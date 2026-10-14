@@ -1,11 +1,79 @@
 ---
-import Welcome from '../components/Welcome.astro';
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const base = import.meta.env.BASE_URL;
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Javier Flores — Lead Audio Engineer | Producción Musical y Live Sound"
+	description="Lead Audio Engineer en Disney Cruise Line con +8 años en live sound, sistemas Q-SYS y redes Dante AoIP. Ingeniero en Producción Musical y M.A. en Comunicación y Medios."
+	lang="es"
+	pathEs=""
+	pathEn="en/"
+>
+	<!-- Banner -->
+		<section id="banner" class="major">
+			<!-- Imagen de fondo optimizada para el banner -->
+			<div class="image-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;">
+				<img src={`${base}images/Javier-Flores-banner.jpg`} alt="Javier Flores, Lead Audio Engineer, durante una actuación en vivo en un festival" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.35;" fetchpriority="high" />
+			</div>
+
+			<div class="inner">
+				<header class="major">
+					<h1>Hola! mi nombre es Javier</h1>
+				</header>
+				<div class="content">
+					<p>Ingeniero creativo y líder técnico con más de 8 años de experiencia en la industria del entretenimiento, 5 de ellos dedicados a crear experiencias de alto impacto para producciones globales de gran exigencia.
+Cuento con una maestría en Medios y Comunicación y un título en Ingeniería de Producción Musical, mi objetivo es tender un puente entre la visión artística y la ejecución técnica. Poseo una trayectoria consolidada en la supervisión de equipos técnicos, la gestión de elencos y espectáculos en vivo. Me apasiona la creación de experiencias inmersivas.<br /></p>
+					<ul class="actions">
+						<li><a href="#one" class="button next scrolly">Más +</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+	<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+				<section id="one" class="tiles">
+					<article>
+						<span class="image">
+							<img src={`${base}images/Javier-Flores-Golden-Mickeys-bn.jpg`} alt="Javier Flores recibiendo un reconocimiento en los Golden Mickeys por su trabajo en producción musical" loading="lazy" decoding="async" />
+						</span>
+						<header class="major">
+							<h2><a href={`${base}musica`} class="link">Música y Diseño Sonoro</a></h2>
+							<p>Mis creaciones como productor musical</p>
+						</header>
+					</article>
+					<article>
+						<span class="image">
+							<img src={`${base}images/Javier-Flores-Dream-bn.jpg`} alt="Javier Flores, ingeniero de audio, operando consolas durante el espectáculo Dream" loading="lazy" decoding="async" />
+						</span>
+						<header class="major">
+							<h2><a href={`${base}ingenieria`} class="link">Ingeniería</a></h2>
+							<p>Mi experiencia en el área de ingeniería y el audio</p>
+						</header>
+					</article>
+					<article>
+						<span class="image">
+							<img src={`${base}images/Javier-Flores-Taipei-Taiwan-bn.jpg`} alt="Javier Flores en Taipei, Taiwan, durante una gira internacional como ingeniero de audio" loading="lazy" decoding="async" />
+						</span>
+						<header class="major">
+							<h2><a href={`${base}experiencia`} class="link">Experiencia</a></h2>
+							<p>Educación, experiencias y trabajos antiguos</p>
+						</header>
+					</article>
+					<article>
+						<span class="image">
+							<img src={`${base}images/Javier-Flores-Coctel-Calavera-sm.jpg`} alt="Javier Flores como saxofonista con la banda Cóctel Calavera en un evento en vivo" loading="lazy" decoding="async" />
+						</span>
+						<header class="major">
+							<h2><a href={`${base}saxofonista`} class="link">Saxofonista</a></h2>
+							<p>Mis logros y vida como músico</p>
+						</header>
+					</article>
+				</section>
+
+		</div>
 </Layout>

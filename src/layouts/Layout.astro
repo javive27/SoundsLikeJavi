@@ -1,23 +1,159 @@
-<!doctype html>
-<html lang="en">
+---
+// src/layouts/Layout.astro
+const { title = "Portafolio JavierF", lang = "es", description = "", pathEs = "", pathEn = "" } = Astro.props;
+const isEn = lang === "en";
+const base = import.meta.env.BASE_URL;
+const homePath = base;
+const enHomePath = `${base}en/`;
+
+// Rutas adaptadas según el idioma
+const musicaPath = isEn ? `${base}en/music` : `${base}musica`;
+const ingenieriaPath = isEn ? `${base}en/engineering` : `${base}ingenieria`;
+const saxofonistaPath = isEn ? `${base}en/saxophonist` : `${base}saxofonista`;
+const experienciaPath = isEn ? `${base}en/experience` : `${base}experiencia`;
+
+// SEO: URLs canónicas y hreflang (activas cuando Astro.site esté definido en astro.config.mjs)
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+const hreflangEs = Astro.site && pathEs ? new URL(pathEs, Astro.site) : null;
+const hreflangEn = Astro.site && pathEn ? new URL(pathEn, Astro.site) : null;
+const ogLocale = isEn ? "en_US" : "es_MX";
+---
+
+<!DOCTYPE HTML>
+<html lang={lang}>
 	<head>
+		<title>{title}</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		{description && <meta name="description" content={description} />}
+		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
+		{hreflangEs && <link rel="alternate" hreflang="es-MX" href={hreflangEs} />}
+		{hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
+		{hreflangEs && <link rel="alternate" hreflang="x-default" href={hreflangEs} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Javier Flores — Portafolio" />
+		<meta property="og:title" content={title} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:locale" content={ogLocale} />
+		{canonicalURL && <meta property="og:url" content={canonicalURL} />}
+		<link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+		<link rel="alternate icon" href={`${base}favicon.ico`} />
+		<link rel="stylesheet" href={`${base}assets/css/main.css`} />
+		<noscript><link rel="stylesheet" href={`${base}assets/css/noscript.css`} /></noscript>
 	</head>
-	<body>
-		<slot />
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href={homePath} class="logo">
+							<strong>Javier Flores</strong> 
+							<span>{isEn ? "Music Production Engineer & Master in Communication and Media" : "Ingeniero en Producción Musical y Master en Comunicación y Medios"}</span>
+						</a>
+						<nav>
+							<!-- Selector de Idiomas -->
+							<a href={homePath} class="button small alt" style="margin-right: 0.5rem;">ES</a>
+							<a href={enHomePath} class="button small alt" style="margin-right: 1rem;">EN</a>
+							<a href="#menu">{isEn ? "Menu" : "Menú"}</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href={musicaPath}>{isEn ? "Music & Sound Design" : "Música y Diseño Sonoro"}</a></li>
+							<li><a href={ingenieriaPath}>{isEn ? "Engineering" : "Ingeniería"}</a></li>
+							<li><a href={saxofonistaPath}>{isEn ? "Saxophonist" : "Saxofonista"}</a></li>
+							<li><a href={experienciaPath}>{isEn ? "Experience" : "Experiencia"}</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href={homePath} class="button primary fit">{isEn ? "HOME" : "INICIO"}</a></li>
+						</ul>
+					</nav>
+
+				<!-- Contenido Dinámico de la Página -->
+				<slot />
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">{isEn ? "Name" : "Nombre"}</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">{isEn ? "Message" : "Mensaje"}</label>
+											<textarea name="message" id="message" rows="6"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value={isEn ? "Send Message" : "Enviar mensaje"} class="primary" /></li>
+										<li><input type="reset" value={isEn ? "Clear" : "Borrar"} /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<span class="icon alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="mailto:FjavierProductorMusical@gmail.com">FjavierProductorMusical@gmail.com</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon alt fa-phone"></span>
+										<h3>{isEn ? "Phone" : "Teléfono"}</h3>
+										<span>(244) 106 95 27</span><br />
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon alt fa-home"></span>
+										<h3>{isEn ? "Address" : "Dirección"}</h3>
+										<span>Atlixco, Puebla<br />
+										México</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://vimeo.com/user98279329" class="icon alt fa-vimeo"><span class="label">Vimeo</span></a></li>
+								<li><a href="https://soundcloud.com/javier-flores-flores-96937841" class="icon alt fa-soundcloud"><span class="label">SoundCloud</span></a></li>
+								<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://web.facebook.com/javier.sax.flores" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="https://www.instagram.com/javier.flores.sax/?hl=es-la" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; {isEn ? "Page programming:" : "Programación de la página:"} Javier Flores</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script is:inline src={`${base}assets/js/jquery.min.js`}></script>
+			<script is:inline src={`${base}assets/js/jquery.scrolly.min.js`}></script>
+			<script is:inline src={`${base}assets/js/jquery.scrollex.min.js`}></script>
+			<script is:inline src={`${base}assets/js/browser.min.js`}></script>
+			<script is:inline src={`${base}assets/js/breakpoints.min.js`}></script>
+			<script is:inline src={`${base}assets/js/util.js`}></script>
+			<script is:inline src={`${base}assets/js/main.js`}></script>
+
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

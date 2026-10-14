@@ -1,0 +1,100 @@
+---
+// src/pages/musica.astro
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+	title="Música y Diseño Sonoro | Javier Flores — Productor Musical"
+	description="Música y diseño sonoro por Javier Flores: composición, producción musical y bandas sonoras. Escucha Jardín en tu mirada, One Please y Death and the Maiden."
+	lang="es"
+	pathEs="musica/"
+	pathEn="en/music/"
+>
+	<!-- Banner -->
+		<section id="banner" class="style2">
+			<div class="inner">
+				<span class="image">
+					<img src={`${base}images/Javier-Flores-Festival-ITESM.jpg`} alt="Javier Flores en el Festival de la Canción del ITESM Campus Puebla, como productor y compositor" />
+				</span>
+				<header class="major">
+					<h1>Producción musical</h1>
+				</header>
+				<div class="content">
+					<p><br />Aquí puedes encontrar algunos ejemplos de mis creaciones audiovisuales.</p>
+				</div>
+			</div>
+		</section>
+
+	<!-- Main -->
+		<div id="main">
+			<!-- Two -->
+				<section id="two" class="spotlights">
+					<section>
+						<iframe src="https://player.vimeo.com/video/334967419" width="640" height="340" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+						<div class="content">
+							<div class="inner">
+								<header class="major">
+									<h2>Jardín en tu mirada</h2>
+								</header>
+								<p>Compositores: Victor Valle y Francisco Flores</p><br />
+								<p>Esta canción ganó mejor letra en el festival de la canción del ITESM campus puebla y fue nominada a mejor arreglo musical para una premiación de producciones audiovisuales en la misma universidad. </p>
+								<ul class="actions">
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<iframe src="https://player.vimeo.com/video/334967471" width="640" height="340" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+						<div class="content">
+							<div class="inner">
+								<header class="major">
+									<h2>One Please</h2>
+								</header>
+								<p>Esta es una composición mía hecha para el corto de terror "One Please", el propósito de la música es agregar emociones a lo que ya estamos viendo dejando a un lado el aturdecedor silencio de la producción original.</p><br />
+								<p>También agregué algunos efectos de sonido como mejoras al diseño sonoro. </p>
+								<ul class="actions">
+									<li><a href="https://www.youtube.com/watch?v=YS8UgWEpXAM&" class="button">ORIGINAL</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<iframe src="https://player.vimeo.com/video/334967398" width="640" height="750" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+						<div class="content">
+							<div class="inner">
+								<header class="major">
+									<h2>Death And The Maiden</h2>
+								</header>
+								<p>Música que creé con el fin de convertir el siguiente texto en música:</p> <br>
+								<p>"Franz-Josef — Emperor of Austria — awoke from a nightmare. It had taken the form of a hellish vision: mobs in the street, gunfire, and improvised incendiary weapons spilling fire across the cobblestones outside the palace. Field Marshal Radetzky, in reality dead for over half a century, had burst into the chancellery wing. All is lost, he had cried. It is over. Undone. In the strange permissive world of dreams there was nothing contradictory about Radetzky quoting a line from a tragedy written decades after his own death. Similarly, the emperor had not been troubled to question why a large orchestra had been playing a Strauss waltz while Vienna burned." - Obtenido del texto "Death and the Maiden" de Frank Tallis.</p> <br>
+								<p>Mi composición se apoya de recursos como leitmotivs e idee fixes, modulaciónes y cambios de regiones armónicas, secuencias armónicas y escalas simétricas.</p>
+								<ul class="actions">
+									<li><a href={`${base}docs/DATM.pdf`} class="button">Score</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/619660953&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+						<div class="content">
+							<div class="inner">
+								<header class="major">
+									<h2>Otros trabajos:</h2>
+								</header>
+							</div>
+						</div>
+					</section>
+					<section>
+						<br>
+					</section>
+					<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/645345330&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+					<section>
+						<br>
+					</section>
+					<section>
+						<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/619654110&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+					</section>
+				</section>
+		</div>
+</Layout>
