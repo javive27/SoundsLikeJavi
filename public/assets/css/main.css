@@ -3936,3 +3936,74 @@ h2, h3, h4, h5, h6 {
 			opacity: 1;
 			visibility: visible;
 		}
+
+/* ===================================================================
+   Embeds de video responsivos (Vimeo / Facebook / SoundCloud visual)
+   Los iframes del template usaban medidas fijas (640x500, 600x500)
+   que desbordaban el viewport en móvil. Ahora actúan como la columna
+   de media (igual que ".image") y conservan su proporción.
+   =================================================================== */
+
+	.spotlights > section > iframe[src*="player.vimeo.com"],
+	.spotlights > section > iframe[src*="facebook.com/plugins"],
+	.spotlights > section > iframe[src*="visual=true"] {
+		align-self: center;
+		border: 0;
+		width: 30%;
+		height: auto;
+	}
+
+		/* Vimeo y Facebook reproducen en formato 16:9 */
+		.spotlights > section > iframe[src*="player.vimeo.com"],
+		.spotlights > section > iframe[src*="facebook.com/plugins"] {
+			aspect-ratio: 16 / 9;
+		}
+
+		/* El player visual de SoundCloud es más cuadrado (~6:5) */
+		.spotlights > section > iframe[src*="visual=true"] {
+			aspect-ratio: 6 / 5;
+		}
+
+	@media screen and (max-width: 1680px) {
+
+		.spotlights > section > iframe[src*="player.vimeo.com"],
+		.spotlights > section > iframe[src*="facebook.com/plugins"],
+		.spotlights > section > iframe[src*="visual=true"] {
+			width: 40%;
+		}
+
+	}
+
+	@media screen and (max-width: 1280px) {
+
+		.spotlights > section > iframe[src*="player.vimeo.com"],
+		.spotlights > section > iframe[src*="facebook.com/plugins"],
+		.spotlights > section > iframe[src*="visual=true"] {
+			width: 45%;
+		}
+
+	}
+
+	/* En tablet/móvil las secciones apilan en bloque: embed a todo el ancho */
+	@media screen and (max-width: 980px) {
+
+		.spotlights > section > iframe[src*="player.vimeo.com"],
+		.spotlights > section > iframe[src*="facebook.com/plugins"],
+		.spotlights > section > iframe[src*="visual=true"] {
+			width: 100%;
+		}
+
+	}
+
+	/* Seguridad: ningún iframe debe desbordar su contenedor en móvil */
+	iframe {
+		max-width: 100%;
+	}
+
+	@media screen and (max-width: 980px) {
+
+		iframe {
+			display: block;
+		}
+
+	}
