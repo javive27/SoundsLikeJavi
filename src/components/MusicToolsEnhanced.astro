@@ -295,43 +295,35 @@
 </style>
 
 <script>
-    let audioCtx = null;
+    // ==========================================
+    // --- LÓGICA DEL METRÓNOMO ---
+    // ==========================================
+    let metronomeCtx = null;
     let bpm = 120;
     let playing = false;
     let nextTickTime = 0;
     let timerId = null;
 
-    const getAudioContext = async () => {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            await audioCtx.resume();
-        }
-        return audioCtx;
-    };
-
-    // --- METRÓNOMO ---
     const playClick = () => {
-        if (!audioCtx) return;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        if (!metronomeCtx) return;
+        const osc = metronomeCtx.createOscillator();
+        const gain = metronomeCtx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(1000, audioCtx.currentTime); 
+        osc.frequency.setValueAtTime(1000, metronomeCtx.currentTime); 
         
-        gain.gain.setValueAtTime(1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+        gain.gain.setValueAtTime(1, metronomeCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, metronomeCtx.currentTime + 0.05);
 
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(metronomeCtx.destination);
 
-        osc.start(audioCtx.currentTime);
-        osc.stop(audioCtx.currentTime + 0.05);
+        osc.start(metronomeCtx.currentTime);
+        osc.stop(metronomeCtx.currentTime + 0.05);
     };
 
     const scheduler = () => {
-        while (nextTickTime < audioCtx.currentTime + 0.1) {
+        while (nextTickTime < metronomeCtx.currentTime + 0.1) {
             playClick();
             nextTickTime += 60.0 / bpm;
         }
@@ -340,7 +332,11 @@
         }
     };
 
-    // --- AFINADOR ---
+    // ==========================================
+    // --- LÓGICA DEL AFINADOR ---
+    // ==========================================
+    let tunerCtx = null;
+    
     const autoCorrelate = (buffer, sampleRate) => {
         const SIZE = buffer.length;
         let sumOfSquares = 0;
@@ -369,6 +365,9 @@
         return -1;
     };
 
+    // ==========================================
+    // --- INICIALIZACIÓN DE EVENTOS ---
+    // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
         // Elementos Metrónomo
         const toggleBtn = document.getElementById('toggleMetronome');
@@ -381,7 +380,7 @@
         const centsDisplay = document.getElementById('centsDisplay');
         const needle = document.getElementById('needle');
 
-        // Sincronizar Slider con Input
+        // Sincronizar Slider con Input (Límite 300)
         const updateBpm = (val) => {
             let newBpm = parseInt(val);
             if (isNaN(newBpm)) newBpm = 120;
@@ -398,13 +397,21 @@
             bpmInput.addEventListener('change', (e) => updateBpm(e.target.value));
         }
 
+        // --- EVENTOS DEL METRÓNOMO ---
         if (toggleBtn) {
-            toggleBtn.addEventListener('click', async () => {
-                await getAudioContext();
+            toggleBtn.addEventListener('click', () => {
+                // Crear y reanudar el contexto exclusivo del metrónomo
+                if (!metronomeCtx) {
+                    metronomeCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (metronomeCtx.state === 'suspended') {
+                    metronomeCtx.resume();
+                }
+
                 playing = !playing;
 
                 if (playing) {
-                    nextTickTime = audioCtx.currentTime;
+                    nextTickTime = metronomeCtx.currentTime;
                     scheduler();
                     toggleBtn.innerText = 'DETENER';
                     toggleBtn.classList.add('active-red');
@@ -416,7 +423,7 @@
             });
         }
 
-        // --- Lógica del Afinador con Toggle ---
+        // --- EVENTOS DEL AFINADOR ---
         let tunerActive = false;
         let tunerTimerId = null;
         let mediaStream = null;
@@ -433,14 +440,19 @@
 
         if (toggleTunerBtn) {
             toggleTunerBtn.addEventListener('click', async () => {
-                await getAudioContext();
+                // Crear y reanudar el contexto exclusivo del afinador
+                if (!tunerCtx) {
+                    tunerCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (tunerCtx.state === 'suspended') {
+                    await tunerCtx.resume();
+                }
 
                 if (tunerActive) {
                     // Detener Afinador
                     tunerActive = false;
                     if (tunerTimerId) cancelAnimationFrame(tunerTimerId);
                     
-                    // Detener las pistas de micrófono para apagar la luz roja del navegador
                     if (mediaStream) {
                         mediaStream.getTracks().forEach(track => track.stop());
                         mediaStream = null;
@@ -462,8 +474,8 @@
                     // Iniciar Afinador
                     try {
                         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                        sourceNode = audioCtx.createMediaStreamSource(mediaStream);
-                        analyserNode = audioCtx.createAnalyser();
+                        sourceNode = tunerCtx.createMediaStreamSource(mediaStream);
+                        analyserNode = tunerCtx.createAnalyser();
                         analyserNode.fftSize = 4096;
                         sourceNode.connect(analyserNode);
 
@@ -482,7 +494,7 @@
                             if (!tunerActive) return;
 
                             analyserNode.getFloatTimeDomainData(buffer);
-                            const freq = autoCorrelate(buffer, audioCtx.sampleRate);
+                            const freq = autoCorrelate(buffer, tunerCtx.sampleRate);
 
                             if (freq !== -1) {
                                 const midiNote = Math.round(12 * Math.log2(freq / 440) + 69);
