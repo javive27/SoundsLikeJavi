@@ -1,0 +1,25 @@
+---
+// src/pages/en/audiotools.astro
+import Layout from '../../layouts/Layout.astro';
+import SoundEngineeringTools from '../../components/SoundEngineeringTools.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+    title="Audio Engineering Tools | Javier Flores"
+    description="Professional sound engineering tools and technical resources by Javier Flores."
+    lang="en"
+    pathEs="audio-tools/"
+    pathEn="en/audio-tools/"
+>
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major">
+                    <h1>Audio Engineering Tools</h1>
+                </header>
+                <SoundEngineeringTools />
+            </div>
+        </section>
+    </div>
+</Layout>

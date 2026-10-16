@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+// Si el archivo se llama MusicToolsEnhanced.astro, impórtalo con ese mismo nombre:
+import MusicToolsEnhanced from '../../components/MusicToolsEnhanced.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+    title="Music Tools | Javier Flores"
+    description="Collection of interactive music tools developed by Javier Flores."
+    lang="en"
+    pathEs="musictools/"
+    pathEn="en/musictools/"
+>
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major">
+                    <h1>Music Tools</h1>
+                </header>
+                <MusicToolsEnhanced />
+            </div>
+        </section>
+    </div>
+</Layout>

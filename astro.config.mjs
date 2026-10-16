@@ -1,8 +1,11 @@
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
   site: 'https://javierfloresaudio.com',
+
   // base no se necesita: el dominio personalizado apunta a la raíz del sitio
   i18n: {
     defaultLocale: 'es',
@@ -10,5 +13,9 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
+  },
+
+  vite: {
+    plugins: [tailwindcss()]
   }
 });

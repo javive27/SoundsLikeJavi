@@ -1,0 +1,537 @@
+<div class="music-tools-wrapper">
+    <!-- Metrónomo -->
+    <div class="mt-card">
+        <h2 class="mt-title">Metrónomo</h2>
+        
+        <div class="bpm-container">
+            <input type="number" id="bpmInput" class="bpm-input" value="120" min="40" max="300">
+            <span class="bpm-label">BPM</span>
+        </div>
+
+        <div class="slider-container">
+            <input type="range" id="bpmSlider" min="40" max="300" value="120" class="mt-slider">
+        </div>
+
+        <button id="toggleMetronome" class="mt-btn mt-btn-cyan">INICIAR</button>
+    </div>
+
+    <!-- Afinador Cromático -->
+    <div class="mt-card">
+        <h2 class="mt-title">Afinador Cromático</h2>
+        
+        <button id="toggleTuner" class="mt-btn mt-btn-cyan mb-spaced">ACTIVAR MICRÓFONO</button>
+
+        <div class="tuner-display">
+            <div id="noteDisplay" class="note-text">--</div>
+            <div id="centsDisplay" class="cents-text">0 cents</div>
+        </div>
+
+        <!-- Indicador Dial/Aguja -->
+        <div class="dial-container">
+            <div class="dial-ticks">
+                <div class="tick major"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick major"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick"></div>
+                <div class="tick major"></div>
+            </div>
+            
+            <div class="dial-center-mark"></div>
+            
+            <div class="dial-labels">
+                <span>-50</span>
+                <span>0</span>
+                <span>+50</span>
+            </div>
+            
+            <div id="needle" class="dial-needle"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* --- Estilos Generales --- */
+    .music-tools-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        max-width: 500px;
+        margin: 0 auto;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .mt-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mt-title {
+        color: #00e5ff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+    /* --- Controles del Metrónomo --- */
+    .bpm-container {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .bpm-input {
+        background: transparent;
+        border: none;
+        border-bottom: 2px dashed rgba(0, 229, 255, 0.4);
+        color: #fff;
+        font-size: 4rem;
+        font-weight: 800;
+        width: 140px;
+        text-align: center;
+        outline: none;
+        transition: border-color 0.3s;
+        font-family: monospace;
+        padding: 0;
+    }
+
+    .bpm-input:focus {
+        border-bottom: 2px solid #00e5ff;
+    }
+
+    .bpm-input::-webkit-outer-spin-button,
+    .bpm-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .bpm-label {
+        color: #888;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .slider-container {
+        margin-bottom: 2rem;
+        padding: 0 10px;
+    }
+
+    .mt-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+    }
+
+    .mt-slider:focus {
+        outline: none;
+    }
+
+    .mt-slider::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8px;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        border: 1px solid rgba(0,0,0,0.3);
+    }
+
+    .mt-slider::-webkit-slider-thumb {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: #00e5ff;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -8px;
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    /* --- Botones --- */
+    .mt-btn {
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: transparent;
+        /* Flexbox para centrar texto vertical y horizontalmente */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1; /* Evita que alturas de línea extrañas lo desplacen */
+    }
+
+    .mt-btn-cyan {
+        border: 2px solid #00e5ff;
+        color: #fff;
+    }
+
+    .mt-btn-cyan:hover {
+        background: #00e5ff;
+        color: #0f131f;
+    }
+
+    .mt-btn.active-red {
+        border-color: #ff3366;
+        color: #fff;
+    }
+    
+    .mt-btn.active-red:hover {
+        background: #ff3366;
+        color: #fff;
+    }
+
+    .mb-spaced {
+        margin-bottom: 2rem;
+    }
+
+    /* --- Controles del Afinador --- */
+    .tuner-display {
+        margin-bottom: 2rem;
+    }
+
+    .note-text {
+        font-size: 5rem;
+        font-weight: 900;
+        color: #555;
+        line-height: 1;
+        transition: color 0.2s;
+    }
+
+    .cents-text {
+        color: #888;
+        font-size: 0.9rem;
+        font-family: monospace;
+        margin-top: 0.5rem;
+    }
+
+    /* Dial del Afinador */
+    .dial-container {
+        position: relative;
+        width: 100%;
+        height: 48px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+    }
+
+    .dial-ticks {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0 10px;
+        box-sizing: border-box;
+        z-index: 0;
+    }
+
+    .tick {
+        width: 2px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .tick.major {
+        height: 16px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .dial-center-mark {
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .dial-labels {
+        position: absolute;
+        width: 100%;
+        bottom: 4px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        box-sizing: border-box;
+        color: #666;
+        font-size: 10px;
+        font-family: monospace;
+        z-index: 1;
+    }
+
+    .dial-needle {
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        background: #555;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: transform 0.05s ease-out, background-color 0.2s;
+        z-index: 2;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+</style>
+
+<script>
+    let audioCtx = null;
+    let bpm = 120;
+    let playing = false;
+    let nextTickTime = 0;
+    let timerId = null;
+
+    const getAudioContext = async () => {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            await audioCtx.resume();
+        }
+        return audioCtx;
+    };
+
+    // --- METRÓNOMO ---
+    const playClick = () => {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1000, audioCtx.currentTime); 
+        
+        gain.gain.setValueAtTime(1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(audioCtx.currentTime);
+        osc.stop(audioCtx.currentTime + 0.05);
+    };
+
+    const scheduler = () => {
+        while (nextTickTime < audioCtx.currentTime + 0.1) {
+            playClick();
+            nextTickTime += 60.0 / bpm;
+        }
+        if (playing) {
+            timerId = requestAnimationFrame(scheduler);
+        }
+    };
+
+    // --- AFINADOR ---
+    const autoCorrelate = (buffer, sampleRate) => {
+        const SIZE = buffer.length;
+        let sumOfSquares = 0;
+        for (let i = 0; i < SIZE; i++) sumOfSquares += buffer[i] * buffer[i];
+        const rms = Math.sqrt(sumOfSquares / SIZE);
+        if (rms < 0.01) return -1; 
+
+        const minSamples = Math.floor(sampleRate / 1200);
+        const maxSamples = Math.floor(sampleRate / 60);
+        let bestLag = -1;
+        let maxCorr = 0;
+
+        for (let lag = minSamples; lag <= maxSamples; lag++) {
+            let corr = 0;
+            for (let i = 0; i < SIZE - lag; i++) {
+                corr += buffer[i] * buffer[i + lag];
+            }
+            if (corr > maxCorr) {
+                maxCorr = corr;
+                bestLag = lag;
+            }
+        }
+        if (maxCorr / sumOfSquares > 0.35 && bestLag !== -1) {
+            return sampleRate / bestLag;
+        }
+        return -1;
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Elementos Metrónomo
+        const toggleBtn = document.getElementById('toggleMetronome');
+        const bpmSlider = document.getElementById('bpmSlider');
+        const bpmInput = document.getElementById('bpmInput');
+        
+        // Elementos Afinador
+        const toggleTunerBtn = document.getElementById('toggleTuner');
+        const noteDisplay = document.getElementById('noteDisplay');
+        const centsDisplay = document.getElementById('centsDisplay');
+        const needle = document.getElementById('needle');
+
+        // Sincronizar Slider con Input
+        const updateBpm = (val) => {
+            let newBpm = parseInt(val);
+            if (isNaN(newBpm)) newBpm = 120;
+            if (newBpm < 40) newBpm = 40;
+            if (newBpm > 300) newBpm = 300; 
+            
+            bpm = newBpm;
+            bpmInput.value = bpm;
+            bpmSlider.value = bpm;
+        };
+
+        if (bpmSlider && bpmInput) {
+            bpmSlider.addEventListener('input', (e) => updateBpm(e.target.value));
+            bpmInput.addEventListener('change', (e) => updateBpm(e.target.value));
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', async () => {
+                await getAudioContext();
+                playing = !playing;
+
+                if (playing) {
+                    nextTickTime = audioCtx.currentTime;
+                    scheduler();
+                    toggleBtn.innerText = 'DETENER';
+                    toggleBtn.classList.add('active-red');
+                } else {
+                    if (timerId) cancelAnimationFrame(timerId);
+                    toggleBtn.innerText = 'INICIAR';
+                    toggleBtn.classList.remove('active-red');
+                }
+            });
+        }
+
+        // --- Lógica del Afinador con Toggle ---
+        let tunerActive = false;
+        let tunerTimerId = null;
+        let mediaStream = null;
+        let analyserNode = null;
+        let sourceNode = null;
+
+        const resetTunerUI = () => {
+            noteDisplay.innerText = "--";
+            noteDisplay.style.color = '#555';
+            centsDisplay.innerText = "0 cents";
+            needle.style.transform = `translateX(-50%)`;
+            needle.style.backgroundColor = '#555';
+        };
+
+        if (toggleTunerBtn) {
+            toggleTunerBtn.addEventListener('click', async () => {
+                await getAudioContext();
+
+                if (tunerActive) {
+                    // Detener Afinador
+                    tunerActive = false;
+                    if (tunerTimerId) cancelAnimationFrame(tunerTimerId);
+                    
+                    // Detener las pistas de micrófono para apagar la luz roja del navegador
+                    if (mediaStream) {
+                        mediaStream.getTracks().forEach(track => track.stop());
+                        mediaStream = null;
+                    }
+                    if (sourceNode) {
+                        sourceNode.disconnect();
+                        sourceNode = null;
+                    }
+                    if (analyserNode) {
+                        analyserNode.disconnect();
+                        analyserNode = null;
+                    }
+
+                    resetTunerUI();
+                    toggleTunerBtn.innerText = 'ACTIVAR MICRÓFONO';
+                    toggleTunerBtn.classList.remove('active-red');
+
+                } else {
+                    // Iniciar Afinador
+                    try {
+                        mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        sourceNode = audioCtx.createMediaStreamSource(mediaStream);
+                        analyserNode = audioCtx.createAnalyser();
+                        analyserNode.fftSize = 4096;
+                        sourceNode.connect(analyserNode);
+
+                        const buffer = new Float32Array(analyserNode.fftSize);
+                        const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+                        const dialWidth = document.querySelector('.dial-container').clientWidth;
+                        let smoothedCents = 0;
+                        let lastMidiNote = -1;
+
+                        tunerActive = true;
+                        toggleTunerBtn.innerText = 'DETENER MICRÓFONO';
+                        toggleTunerBtn.classList.add('active-red');
+
+                        const update = () => {
+                            if (!tunerActive) return;
+
+                            analyserNode.getFloatTimeDomainData(buffer);
+                            const freq = autoCorrelate(buffer, audioCtx.sampleRate);
+
+                            if (freq !== -1) {
+                                const midiNote = Math.round(12 * Math.log2(freq / 440) + 69);
+                                const noteName = noteNames[midiNote % 12];
+                                const idealFreq = 440 * Math.pow(2, (midiNote - 69) / 12);
+                                const currentCents = Math.round(1200 * Math.log2(freq / idealFreq));
+
+                                if (midiNote !== lastMidiNote) {
+                                    smoothedCents = currentCents;
+                                    lastMidiNote = midiNote;
+                                } else {
+                                    smoothedCents = (smoothedCents * 0.8) + (currentCents * 0.2);
+                                }
+
+                                const displayCents = Math.round(smoothedCents);
+
+                                noteDisplay.innerText = noteName;
+                                centsDisplay.innerText = `${displayCents > 0 ? '+' : ''}${displayCents} cents`;
+
+                                const maxOffset = (dialWidth / 2) - 10; 
+                                let ratio = smoothedCents / 50; 
+                                if (ratio > 1) ratio = 1;
+                                if (ratio < -1) ratio = -1;
+                                
+                                needle.style.transform = `translateX(calc(-50% + ${ratio * maxOffset}px))`;
+
+                                if (Math.abs(smoothedCents) <= 5) {
+                                    noteDisplay.style.color = '#00ff88'; 
+                                    needle.style.backgroundColor = '#00ff88';
+                                } else {
+                                    noteDisplay.style.color = '#00e5ff'; 
+                                    needle.style.backgroundColor = '#00e5ff';
+                                }
+                            } else {
+                                smoothedCents = smoothedCents * 0.9;
+                                resetTunerUI();
+                                lastMidiNote = -1;
+                            }
+                            tunerTimerId = requestAnimationFrame(update);
+                        };
+
+                        update();
+                    } catch (err) {
+                        console.error('Error de micrófono:', err);
+                        alert('No se pudo acceder al micrófono.');
+                        tunerActive = false;
+                    }
+                }
+            });
+        }
+    });
+</script>

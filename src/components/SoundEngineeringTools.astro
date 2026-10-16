@@ -1,0 +1,684 @@
+<div class="music-tools-wrapper">
+    <div class="mt-card" style="max-width: 900px;">
+        <h2 class="mt-title">Analizador de Espectro & SPL Meter</h2>
+        
+        <!-- Panel Principal con RTA Data y SPL Meter -->
+        <div class="rta-top-panel">
+            
+            <div class="metrics-container">
+                <!-- Columna Izquierda: RTA Freq Info -->
+                <div class="rta-readout-col">
+                    <div class="readout-label">PICO MÁXIMO RTA (HOLD)</div>
+                    <div class="readout-value">
+                        <span id="peakFreqDisplay">-- Hz</span> 
+                        <span id="peakDbDisplay" class="text-zinc-400 text-sm">-- dB</span>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: SPL Meter -->
+                <div class="spl-meter-panel">
+                    <div class="spl-row">
+                        <span class="spl-label" title="Peak Maximum">LpKmax</span>
+                        <span class="spl-val text-zinc-400" id="splMaxDisplay">--- dB</span>
+                    </div>
+                    <div class="spl-row">
+                        <span class="spl-label" title="Fast Minimum">LFmin</span>
+                        <span class="spl-val text-zinc-400" id="splMinDisplay">--- dB</span>
+                    </div>
+                    <div class="spl-row active-spl">
+                        <span class="spl-label" title="Live SPL">Live SPL</span>
+                        <span class="spl-val" id="splLiveDisplay">--- dB</span>
+                    </div>
+                    <div class="spl-row active-spl">
+                        <span class="spl-label" title="Equivalent Continuous Sound Level">LAeq</span>
+                        <span class="spl-val" id="splLeqDisplay">--- dB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de Captura -->
+            <button id="captureBtn" class="mt-btn-outline" title="Guardar captura con metadatos">
+                📸 CAPTURAR MEDICIÓN
+            </button>
+            
+            <!-- Controles -->
+            <div class="rta-controls-grid">
+                <div class="control-group">
+                    <label>Ponderación RTA</label>
+                    <select id="weightingSelect" class="mt-select">
+                        <option value="0.96">Slow (Averaged)</option>
+                        <option value="0.4">Fast (Momentary)</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Rango RTA (Visual)</label>
+                    <select id="dbRangeSelect" class="mt-select">
+                        <option value="-100,-10">Alta Sensibilidad (-100 a -10 dB)</option>
+                        <option value="-80,0">Estudio (-80 a 0 dB)</option>
+                        <option value="-60,20">Alto SPL (-60 a +20 dB)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Rango Frecuencia</label>
+                    <select id="freqRangeSelect" class="mt-select">
+                        <option value="20,20000">Full (20Hz - 20kHz)</option>
+                        <option value="20,250">Low / Sub (20Hz - 250Hz)</option>
+                        <option value="250,4000">Mid (250Hz - 4kHz)</option>
+                        <option value="4000,20000">High (4kHz - 20kHz)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Max Hold & SPL</label>
+                    <div class="peak-buttons">
+                        <button id="togglePeakHold" class="mt-btn-small active">ON</button>
+                        <button id="clearPeakHold" class="mt-btn-small">RST</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rta-container mb-spaced">
+            <canvas id="rtaCanvas" width="800" height="300"></canvas>
+            <div id="rtaXLabels" class="rta-labels">
+                <!-- Se generan dinámicamente -->
+            </div>
+        </div>
+
+        <button id="toggleRTA" class="mt-btn mt-btn-cyan">ACTIVAR MICRÓFONO</button>
+    </div>
+</div>
+
+<style>
+    .music-tools-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        max-width: 900px; 
+        margin: 0 auto;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .mt-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mt-title {
+        color: #00e5ff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    /* --- Panel Superior --- */
+    .rta-top-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .metrics-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+        .metrics-container { grid-template-columns: 1fr; }
+    }
+
+    .rta-readout-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .readout-label {
+        color: #888;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.25rem;
+    }
+
+    .readout-value span:first-child {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 800;
+        font-family: monospace;
+    }
+    
+    .readout-value span:last-child {
+        color: #00e5ff;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    /* --- SPL METER PANEL --- */
+    .spl-meter-panel {
+        background: #0a0d14;
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 6px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .spl-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: monospace;
+        font-size: 1.1rem;
+    }
+
+    .spl-row.active-spl {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #00e5ff;
+        margin-top: 0.25rem;
+    }
+
+    .spl-label {
+        color: #888;
+        font-size: 0.9rem;
+        font-family: system-ui, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* --- CONTROLES --- */
+    .rta-controls-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+        align-items: end; 
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .control-group label {
+        color: #00e5ff;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .mt-select {
+        background: #0f131f;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        outline: none;
+        height: 36px;
+        box-sizing: border-box;
+    }
+
+    .peak-buttons {
+        display: flex;
+        gap: 0.5rem;
+        height: 36px;
+    }
+
+    .mt-btn-small {
+        flex: 1;
+        background: transparent;
+        border: 1px solid #555;
+        color: #888;
+        padding: 0 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        height: 100%;
+    }
+
+    .mt-btn-small:hover { border-color: #fff; color: #fff; }
+    .mt-btn-small.active { background: #00e5ff; color: #000; border-color: #00e5ff; }
+
+    /* Botón Captura */
+    .mt-btn-outline {
+        background: transparent;
+        border: 1px dashed #00e5ff;
+        color: #00e5ff;
+        padding: 12px 16px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .mt-btn-outline:hover {
+        background: rgba(0, 229, 255, 0.1);
+        border-style: solid;
+    }
+
+    /* --- Contenedor Canvas --- */
+    .rta-container {
+        position: relative;
+        width: 100%;
+        background: #0f131f;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    #rtaCanvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+        filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.6)); 
+    }
+
+    .rta-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        color: #888;
+        font-size: 10px;
+        font-family: monospace;
+        padding: 0 5px;
+    }
+
+    .mb-spaced { margin-bottom: 2rem; }
+
+    /* --- Botón Principal --- */
+    .mt-btn {
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .mt-btn-cyan { border: 2px solid #00e5ff; color: #fff; }
+    .mt-btn-cyan:hover { background: #00e5ff; color: #0f131f; }
+    .mt-btn.active-red { border-color: #ff3366; color: #fff; }
+    .mt-btn.active-red:hover { background: #ff3366; color: #fff; }
+</style>
+
+<script>
+    let audioCtx = null;
+
+    const getAudioContext = async () => {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            await audioCtx.resume();
+        }
+        return audioCtx;
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleRTABtn = document.getElementById('toggleRTA');
+        const captureBtn = document.getElementById('captureBtn');
+        const canvas = document.getElementById('rtaCanvas');
+        const canvasCtx = canvas.getContext('2d');
+        
+        // Displays RTA
+        const peakFreqDisplay = document.getElementById('peakFreqDisplay');
+        const peakDbDisplay = document.getElementById('peakDbDisplay');
+        const xLabelsContainer = document.getElementById('rtaXLabels');
+
+        // Displays SPL
+        const splMaxDisplay = document.getElementById('splMaxDisplay');
+        const splMinDisplay = document.getElementById('splMinDisplay');
+        const splLiveDisplay = document.getElementById('splLiveDisplay');
+        const splLeqDisplay = document.getElementById('splLeqDisplay');
+
+        // Controles
+        const weightingSelect = document.getElementById('weightingSelect');
+        const dbRangeSelect = document.getElementById('dbRangeSelect');
+        const freqRangeSelect = document.getElementById('freqRangeSelect');
+        const togglePeakHoldBtn = document.getElementById('togglePeakHold');
+        const clearPeakHoldBtn = document.getElementById('clearPeakHold');
+
+        let rtaActive = false;
+        let rtaTimerId = null;
+        let mediaStream = null;
+        let analyserNode = null;
+        let sourceNode = null;
+
+        // Variables RTA
+        let isPeakHold = true;
+        let peakDataArray = null;
+        let absoluteMaxIntensity = -Infinity;
+        let absoluteMaxFreqHz = 0;
+        let minFreq = 20;
+        let maxFreq = 20000;
+
+        // Variables SPL Meter
+        let splFast = 0;
+        let splMax = -Infinity;
+        let splMin = Infinity;
+        let sumPressureSquared = 0;
+        let leqSamples = 0;
+        const CALIBRATION_OFFSET = 114; // dB offset genérico para calibrar señal digital a presión acústica aproximada
+
+        canvasCtx.fillStyle = '#0f131f';
+        canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const resetRTAUI = () => {
+            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+            peakFreqDisplay.innerText = '-- Hz';
+            peakDbDisplay.innerText = '-- dB';
+            splMaxDisplay.innerText = '--- dB';
+            splMinDisplay.innerText = '--- dB';
+            splLiveDisplay.innerText = '--- dB';
+            splLeqDisplay.innerText = '--- dB';
+        };
+
+        const updateLabels = () => {
+            xLabelsContainer.innerHTML = '';
+            if (minFreq === 20 && maxFreq === 20000) {
+                xLabelsContainer.innerHTML = '<span>20Hz</span><span>250Hz</span><span>1kHz</span><span>4kHz</span><span>20kHz</span>';
+            } else {
+                xLabelsContainer.innerHTML = `<span>${minFreq}Hz</span><span></span><span>${maxFreq}Hz</span>`;
+            }
+        };
+        updateLabels();
+
+        // --- LÓGICA DE CAPTURA DE IMAGEN ---
+        captureBtn.addEventListener('click', () => {
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = 900;
+            exportCanvas.height = 650;
+            const ctx = exportCanvas.getContext('2d');
+
+            // Fondo
+            ctx.fillStyle = '#0a0d14';
+            ctx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+            // Cabecera
+            ctx.fillStyle = '#00e5ff';
+            ctx.font = 'bold 24px system-ui, sans-serif';
+            ctx.fillText('RTA & SPL MEASUREMENT REPORT', 40, 50);
+
+            // Meta Data & RTA Readings
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '14px monospace';
+            const dateStr = new Date().toLocaleString();
+            ctx.fillText(`FECHA: ${dateStr}`, 40, 90);
+            ctx.fillText(`RTA MAX HOLD: ${peakFreqDisplay.innerText} @ ${peakDbDisplay.innerText}`, 40, 115);
+
+            // SPL Readings Panel (Dibujando la caja de SPL)
+            ctx.fillStyle = '#0f131f';
+            ctx.fillRect(500, 40, 350, 120);
+            ctx.strokeStyle = '#00e5ff';
+            ctx.strokeRect(500, 40, 350, 120);
+            
+            ctx.fillStyle = '#888888';
+            ctx.font = '12px system-ui';
+            ctx.fillText('LpKmax (Peak)', 520, 65);
+            ctx.fillText('LFmin (Min)', 520, 90);
+            ctx.fillText('Live SPL', 700, 65);
+            ctx.fillText('LAeq', 700, 90);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px monospace';
+            ctx.fillText(splMaxDisplay.innerText, 520, 80);
+            ctx.fillText(splMinDisplay.innerText, 520, 105);
+            
+            ctx.fillStyle = '#00e5ff';
+            ctx.font = 'bold 22px monospace';
+            ctx.fillText(splLiveDisplay.innerText, 700, 83);
+            ctx.fillText(splLeqDisplay.innerText, 700, 108);
+
+            // Settings Config
+            const wText = weightingSelect.options[weightingSelect.selectedIndex].text;
+            const splText = dbRangeSelect.options[dbRangeSelect.selectedIndex].text;
+            const freqText = freqRangeSelect.options[freqRangeSelect.selectedIndex].text;
+            
+            ctx.fillStyle = '#aaaaaa';
+            ctx.font = '14px monospace';
+            ctx.fillText(`RTA POND: ${wText}`, 40, 145);
+            ctx.fillText(`RANGO Y: ${splText}`, 300, 145);
+            ctx.fillText(`RANGO X: ${freqText}`, 550, 145);
+
+            // Gráfica
+            ctx.fillStyle = '#0f131f';
+            ctx.fillRect(40, 180, 820, 400);
+            ctx.drawImage(canvas, 50, 190, 800, 380);
+
+            // Eje X Etiquetas
+            ctx.fillStyle = '#888888';
+            ctx.font = '12px monospace';
+            ctx.fillText(`${minFreq}Hz`, 50, 595);
+            ctx.textAlign = 'right';
+            ctx.fillText(`${maxFreq}Hz`, 850, 595);
+            ctx.textAlign = 'left';
+
+            // Footer
+            ctx.fillStyle = '#444444';
+            ctx.font = '12px system-ui, sans-serif';
+            ctx.fillText('Generado por Javier Flores Audio Engineering Tools', 40, 630);
+
+            const dataUrl = exportCanvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = dataUrl;
+            
+            const safeDate = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            a.download = `Measurement_${safeDate}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            const originalText = captureBtn.innerText;
+            captureBtn.innerText = '✔️ GUARDADO';
+            captureBtn.style.backgroundColor = 'rgba(0, 229, 255, 0.2)';
+            setTimeout(() => {
+                captureBtn.innerText = originalText;
+                captureBtn.style.backgroundColor = 'transparent';
+            }, 2000);
+        });
+
+        // Eventos de controles
+        togglePeakHoldBtn.addEventListener('click', () => {
+            isPeakHold = !isPeakHold;
+            togglePeakHoldBtn.classList.toggle('active', isPeakHold);
+        });
+
+        clearPeakHoldBtn.addEventListener('click', () => {
+            // Reset RTA
+            if (peakDataArray) peakDataArray.fill(0);
+            absoluteMaxIntensity = -Infinity;
+            absoluteMaxFreqHz = 0;
+            
+            // Reset SPL
+            splMax = -Infinity;
+            splMin = Infinity;
+            sumPressureSquared = 0;
+            leqSamples = 0;
+            
+            if (!rtaActive) resetRTAUI();
+        });
+
+        if (toggleRTABtn && canvas) {
+            toggleRTABtn.addEventListener('click', async () => {
+                await getAudioContext();
+
+                if (rtaActive) {
+                    rtaActive = false;
+                    if (rtaTimerId) cancelAnimationFrame(rtaTimerId);
+                    
+                    if (mediaStream) {
+                        mediaStream.getTracks().forEach(track => track.stop());
+                        mediaStream = null;
+                    }
+                    if (sourceNode) sourceNode.disconnect();
+                    if (analyserNode) analyserNode.disconnect();
+
+                    resetRTAUI();
+                    toggleRTABtn.innerText = 'ACTIVAR MICRÓFONO';
+                    toggleRTABtn.classList.remove('active-red');
+
+                } else {
+                    try {
+                        mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        sourceNode = audioCtx.createMediaStreamSource(mediaStream);
+                        analyserNode = audioCtx.createAnalyser();
+                        
+                        analyserNode.fftSize = 4096; 
+                        peakDataArray = new Uint8Array(analyserNode.frequencyBinCount);
+                        
+                        sourceNode.connect(analyserNode);
+
+                        const bufferLength = analyserNode.frequencyBinCount;
+                        const dataArray = new Uint8Array(bufferLength);
+                        const timeDomainArray = new Float32Array(analyserNode.fftSize); // Para cálculo SPL
+                        const freqResolution = audioCtx.sampleRate / analyserNode.fftSize;
+
+                        rtaActive = true;
+                        toggleRTABtn.innerText = 'DETENER MICRÓFONO';
+                        toggleRTABtn.classList.add('active-red');
+
+                        const draw = () => {
+                            if (!rtaActive) return;
+                            rtaTimerId = requestAnimationFrame(draw);
+
+                            // --- 1. LÓGICA SPL METER (RMS Time Domain) ---
+                            analyserNode.getFloatTimeDomainData(timeDomainArray);
+                            let sumSquares = 0;
+                            for (let i = 0; i < timeDomainArray.length; i++) {
+                                sumSquares += timeDomainArray[i] * timeDomainArray[i];
+                            }
+                            let rms = Math.sqrt(sumSquares / timeDomainArray.length);
+                            
+                            // Conversión a dBFS + offset de calibración
+                            let currentDb = 20 * Math.log10(rms || 1e-8) + CALIBRATION_OFFSET;
+                            if (currentDb < 0) currentDb = 0;
+
+                            // Smoothing de SPL Live (Reactividad visual fluida)
+                            splFast = (splFast * 0.7) + (currentDb * 0.3);
+
+                            // LMax / LMin
+                            if (splFast > splMax) splMax = splFast;
+                            if (splFast < splMin && splFast > 10) splMin = splFast;
+
+                            // LEQ (Nivel Equivalente Continuo)
+                            sumPressureSquared += Math.pow(10, currentDb / 10);
+                            leqSamples++;
+                            let leq = 10 * Math.log10(sumPressureSquared / leqSamples);
+
+                            // Imprimir SPL a la pantalla
+                            splLiveDisplay.innerText = `${splFast.toFixed(1)} dB`;
+                            splLeqDisplay.innerText = `${leq.toFixed(1)} dB`;
+                            splMaxDisplay.innerText = `${splMax === -Infinity ? '---' : splMax.toFixed(1)} dB`;
+                            splMinDisplay.innerText = `${splMin === Infinity ? '---' : splMin.toFixed(1)} dB`;
+
+
+                            // --- 2. LÓGICA DEL RTA GRÁFICO ---
+                            analyserNode.smoothingTimeConstant = parseFloat(weightingSelect.value); // Aquí controla la velocidad (0.96 o 0.4)
+                            const [minDb, maxDb] = dbRangeSelect.value.split(',').map(Number);
+                            analyserNode.minDecibels = minDb;
+                            analyserNode.maxDecibels = maxDb;
+
+                            [minFreq, maxFreq] = freqRangeSelect.value.split(',').map(Number);
+                            updateLabels();
+
+                            analyserNode.getByteFrequencyData(dataArray);
+                            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+                            const startBin = Math.max(0, Math.floor(minFreq / freqResolution));
+                            const endBin = Math.min(bufferLength, Math.ceil(maxFreq / freqResolution));
+                            const totalBins = endBin - startBin;
+                            
+                            const barWidth = canvas.width / totalBins;
+                            let x = 0;
+                            
+                            let frameHighestIntensity = 0;
+                            let frameHighestIntensityIndex = 0;
+
+                            for (let i = startBin; i < endBin; i++) {
+                                let val = dataArray[i];
+                                
+                                if (val > frameHighestIntensity) {
+                                    frameHighestIntensity = val;
+                                    frameHighestIntensityIndex = i;
+                                }
+
+                                if (isPeakHold) {
+                                    if (val > peakDataArray[i]) peakDataArray[i] = val;
+                                } else {
+                                    peakDataArray[i] = 0;
+                                }
+
+                                const scaleY = (val / 255) * canvas.height;
+                                canvasCtx.fillStyle = '#00e5ff';
+                                canvasCtx.fillRect(x, canvas.height - scaleY, Math.ceil(barWidth), scaleY);
+
+                                if (isPeakHold && peakDataArray[i] > 0) {
+                                    const peakScaleY = (peakDataArray[i] / 255) * canvas.height;
+                                    canvasCtx.fillStyle = '#fff'; 
+                                    canvasCtx.fillRect(x, canvas.height - peakScaleY - 2, Math.ceil(barWidth), 2);
+                                }
+                                x += barWidth;
+                            }
+
+                            if (frameHighestIntensity > 0) {
+                                if (frameHighestIntensity > absoluteMaxIntensity) {
+                                    absoluteMaxIntensity = frameHighestIntensity;
+                                    absoluteMaxFreqHz = frameHighestIntensityIndex * freqResolution;
+                                }
+
+                                const peakHz = absoluteMaxFreqHz.toFixed(1);
+                                const peakDbCalc = minDb + (absoluteMaxIntensity / 255) * (maxDb - minDb);
+                                peakFreqDisplay.innerText = `${peakHz} Hz`;
+                                peakDbDisplay.innerText = `${peakDbCalc.toFixed(1)} dB`;
+                            }
+                        };
+
+                        draw();
+                    } catch (err) {
+                        console.error('Error de micrófono:', err);
+                        alert('No se pudo acceder al micrófono para el analizador.');
+                        rtaActive = false;
+                    }
+                }
+            });
+        }
+    });
+</script>
