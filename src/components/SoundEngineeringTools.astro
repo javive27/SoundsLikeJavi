@@ -17,19 +17,11 @@
 
                 <!-- Columna Derecha: SPL Meter -->
                 <div class="spl-meter-panel">
-                    <div class="spl-row">
-                        <span class="spl-label" title="Peak Maximum">LpKmax</span>
-                        <span class="spl-val text-zinc-400" id="splMaxDisplay">--- dB</span>
-                    </div>
-                    <div class="spl-row">
-                        <span class="spl-label" title="Fast Minimum">LFmin</span>
-                        <span class="spl-val text-zinc-400" id="splMinDisplay">--- dB</span>
-                    </div>
-                    <div class="spl-row active-spl">
+                    <div class="spl-row active-spl" style="margin-top: 0.5rem;">
                         <span class="spl-label" title="Live SPL">Live SPL</span>
                         <span class="spl-val" id="splLiveDisplay">--- dB</span>
                     </div>
-                    <div class="spl-row active-spl">
+                    <div class="spl-row active-spl" style="margin-top: 1rem; margin-bottom: 0.5rem;">
                         <span class="spl-label" title="Equivalent Continuous Sound Level">LAeq</span>
                         <span class="spl-val" id="splLeqDisplay">--- dB</span>
                     </div>
@@ -80,10 +72,16 @@
             </div>
         </div>
 
-        <div class="rta-container mb-spaced">
-            <canvas id="rtaCanvas" width="800" height="300"></canvas>
-            <div id="rtaXLabels" class="rta-labels">
+        <!-- Contenedor Gráfico RTA con Eje Y -->
+        <div class="rta-wrapper mb-spaced">
+            <div id="rtaYLabels" class="rta-y-labels">
                 <!-- Se generan dinámicamente -->
+            </div>
+            <div class="rta-container">
+                <canvas id="rtaCanvas" width="800" height="300"></canvas>
+                <div id="rtaXLabels" class="rta-labels">
+                    <!-- Se generan dinámicamente -->
+                </div>
             </div>
         </div>
 
@@ -179,6 +177,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        justify-content: center;
     }
 
     .spl-row {
@@ -190,7 +189,7 @@
     }
 
     .spl-row.active-spl {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 800;
         color: #00e5ff;
         margin-top: 0.25rem;
@@ -198,7 +197,7 @@
 
     .spl-label {
         color: #888;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         font-family: system-ui, sans-serif;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -285,9 +284,28 @@
     }
 
     /* --- Contenedor Canvas --- */
+    .rta-wrapper {
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .rta-y-labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 10px;
+        padding-bottom: 35px; /* Compensa el alto de los labels X para alinear con el fondo del canvas */
+        color: #888;
+        font-size: 10px;
+        font-family: monospace;
+        text-align: right;
+        min-width: 30px;
+    }
+
     .rta-container {
+        flex: 1;
         position: relative;
-        width: 100%;
         background: #0f131f;
         border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -362,10 +380,9 @@
         const peakFreqDisplay = document.getElementById('peakFreqDisplay');
         const peakDbDisplay = document.getElementById('peakDbDisplay');
         const xLabelsContainer = document.getElementById('rtaXLabels');
+        const yLabelsContainer = document.getElementById('rtaYLabels');
 
         // Displays SPL
-        const splMaxDisplay = document.getElementById('splMaxDisplay');
-        const splMinDisplay = document.getElementById('splMinDisplay');
         const splLiveDisplay = document.getElementById('splLiveDisplay');
         const splLeqDisplay = document.getElementById('splLeqDisplay');
 
@@ -385,15 +402,11 @@
         // Variables RTA
         let isPeakHold = true;
         let peakDataArray = null;
-        let absoluteMaxIntensity = -Infinity;
-        let absoluteMaxFreqHz = 0;
         let minFreq = 20;
         let maxFreq = 20000;
 
         // Variables SPL Meter
         let splFast = 0;
-        let splMax = -Infinity;
-        let splMin = Infinity;
         let sumPressureSquared = 0;
         let leqSamples = 0;
         const CALIBRATION_OFFSET = 114; // dB offset genérico para calibrar señal digital a presión acústica aproximada
@@ -405,13 +418,11 @@
             canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
             peakFreqDisplay.innerText = '-- Hz';
             peakDbDisplay.innerText = '-- dB';
-            splMaxDisplay.innerText = '--- dB';
-            splMinDisplay.innerText = '--- dB';
             splLiveDisplay.innerText = '--- dB';
             splLeqDisplay.innerText = '--- dB';
         };
 
-        const updateLabels = () => {
+        const updateXLabels = () => {
             xLabelsContainer.innerHTML = '';
             if (minFreq === 20 && maxFreq === 20000) {
                 xLabelsContainer.innerHTML = '<span>20Hz</span><span>250Hz</span><span>1kHz</span><span>4kHz</span><span>20kHz</span>';
@@ -419,7 +430,31 @@
                 xLabelsContainer.innerHTML = `<span>${minFreq}Hz</span><span></span><span>${maxFreq}Hz</span>`;
             }
         };
-        updateLabels();
+
+        const updateYLabels = () => {
+            const [minDb, maxDb] = dbRangeSelect.value.split(',').map(Number);
+            const range = maxDb - minDb;
+            const steps = 5; // Cantidad de etiquetas verticales
+            yLabelsContainer.innerHTML = '';
+            
+            for (let i = 0; i < steps; i++) {
+                const dbValue = maxDb - (range / (steps - 1)) * i;
+                const span = document.createElement('span');
+                span.innerText = `${dbValue.toFixed(0)}`;
+                yLabelsContainer.appendChild(span);
+            }
+        };
+
+        // Inicializar labels
+        updateXLabels();
+        updateYLabels();
+
+        // Actualizar etiquetas Y al cambiar el select
+        dbRangeSelect.addEventListener('change', updateYLabels);
+        freqRangeSelect.addEventListener('change', () => {
+            [minFreq, maxFreq] = freqRangeSelect.value.split(',').map(Number);
+            updateXLabels();
+        });
 
         // --- LÓGICA DE CAPTURA DE IMAGEN ---
         captureBtn.addEventListener('click', () => {
@@ -444,33 +479,27 @@
             ctx.fillText(`FECHA: ${dateStr}`, 40, 90);
             ctx.fillText(`RTA MAX HOLD: ${peakFreqDisplay.innerText} @ ${peakDbDisplay.innerText}`, 40, 115);
 
-            // SPL Readings Panel (Dibujando la caja de SPL)
+            // SPL Readings Panel (Caja rediseñada para solo Live y LAeq)
             ctx.fillStyle = '#0f131f';
             ctx.fillRect(500, 40, 350, 120);
             ctx.strokeStyle = '#00e5ff';
             ctx.strokeRect(500, 40, 350, 120);
             
             ctx.fillStyle = '#888888';
-            ctx.font = '12px system-ui';
-            ctx.fillText('LpKmax (Peak)', 520, 65);
-            ctx.fillText('LFmin (Min)', 520, 90);
-            ctx.fillText('Live SPL', 700, 65);
-            ctx.fillText('LAeq', 700, 90);
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 16px monospace';
-            ctx.fillText(splMaxDisplay.innerText, 520, 80);
-            ctx.fillText(splMinDisplay.innerText, 520, 105);
+            ctx.font = '14px system-ui';
+            ctx.fillText('Live SPL', 540, 75);
+            ctx.fillText('LAeq', 730, 75);
             
             ctx.fillStyle = '#00e5ff';
-            ctx.font = 'bold 22px monospace';
-            ctx.fillText(splLiveDisplay.innerText, 700, 83);
-            ctx.fillText(splLeqDisplay.innerText, 700, 108);
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText(splLiveDisplay.innerText, 540, 115);
+            ctx.fillText(splLeqDisplay.innerText, 730, 115);
 
             // Settings Config
             const wText = weightingSelect.options[weightingSelect.selectedIndex].text;
             const splText = dbRangeSelect.options[dbRangeSelect.selectedIndex].text;
             const freqText = freqRangeSelect.options[freqRangeSelect.selectedIndex].text;
+            const [minDbCap, maxDbCap] = dbRangeSelect.value.split(',').map(Number);
             
             ctx.fillStyle = '#aaaaaa';
             ctx.font = '14px monospace';
@@ -478,15 +507,23 @@
             ctx.fillText(`RANGO Y: ${splText}`, 300, 145);
             ctx.fillText(`RANGO X: ${freqText}`, 550, 145);
 
-            // Gráfica
-            ctx.fillStyle = '#0f131f';
-            ctx.fillRect(40, 180, 820, 400);
-            ctx.drawImage(canvas, 50, 190, 800, 380);
-
-            // Eje X Etiquetas
+            // Eje Y Etiquetas en Captura
             ctx.fillStyle = '#888888';
             ctx.font = '12px monospace';
-            ctx.fillText(`${minFreq}Hz`, 50, 595);
+            ctx.textAlign = 'right';
+            ctx.fillText(`${maxDbCap}`, 35, 195);
+            ctx.fillText(`${minDbCap}`, 35, 565);
+            ctx.textAlign = 'left';
+
+            // Gráfica RTA (Ajustada para dejar espacio a los labels Y)
+            ctx.fillStyle = '#0f131f';
+            ctx.fillRect(45, 180, 815, 400);
+            ctx.drawImage(canvas, 55, 190, 795, 380);
+
+            // Eje X Etiquetas en Captura
+            ctx.fillStyle = '#888888';
+            ctx.font = '12px monospace';
+            ctx.fillText(`${minFreq}Hz`, 55, 595);
             ctx.textAlign = 'right';
             ctx.fillText(`${maxFreq}Hz`, 850, 595);
             ctx.textAlign = 'left';
@@ -522,14 +559,10 @@
         });
 
         clearPeakHoldBtn.addEventListener('click', () => {
-            // Reset RTA
+            // Reset RTA Array
             if (peakDataArray) peakDataArray.fill(0);
-            absoluteMaxIntensity = -Infinity;
-            absoluteMaxFreqHz = 0;
             
-            // Reset SPL
-            splMax = -Infinity;
-            splMin = Infinity;
+            // Reset SPL Array
             sumPressureSquared = 0;
             leqSamples = 0;
             
@@ -594,10 +627,6 @@
                             // Smoothing de SPL Live (Reactividad visual fluida)
                             splFast = (splFast * 0.7) + (currentDb * 0.3);
 
-                            // LMax / LMin
-                            if (splFast > splMax) splMax = splFast;
-                            if (splFast < splMin && splFast > 10) splMin = splFast;
-
                             // LEQ (Nivel Equivalente Continuo)
                             sumPressureSquared += Math.pow(10, currentDb / 10);
                             leqSamples++;
@@ -606,8 +635,6 @@
                             // Imprimir SPL a la pantalla
                             splLiveDisplay.innerText = `${splFast.toFixed(1)} dB`;
                             splLeqDisplay.innerText = `${leq.toFixed(1)} dB`;
-                            splMaxDisplay.innerText = `${splMax === -Infinity ? '---' : splMax.toFixed(1)} dB`;
-                            splMinDisplay.innerText = `${splMin === Infinity ? '---' : splMin.toFixed(1)} dB`;
 
 
                             // --- 2. LÓGICA DEL RTA GRÁFICO ---
@@ -617,7 +644,6 @@
                             analyserNode.maxDecibels = maxDb;
 
                             [minFreq, maxFreq] = freqRangeSelect.value.split(',').map(Number);
-                            updateLabels();
 
                             analyserNode.getByteFrequencyData(dataArray);
                             canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
@@ -629,27 +655,34 @@
                             const barWidth = canvas.width / totalBins;
                             let x = 0;
                             
-                            let frameHighestIntensity = 0;
-                            let frameHighestIntensityIndex = 0;
+                            let currentDisplayMax = 0;
+                            let currentDisplayMaxIndex = 0;
 
                             for (let i = startBin; i < endBin; i++) {
                                 let val = dataArray[i];
-                                
-                                if (val > frameHighestIntensity) {
-                                    frameHighestIntensity = val;
-                                    frameHighestIntensityIndex = i;
-                                }
 
+                                // 1. Actualizar el arreglo de retención (Peak Hold)
                                 if (isPeakHold) {
                                     if (val > peakDataArray[i]) peakDataArray[i] = val;
                                 } else {
                                     peakDataArray[i] = 0;
                                 }
 
+                                // 2. Determinar qué arreglo usar para buscar el pico máximo del texto
+                                let valueToCompare = isPeakHold ? peakDataArray[i] : val;
+
+                                // 3. Encontrar el valor más alto en el rango visible actual
+                                if (valueToCompare > currentDisplayMax) {
+                                    currentDisplayMax = valueToCompare;
+                                    currentDisplayMaxIndex = i;
+                                }
+
+                                // 4. Dibujar la gráfica (Barras azules)
                                 const scaleY = (val / 255) * canvas.height;
                                 canvasCtx.fillStyle = '#00e5ff';
                                 canvasCtx.fillRect(x, canvas.height - scaleY, Math.ceil(barWidth), scaleY);
 
+                                // 5. Dibujar el Peak Hold (Línea blanca)
                                 if (isPeakHold && peakDataArray[i] > 0) {
                                     const peakScaleY = (peakDataArray[i] / 255) * canvas.height;
                                     canvasCtx.fillStyle = '#fff'; 
@@ -658,16 +691,15 @@
                                 x += barWidth;
                             }
 
-                            if (frameHighestIntensity > 0) {
-                                if (frameHighestIntensity > absoluteMaxIntensity) {
-                                    absoluteMaxIntensity = frameHighestIntensity;
-                                    absoluteMaxFreqHz = frameHighestIntensityIndex * freqResolution;
-                                }
-
-                                const peakHz = absoluteMaxFreqHz.toFixed(1);
-                                const peakDbCalc = minDb + (absoluteMaxIntensity / 255) * (maxDb - minDb);
-                                peakFreqDisplay.innerText = `${peakHz} Hz`;
+                            // 6. Actualizar el texto dinámicamente escaneando lo que realmente se dibuja
+                            if (currentDisplayMax > 0) {
+                                const peakHz = currentDisplayMaxIndex * freqResolution;
+                                const peakDbCalc = minDb + (currentDisplayMax / 255) * (maxDb - minDb);
+                                peakFreqDisplay.innerText = `${peakHz.toFixed(1)} Hz`;
                                 peakDbDisplay.innerText = `${peakDbCalc.toFixed(1)} dB`;
+                            } else {
+                                peakFreqDisplay.innerText = '-- Hz';
+                                peakDbDisplay.innerText = '-- dB';
                             }
                         };
 
