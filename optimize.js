@@ -1,47 +1,51 @@
-// optimize.js
-const fs = require('fs');
-const path = require('path');
-const sharp = require('sharp');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
-// Directorio donde tienes tus imágenes originales (ajustálo según tu proyecto)
-const inputDir = path.join(__dirname, 'src/assets/images'); 
-// Directorio de salida para las imágenes optimizadas
-const outputDir = path.join(__dirname, 'public/optimized');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-if (!fs.existsSync(outputDir)){
-    fs.mkdirSync(outputDir, { recursive: true });
-}
+const inputDir = path.join(__dirname, 'public/images');
 
 async function processImages() {
     try {
+        if (!fs.existsSync(inputDir)) {
+            console.error(`❌ El directorio ${inputDir} no existe.`);
+            return;
+        }
+
         const files = fs.readdirSync(inputDir);
         
         for (const file of files) {
-            const filePath = path.join(inputDir, file);
             const ext = path.extname(file).toLowerCase();
             const baseName = path.basename(file, ext);
 
-            if (['.jpg', '.jpeg', '.png'].includes(ext)) {
-                const image = sharp(filePath);
-                
-                // 1. Optimizar y guardar en formato WebP (Recomendado para web)
-                await image
-                    .webp({ quality: 80 }) // Calidad ajustable (0-100)
-                    .toFile(path.join(outputDir, `${baseName}.webp`));
+            if (['.jpg', '.jpeg', '.png', '.heic', '.JPG'].includes(ext)) {
+                const filePath = path.join(inputDir, file);
+                const outputFilePath = path.join(inputDir, `${baseName}.webp`);
 
-                // 2. Opcional: Optimizar el formato original sin perder calidad excesiva
-                if (ext === '.png') {
-                    await image.png({ compressionLevel: 9 }).toFile(path.join(outputDir, file));
-                } else {
-                    await image.jpeg({ quality: 80, mozjpeg: true }).toFile(path.join(outputDir, file));
+                try {
+                    // Leer, comprimir al 80% de calidad y guardar como WebP
+                    await sharp(filePath)
+                        .webp({ quality: 80 })
+                        .toFile(outputFilePath);
+
+                    console.log(`✔️ Convertido y optimizado: ${file} -> ${baseName}.webp`);
+
+                    // Reemplazar el original eliminándolo
+                    if (filePath !== outputFilePath) {
+                        fs.unlinkSync(filePath);
+                        console.log(`🗑️ Original eliminado: ${file}`);
+                    }
+                } catch (err) {
+                    console.error(`❌ Error procesando ${file}:`, err.message);
                 }
-
-                console.log(`✔️ Optimizado y convertido: ${file} -> WebP`);
             }
         }
-        console.log('🚀 ¡Todas las imágenes se han optimizado con éxito!');
+        console.log('🚀 ¡Todas las imágenes se han optimizado a WebP y reemplazado con éxito!');
     } catch (error) {
-        console.error('❌ Error al procesar las imágenes:', error);
+        console.error('❌ Error general al procesar las imágenes:', error);
     }
 }
 

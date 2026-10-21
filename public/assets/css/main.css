@@ -3366,7 +3366,7 @@ h2, h3, h4, h5, h6 {
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		background-image: url("../../images/banner.jpg");
+		background-image: url("../../images/banner.webp");
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
