@@ -46,6 +46,9 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         <link rel="alternate icon" href={`${base}favicon.ico`} />
         <link rel="stylesheet" href={`${base}assets/css/main.css`} />
         <noscript><link rel="stylesheet" href={`${base}assets/css/noscript.css`} /></noscript>
+        {import.meta.env.PROD && (
+            <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
+        )}
     </head>
     <body class="is-preload">
 
@@ -242,10 +245,12 @@ const ogLocale = isEn ? "en_US" : "es_MX";
 
     <style>
         .utility-header {
-            background-color: rgba(15, 19, 31, 0.5) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(15, 19, 31, 0.15) !important; /* Header con alta transparencia */
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-top: 1px solid rgba(0, 229, 255, 0.3) !important; /* Línea divisoria movida a la parte superior */
+            border-bottom: none !important; /* Se remueve la línea inferior anterior */
+            box-shadow: 0 -4px 20px rgba(0, 229, 255, 0.15) !important; /* Resplandor superior en cyan */
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
@@ -256,5 +261,44 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         }
     </style>
     <AmbientHUD lang={lang} />
+
+    <!-- Cookie Banner (Glassmorphism style, perfectly centered) -->
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 480px; z-index: 9999; background: rgba(15, 19, 31, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 12px; padding: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.15); color: #ffffff; font-family: inherit; font-size: 0.9rem; text-align: center; flex-direction: column; align-items: center; gap: 1rem;">
+        <div style="width: 100%;">
+            <p style="margin: 0; line-height: 1.4; color: #e2e8f0; font-size: 0.85rem; text-align: center;">
+                {isEn 
+                    ? "This site uses cookies to enhance your experience and analyze traffic. You can accept or decline their use."
+                    : "Este sitio utiliza cookies para mejorar tu experiencia y analizar el tráfico. Puedes aceptar o rechazar su uso."}
+            </p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: center; width: 100%;">
+            <button id="cookie-decline" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #a1a1aa; padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;">
+                {isEn ? "Decline" : "Rechazar"}
+            </button>
+            <button id="cookie-accept" style="background: #00e5ff; border: none; color: #0f131f; padding: 0.4rem 1.25rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">
+                {isEn ? "Accept" : "Aceptar"}
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = localStorage.getItem('cookie_consent');
+            const banner = document.getElementById('cookie-banner');
+            if (!consent && banner) {
+                banner.style.display = 'flex';
+            }
+
+            document.getElementById('cookie-accept')?.addEventListener('click', () => {
+                localStorage.setItem('cookie_consent', 'accepted');
+                if (banner) banner.style.display = 'none';
+            });
+
+            document.getElementById('cookie-decline')?.addEventListener('click', () => {
+                localStorage.setItem('cookie_consent', 'declined');
+                if (banner) banner.style.display = 'none';
+            });
+        });
+    </script>
     </body>
 </html>
