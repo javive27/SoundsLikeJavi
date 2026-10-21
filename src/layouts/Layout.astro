@@ -4,16 +4,19 @@ import AmbientHUD from '../components/AmbientHUD.astro';
 const { title = "Portafolio JavierF", lang = "es", description = "", pathEs = "", pathEn = "" } = Astro.props;
 const isEn = lang === "en";
 const base = import.meta.env.BASE_URL;
-const homePath = base;
-const enHomePath = `${base}en/`;
 
-// Rutas adaptadas según el idioma
-const musicaPath = isEn ? `${base}en/music` : `${base}musica`;
-const ingenieriaPath = isEn ? `${base}en/engineering` : `${base}ingenieria`;
-const saxofonistaPath = isEn ? `${base}en/saxophonist` : `${base}saxofonista`;
-const experienciaPath = isEn ? `${base}en/experience` : `${base}experiencia`;
-const musicToolsPath = isEn ? `${base}en/music-tools` : `${base}musictools`;
-const audioToolsPath = isEn ? `${base}en/audiotools` : `${base}audiotools`;
+// Rutas adaptadas según el idioma (English at root /, Spanish at /es/)
+const homePath = isEn ? `${base}` : `${base}es/`;
+
+const musicaPath = isEn ? `${base}music` : `${base}es/musica`;
+const ingenieriaPath = isEn ? `${base}engineering` : `${base}es/ingenieria`;
+const saxofonistaPath = isEn ? `${base}saxophonist` : `${base}es/saxofonista`;
+const experienciaPath = isEn ? `${base}experience` : `${base}es/experiencia`;
+const musicToolsPath = isEn ? `${base}music-tools` : `${base}es/music-tools`;
+const audioToolsPath = isEn ? `${base}audiotools` : `${base}es/audiotools`;
+
+const esTarget = pathEs ? `${base}es/${pathEs}` : `${base}es/`;
+const enTarget = pathEn ? `${base}${pathEn}` : `${base}`;
 
 // SEO: URLs canónicas y hreflang (activas cuando Astro.site esté definido en astro.config.mjs)
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
@@ -59,7 +62,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                             <!-- Selector de Idiomas Mejorado (ESP | ENG) -->
                             <div style="display: inline-flex; align-items: center; margin-right: 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;">
                                 <a 
-                                    href={homePath} 
+                                    href={esTarget} 
                                     style={`color: ${!isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}
                                     title="Cambiar a Español"
                                 >
@@ -67,7 +70,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                                 </a>
                                 <span style="color: #555555; margin: 0 0.2rem;">/</span>
                                 <a 
-                                    href={enHomePath} 
+                                    href={enTarget} 
                                     style={`color: ${isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}
                                     title="Switch to English"
                                 >
