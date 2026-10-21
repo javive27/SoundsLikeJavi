@@ -20,7 +20,7 @@ const base = import.meta.env.BASE_URL;
 
             <div class="inner">
                 <header class="major">
-                    <h1>¡Hola! Mi nombre es Javier</h1>
+                    <h1 class="hero-title">¡Hola! Mi nombre es Javier</h1>
                 </header>
                 <div class="content">
                     <p>Ingeniero creativo y líder técnico con más de 8 años de experiencia en la industria del entretenimiento, 5 de ellos dedicados a crear experiencias de alto impacto para producciones globales exigentes.
@@ -42,7 +42,7 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                             <img src={`${base}images/Javier-Flores-Golden-Mickeys-bn.jpg`} alt="Javier Flores recibiendo un premio Golden Mickeys por su trabajo en producción musical" loading="lazy" decoding="async" />
                         </span>
                         <header class="major">
-                            <h2><a href={`${base}music`} class="link">Música y Diseño Sonoro</a></h2>
+                            <h2><a href={`${base}musica`} class="link">Música y Diseño Sonoro</a></h2>
                             <p>Mis creaciones como productor musical</p>
                         </header>
                     </article>
@@ -51,7 +51,7 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                             <img src={`${base}images/Javier-Flores-Dream-bn.jpg`} alt="Javier Flores, ingeniero de audio, operando consolas de mezcla durante el espectáculo escénico Dream" loading="lazy" decoding="async" />
                         </span>
                         <header class="major">
-                            <h2><a href={`${base}engineering`} class="link">Ingeniería</a></h2>
+                            <h2><a href={`${base}ingenieria`} class="link">Ingeniería</a></h2>
                             <p>Mi experiencia en ingeniería y audio</p>
                         </header>
                     </article>
@@ -60,7 +60,7 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                             <img src={`${base}images/Javier-Flores-Taipei-Taiwan-bn.jpg`} alt="Javier Flores en Taipei, Taiwán, durante una gira internacional como ingeniero de audio" loading="lazy" decoding="async" />
                         </span>
                         <header class="major">
-                            <h2><a href={`${base}experience`} class="link">Experiencia</a></h2>
+                            <h2><a href={`${base}experiencia`} class="link">Experiencia</a></h2>
                             <p>Educación, experiencias y trabajos anteriores</p>
                         </header>
                     </article>
@@ -69,7 +69,7 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                             <img src={`${base}images/Javier-Flores-Coctel-Calavera-sm.jpg`} alt="Javier Flores tocando el saxofón con la banda Cóctel Calavera en un evento en vivo" loading="lazy" decoding="async" />
                         </span>
                         <header class="major">
-                            <h2><a href={`${base}saxophonist`} class="link">Saxofonista</a></h2>
+                            <h2><a href={`${base}saxofonista`} class="link">Saxofonista</a></h2>
                             <p>Mis logros y trayectoria como músico</p>
                         </header>
                     </article>
@@ -78,7 +78,7 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                             <img src={`${base}images/Javier-Flores-Orquesta-ITESM.jpg`} alt="Javier Flores en la orquesta de cámara del ITESM" loading="lazy" decoding="async" />
                         </span>
                         <header class="major">
-                            <h2><a href={`${base}music-tools`} class="link">Herramientas Musicales</a></h2>
+                            <h2><a href={`${base}musictools`} class="link">Herramientas Musicales</a></h2>
                             <p>Por si acaso olvidaste tu metrónomo y tu diapasón en casa</p>
                         </header>
                     </article>
@@ -94,4 +94,24 @@ Poseo una Maestría en Comunicación y Medios Digitales y una ingeniería en Pro
                 </section>
 
         </div>
+
+    <style>
+        body, #wrapper {
+            background-color: #0f131f !important;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem) !important;
+            font-weight: 900 !important;
+            color: #00e5ff !important;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        /* Pattern: 1 blue, 2 purples, 2 blues, 2 purples... */
+        #one.tiles article:nth-child(6n - 5):before { background-color: #6fc3df !important; } /* 1. Azul */
+        #one.tiles article:nth-child(6n - 4):before { background-color: #8d82c4 !important; } /* 2. Púrpura 1 */
+        #one.tiles article:nth-child(6n - 3):before { background-color: #8d82c4 !important; } /* 3. Púrpura 2 */
+        #one.tiles article:nth-child(6n - 2):before { background-color: #6fc3df !important; } /* 4. Azul 1 */
+        #one.tiles article:nth-child(6n - 1):before { background-color: #6fc3df !important; } /* 5. Azul 2 */
+        #one.tiles article:nth-child(6n):before { background-color: #8d82c4 !important;     } /* 6. Púrpura 1 */
+    </style>
 </Layout>

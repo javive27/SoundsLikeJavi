@@ -20,7 +20,7 @@ const base = import.meta.env.BASE_URL;
 
             <div class="inner">
                 <header class="major">
-                    <h1>Hello! My name is Javier</h1>
+                    <h1 class="hero-title">Hello! My name is Javier</h1>
                 </header>
                 <div class="content">
                     <p>Creative engineer and technical lead with over 8 years of experience in the entertainment industry, 5 of them dedicated to creating high-impact experiences for demanding global productions.
@@ -94,4 +94,24 @@ I hold a Master's in Media and Communication and a degree in Music Production En
                 </section>
 
         </div>
+
+    <style>
+        body, #wrapper {
+            background-color: #0f131f !important;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem) !important;
+            font-weight: 900 !important;
+            color: #00e5ff !important;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        /* Pattern: 1 blue, 2 purples, 2 blues, 2 purples... */
+        #one.tiles article:nth-child(6n - 5):before { background-color: #6fc3df !important; } /* 1. Azul */
+        #one.tiles article:nth-child(6n - 4):before { background-color: #8d82c4 !important; } /* 2. Púrpura 1 */
+        #one.tiles article:nth-child(6n - 3):before { background-color: #8d82c4 !important; } /* 3. Púrpura 2 */
+        #one.tiles article:nth-child(6n - 2):before { background-color: #6fc3df !important; } /* 4. Azul 1 */
+        #one.tiles article:nth-child(6n - 1):before { background-color: #6fc3df !important; } /* 5. Azul 2 */
+        #one.tiles article:nth-child(6n):before { background-color: #8d82c4 !important;     } /* 6. Púrpura 1 */
+    </style>
 </Layout>
