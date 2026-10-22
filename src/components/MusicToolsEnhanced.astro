@@ -3,6 +3,29 @@
     <div class="mt-card">
         <h2 class="mt-title">Metrónomo</h2>
         
+        <!-- Contenedor superior con CSS Grid para alineación perfecta -->
+        <div class="mt-controls-grid">
+            
+            <div class="compas-wrapper">
+                <select id="timeSignature" class="mt-select">
+                    <option value="1">1/4</option>
+                    <option value="2">2/4</option>
+                    <option value="3">3/4</option>
+                    <option value="4" selected>4/4</option>
+                    <option value="5">5/4</option>
+                    <option value="6">6/8</option>
+                </select>
+            </div>
+
+            <div class="led-wrapper">
+                <div id="beatLight" class="led-light"></div>
+            </div>
+
+            <div class="tap-wrapper">
+                <button id="tapTempoBtn" class="mt-btn-small">TAP TEMPO</button>
+            </div>
+        </div>
+
         <div class="bpm-container">
             <input type="number" id="bpmInput" class="bpm-input" value="120" min="40" max="300">
             <span class="bpm-label">BPM</span>
@@ -19,6 +42,11 @@
     <div class="mt-card">
         <h2 class="mt-title">Afinador Cromático</h2>
         
+        <div class="calibration-row">
+            <label>Ref A4:</label>
+            <input type="number" id="a4Input" class="mt-input-sm" value="440" min="410" max="460"> <span>Hz</span>
+        </div>
+
         <button id="toggleTuner" class="mt-btn mt-btn-cyan mb-spaced">ACTIVAR MICRÓFONO</button>
 
         <div class="tuner-display">
@@ -41,16 +69,38 @@
                 <div class="tick"></div>
                 <div class="tick major"></div>
             </div>
-            
             <div class="dial-center-mark"></div>
-            
             <div class="dial-labels">
                 <span>-50</span>
                 <span>0</span>
                 <span>+50</span>
             </div>
-            
             <div id="needle" class="dial-needle"></div>
+        </div>
+    </div>
+
+    <!-- Piano Synth -->
+    <div class="mt-card">
+        <h2 class="mt-title">Mini Piano</h2>
+        <p class="piano-hint">Usa el teclado: Q a P (blancas), Num 2 a 0 (negras)</p>
+        <div class="piano-wrapper">
+            <div class="piano-key white" data-key="q" data-freq="261.63"><span>Q</span></div>
+            <div class="piano-key black" data-key="2" data-freq="277.18"><span>2</span></div>
+            <div class="piano-key white" data-key="w" data-freq="293.66"><span>W</span></div>
+            <div class="piano-key black" data-key="3" data-freq="311.13"><span>3</span></div>
+            <div class="piano-key white" data-key="e" data-freq="329.63"><span>E</span></div>
+            <div class="piano-key white" data-key="r" data-freq="349.23"><span>R</span></div>
+            <div class="piano-key black" data-key="5" data-freq="369.99"><span>5</span></div>
+            <div class="piano-key white" data-key="t" data-freq="392.00"><span>T</span></div>
+            <div class="piano-key black" data-key="6" data-freq="415.30"><span>6</span></div>
+            <div class="piano-key white" data-key="y" data-freq="440.00"><span>Y</span></div>
+            <div class="piano-key black" data-key="7" data-freq="466.16"><span>7</span></div>
+            <div class="piano-key white" data-key="u" data-freq="493.88"><span>U</span></div>
+            <div class="piano-key white" data-key="i" data-freq="523.25"><span>I</span></div>
+            <div class="piano-key black" data-key="9" data-freq="554.37"><span>9</span></div>
+            <div class="piano-key white" data-key="o" data-freq="587.33"><span>O</span></div>
+            <div class="piano-key black" data-key="0" data-freq="622.25"><span>0</span></div>
+            <div class="piano-key white" data-key="p" data-freq="659.25"><span>P</span></div>
         </div>
     </div>
 </div>
@@ -61,9 +111,10 @@
         display: flex;
         flex-direction: column;
         gap: 2.5rem;
-        max-width: 500px;
+        max-width: 550px;
         margin: 0 auto;
         font-family: system-ui, -apple-system, sans-serif;
+        color: #fff;
     }
 
     .mt-card {
@@ -84,7 +135,106 @@
         letter-spacing: 1px;
     }
 
-    /* --- Controles del Metrónomo --- */
+    /* --- NUEVO LAYOUT GRID PARA CONTROLES SUPERIORES --- */
+    .mt-controls-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr; /* Columna izq, centro ajustado, derecha */
+        grid-template-rows: auto auto;
+        row-gap: 0.3rem;
+        column-gap: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 1.2rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        align-items: center;
+    }
+
+    .compas-label {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        text-align: left;
+        font-size: 0.75rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .compas-wrapper {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        text-align: left;
+    }
+
+    .led-wrapper {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tap-wrapper {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+        text-align: right;
+    }
+
+    /* Alturas y alineaciones compartidas para consistencia */
+    .mt-select, .mt-btn-small {
+        height: 40px; /* Misma altura para alinear perfecto */
+        box-sizing: border-box;
+    }
+
+    .mt-select, .mt-input-sm {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        color: #fff;
+        padding: 0 12px;
+        border-radius: 6px;
+        outline: none;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 100%;
+        max-width: 100px;
+    }
+
+    .mt-select:focus, .mt-input-sm:focus { border-color: #00e5ff; }
+
+    .mt-btn-small {
+        background: transparent;
+        border: 1px solid #00e5ff; /* Cambiado a Cyan */
+        color: #00e5ff; /* Cambiado a Cyan */
+        padding: 0 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        transition: all 0.2s;
+        /* Flexbox para centrar texto dentro del botón */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 130px;
+    }
+    
+    .mt-btn-small:hover, .mt-btn-small:active {
+        background: #00e5ff;
+        color: #0f131f;
+    }
+
+    .led-light {
+        width: 20px; /* Un poco más estilizado */
+        height: 20px;
+        border-radius: 50%;
+        background: #222;
+        border: 2px solid #111;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+        transition: background 0.05s, box-shadow 0.05s, border-color 0.05s;
+    }
+
+    /* --- Metrónomo Central --- */
     .bpm-container {
         display: flex;
         justify-content: center;
@@ -108,15 +258,8 @@
         padding: 0;
     }
 
-    .bpm-input:focus {
-        border-bottom: 2px solid #00e5ff;
-    }
-
-    .bpm-input::-webkit-outer-spin-button,
-    .bpm-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+    .bpm-input:focus { border-bottom: 2px solid #00e5ff; }
+    .bpm-input::-webkit-outer-spin-button, .bpm-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
     .bpm-label {
         color: #888;
@@ -125,21 +268,9 @@
         text-transform: uppercase;
     }
 
-    .slider-container {
-        margin-bottom: 2rem;
-        padding: 0 10px;
-    }
-
-    .mt-slider {
-        -webkit-appearance: none;
-        width: 100%;
-        background: transparent;
-    }
-
-    .mt-slider:focus {
-        outline: none;
-    }
-
+    .slider-container { margin-bottom: 2rem; padding: 0 10px; }
+    .mt-slider { -webkit-appearance: none; width: 100%; background: transparent; }
+    .mt-slider:focus { outline: none; }
     .mt-slider::-webkit-slider-runnable-track {
         width: 100%;
         height: 8px;
@@ -148,7 +279,6 @@
         border-radius: 4px;
         border: 1px solid rgba(0,0,0,0.3);
     }
-
     .mt-slider::-webkit-slider-thumb {
         height: 24px;
         width: 24px;
@@ -160,7 +290,7 @@
         box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
     }
 
-    /* --- Botones --- */
+    /* --- Botones Generales --- */
     .mt-btn {
         width: 100%;
         padding: 14px 24px;
@@ -172,56 +302,31 @@
         cursor: pointer;
         transition: all 0.3s ease;
         background: transparent;
-        /* Flexbox para centrar texto vertical y horizontalmente */
         display: flex;
         align-items: center;
         justify-content: center;
-        line-height: 1; /* Evita que alturas de línea extrañas lo desplacen */
-    }
-
-    .mt-btn-cyan {
-        border: 2px solid #00e5ff;
-        color: #fff;
-    }
-
-    .mt-btn-cyan:hover {
-        background: #00e5ff;
-        color: #0f131f;
-    }
-
-    .mt-btn.active-red {
-        border-color: #ff3366;
-        color: #fff;
-    }
-    
-    .mt-btn.active-red:hover {
-        background: #ff3366;
-        color: #fff;
-    }
-
-    .mb-spaced {
-        margin-bottom: 2rem;
-    }
-
-    /* --- Controles del Afinador --- */
-    .tuner-display {
-        margin-bottom: 2rem;
-    }
-
-    .note-text {
-        font-size: 5rem;
-        font-weight: 900;
-        color: #555;
         line-height: 1;
-        transition: color 0.2s;
     }
+    .mt-btn-cyan { border: 2px solid #00e5ff; color: #fff; }
+    .mt-btn-cyan:hover { background: #00e5ff; color: #0f131f; }
+    .mt-btn.active-red { border-color: #ff3366; color: #fff; }
+    .mt-btn.active-red:hover { background: #ff3366; color: #fff; }
+    .mb-spaced { margin-bottom: 2rem; }
 
-    .cents-text {
+    /* --- Afinador --- */
+    .calibration-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
         color: #888;
         font-size: 0.9rem;
-        font-family: monospace;
-        margin-top: 0.5rem;
     }
+    .calibration-row input { width: 70px; text-align: center; }
+    .tuner-display { margin-bottom: 2rem; }
+    .note-text { font-size: 5rem; font-weight: 900; color: #555; line-height: 1; transition: color 0.15s; }
+    .cents-text { color: #888; font-size: 0.9rem; font-family: monospace; margin-top: 0.5rem; }
 
     /* Dial del Afinador */
     .dial-container {
@@ -233,64 +338,55 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         overflow: hidden;
     }
-
     .dial-ticks {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 0 10px;
-        box-sizing: border-box;
-        z-index: 0;
+        position: absolute; width: 100%; height: 100%;
+        display: flex; justify-content: space-between; align-items: flex-start;
+        padding: 0 10px; box-sizing: border-box; z-index: 0;
     }
-
-    .tick {
-        width: 2px;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.15);
-    }
-
-    .tick.major {
-        height: 16px;
-        background: rgba(255, 255, 255, 0.3);
-    }
-
+    .tick { width: 2px; height: 8px; background: rgba(255, 255, 255, 0.15); }
+    .tick.major { height: 16px; background: rgba(255, 255, 255, 0.3); }
     .dial-center-mark {
-        position: absolute;
-        width: 2px;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
+        position: absolute; width: 2px; height: 100%; background: rgba(255, 255, 255, 0.1);
+        left: 50%; transform: translateX(-50%); z-index: 1;
     }
-
     .dial-labels {
-        position: absolute;
-        width: 100%;
-        bottom: 4px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-        box-sizing: border-box;
-        color: #666;
-        font-size: 10px;
-        font-family: monospace;
-        z-index: 1;
+        position: absolute; width: 100%; bottom: 4px; display: flex; justify-content: space-between;
+        padding: 0 10px; box-sizing: border-box; color: #666; font-size: 10px; font-family: monospace; z-index: 1;
+    }
+    .dial-needle {
+        position: absolute; width: 4px; height: 100%; background: #555; left: 50%;
+        transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.4, 1), background-color 0.2s; z-index: 2;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
 
-    .dial-needle {
-        position: absolute;
-        width: 4px;
-        height: 100%;
-        background: #555;
-        left: 50%;
-        transform: translateX(-50%);
-        transition: transform 0.05s ease-out, background-color 0.2s;
-        z-index: 2;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    /* --- Mini Piano --- */
+    .piano-hint { color: #888; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .piano-wrapper {
+        display: flex; position: relative; justify-content: center;
+        height: 160px; width: 100%; background: #111; padding: 10px 10px 0 10px;
+        border-radius: 8px; border: 2px solid #333; box-sizing: border-box; overflow: hidden;
+    }
+    .piano-key {
+        cursor: pointer; display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 10px; user-select: none; transition: background 0.05s;
+        border-radius: 0 0 4px 4px; border: 1px solid #000;
+    }
+    .piano-key span { pointer-events: none; }
+    .piano-key.white {
+        background: #fffff0; color: #333; width: 45px; height: 100%; z-index: 1;
+        font-weight: bold; box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+    }
+    .piano-key.white.active {
+        background: #e0e0d0; box-shadow: inset 0 -1px 2px rgba(0,0,0,0.4);
+        transform: scaleY(0.98); transform-origin: top;
+    }
+    .piano-key.black {
+        background: #111; color: #aaa; width: 30px; height: 60%; margin-left: -15px; margin-right: -15px;
+        z-index: 2; font-size: 0.75rem; box-shadow: inset 0 -3px 5px rgba(255,255,255,0.1), 2px 2px 5px rgba(0,0,0,0.5);
+    }
+    .piano-key.black.active {
+        background: #333; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.1);
+        transform: scaleY(0.98); transform-origin: top;
     }
 </style>
 
@@ -303,29 +399,66 @@
     let playing = false;
     let nextTickTime = 0;
     let timerId = null;
+    let currentBeat = 0;
+    let tapTimes = [];
 
-    const playClick = () => {
+    const playClick = (time, isAccent) => {
         if (!metronomeCtx) return;
+
+        const timeToPlay = time - metronomeCtx.currentTime;
+        const triggerLed = () => {
+            const led = document.getElementById('beatLight');
+            led.classList.add('active');
+            
+            // Todo se prende en Cyan como solicitaste
+            led.style.backgroundColor = '#00e5ff';
+            led.style.borderColor = '#00e5ff';
+            
+            // Acentos brillan un poco más para mantener el feel
+            if (isAccent) {
+                led.style.boxShadow = '0 0 20px #00e5ff, inset 0 0 10px #fff';
+            } else {
+                led.style.boxShadow = '0 0 10px #00e5ff';
+            }
+            
+            setTimeout(() => {
+                led.classList.remove('active');
+                led.style.backgroundColor = '';
+                led.style.borderColor = '';
+                led.style.boxShadow = '';
+            }, 100);
+        };
+
+        if (timeToPlay > 0) {
+            setTimeout(triggerLed, timeToPlay * 1000);
+        } else {
+            triggerLed();
+        }
+
         const osc = metronomeCtx.createOscillator();
         const gain = metronomeCtx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(1000, metronomeCtx.currentTime); 
+        osc.frequency.setValueAtTime(isAccent ? 1500 : 1000, time); 
         
-        gain.gain.setValueAtTime(1, metronomeCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, metronomeCtx.currentTime + 0.05);
+        gain.gain.setValueAtTime(1, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
 
         osc.connect(gain);
         gain.connect(metronomeCtx.destination);
 
-        osc.start(metronomeCtx.currentTime);
-        osc.stop(metronomeCtx.currentTime + 0.05);
+        osc.start(time);
+        osc.stop(time + 0.05);
     };
 
     const scheduler = () => {
         while (nextTickTime < metronomeCtx.currentTime + 0.1) {
-            playClick();
+            const timeSig = parseInt(document.getElementById('timeSignature').value);
+            const isAccent = (currentBeat % timeSig === 0);
+            
+            playClick(nextTickTime, isAccent);
             nextTickTime += 60.0 / bpm;
+            currentBeat++;
         }
         if (playing) {
             timerId = requestAnimationFrame(scheduler);
@@ -366,21 +499,75 @@
     };
 
     // ==========================================
+    // --- LÓGICA DEL PIANO SINTETIZADOR ---
+    // ==========================================
+    let pianoCtx = null;
+    const activeNotes = {};
+
+    const playPianoNote = (freq, keyElement) => {
+        if (!pianoCtx) pianoCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (pianoCtx.state === 'suspended') pianoCtx.resume();
+        
+        keyElement.classList.add('active');
+
+        const osc1 = pianoCtx.createOscillator();
+        const osc2 = pianoCtx.createOscillator();
+        const gainNode = pianoCtx.createGain();
+
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        
+        osc1.frequency.setValueAtTime(freq, pianoCtx.currentTime);
+        osc2.frequency.setValueAtTime(freq + 0.5, pianoCtx.currentTime); 
+
+        gainNode.gain.setValueAtTime(0, pianoCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(1, pianoCtx.currentTime + 0.015);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, pianoCtx.currentTime + 2.5);
+
+        osc1.connect(gainNode);
+        osc2.connect(gainNode);
+        gainNode.connect(pianoCtx.destination);
+
+        osc1.start();
+        osc2.start();
+        
+        osc1.stop(pianoCtx.currentTime + 3);
+        osc2.stop(pianoCtx.currentTime + 3);
+
+        return { osc1, osc2, gainNode, keyElement };
+    };
+
+    const stopPianoNote = (noteObj) => {
+        if (!noteObj || !pianoCtx) return;
+        const { osc1, osc2, gainNode, keyElement } = noteObj;
+        const now = pianoCtx.currentTime;
+        
+        gainNode.gain.cancelScheduledValues(now);
+        gainNode.gain.setValueAtTime(gainNode.gain.value, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        
+        setTimeout(() => { try { osc1.stop(); osc2.stop(); } catch(e){} }, 150);
+        keyElement.classList.remove('active');
+    };
+
+    // ==========================================
     // --- INICIALIZACIÓN DE EVENTOS ---
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
-        // Elementos Metrónomo
+        // --- Metrónomo ---
         const toggleBtn = document.getElementById('toggleMetronome');
         const bpmSlider = document.getElementById('bpmSlider');
         const bpmInput = document.getElementById('bpmInput');
+        const tapTempoBtn = document.getElementById('tapTempoBtn');
+        const timeSigSelect = document.getElementById('timeSignature');
         
-        // Elementos Afinador
+        // --- Afinador ---
         const toggleTunerBtn = document.getElementById('toggleTuner');
         const noteDisplay = document.getElementById('noteDisplay');
         const centsDisplay = document.getElementById('centsDisplay');
         const needle = document.getElementById('needle');
+        const a4Input = document.getElementById('a4Input');
 
-        // Sincronizar Slider con Input (Límite 300)
         const updateBpm = (val) => {
             let newBpm = parseInt(val);
             if (isNaN(newBpm)) newBpm = 120;
@@ -397,21 +584,36 @@
             bpmInput.addEventListener('change', (e) => updateBpm(e.target.value));
         }
 
-        // --- EVENTOS DEL METRÓNOMO ---
+        if (tapTempoBtn) {
+            tapTempoBtn.addEventListener('click', () => {
+                const now = performance.now();
+                tapTimes.push(now);
+                if (tapTimes.length > 4) tapTimes.shift(); 
+                
+                if (tapTimes.length > 1) {
+                    let intervals = [];
+                    for (let i = 1; i < tapTimes.length; i++) {
+                        intervals.push(tapTimes[i] - tapTimes[i-1]);
+                    }
+                    const avgInterval = intervals.reduce((a, b) => a + b) / intervals.length;
+                    const newBpm = Math.round(60000 / avgInterval);
+                    updateBpm(newBpm);
+                }
+            });
+        }
+
+        if (timeSigSelect) timeSigSelect.addEventListener('change', () => currentBeat = 0);
+
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
-                // Crear y reanudar el contexto exclusivo del metrónomo
-                if (!metronomeCtx) {
-                    metronomeCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (metronomeCtx.state === 'suspended') {
-                    metronomeCtx.resume();
-                }
+                if (!metronomeCtx) metronomeCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (metronomeCtx.state === 'suspended') metronomeCtx.resume();
 
                 playing = !playing;
 
                 if (playing) {
-                    nextTickTime = metronomeCtx.currentTime;
+                    currentBeat = 0; 
+                    nextTickTime = metronomeCtx.currentTime + 0.05;
                     scheduler();
                     toggleBtn.innerText = 'DETENER';
                     toggleBtn.classList.add('active-red');
@@ -423,12 +625,23 @@
             });
         }
 
-        // --- EVENTOS DEL AFINADOR ---
+        // --- Eventos Afinador ---
         let tunerActive = false;
         let tunerTimerId = null;
         let mediaStream = null;
         let analyserNode = null;
         let sourceNode = null;
+        let baseA4 = 440;
+
+        if (a4Input) {
+            a4Input.addEventListener('change', (e) => {
+                let val = parseFloat(e.target.value);
+                if (val < 410) val = 410;
+                if (val > 460) val = 460;
+                baseA4 = val || 440;
+                e.target.value = baseA4;
+            });
+        }
 
         const resetTunerUI = () => {
             noteDisplay.innerText = "--";
@@ -440,38 +653,19 @@
 
         if (toggleTunerBtn) {
             toggleTunerBtn.addEventListener('click', async () => {
-                // Crear y reanudar el contexto exclusivo del afinador
-                if (!tunerCtx) {
-                    tunerCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (tunerCtx.state === 'suspended') {
-                    await tunerCtx.resume();
-                }
+                if (!tunerCtx) tunerCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (tunerCtx.state === 'suspended') await tunerCtx.resume();
 
                 if (tunerActive) {
-                    // Detener Afinador
                     tunerActive = false;
                     if (tunerTimerId) cancelAnimationFrame(tunerTimerId);
-                    
-                    if (mediaStream) {
-                        mediaStream.getTracks().forEach(track => track.stop());
-                        mediaStream = null;
-                    }
-                    if (sourceNode) {
-                        sourceNode.disconnect();
-                        sourceNode = null;
-                    }
-                    if (analyserNode) {
-                        analyserNode.disconnect();
-                        analyserNode = null;
-                    }
-
+                    if (mediaStream) { mediaStream.getTracks().forEach(track => track.stop()); mediaStream = null; }
+                    if (sourceNode) { sourceNode.disconnect(); sourceNode = null; }
+                    if (analyserNode) { analyserNode.disconnect(); analyserNode = null; }
                     resetTunerUI();
                     toggleTunerBtn.innerText = 'ACTIVAR MICRÓFONO';
                     toggleTunerBtn.classList.remove('active-red');
-
                 } else {
-                    // Iniciar Afinador
                     try {
                         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
                         sourceNode = tunerCtx.createMediaStreamSource(mediaStream);
@@ -481,12 +675,12 @@
 
                         const buffer = new Float32Array(analyserNode.fftSize);
                         const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-
                         const dialWidth = document.querySelector('.dial-container').clientWidth;
+                        
                         let smoothedCents = 0;
                         let lastMidiNote = -1;
-
                         tunerActive = true;
+                        
                         toggleTunerBtn.innerText = 'DETENER MICRÓFONO';
                         toggleTunerBtn.classList.add('active-red');
 
@@ -497,9 +691,11 @@
                             const freq = autoCorrelate(buffer, tunerCtx.sampleRate);
 
                             if (freq !== -1) {
-                                const midiNote = Math.round(12 * Math.log2(freq / 440) + 69);
+                                const midiNote = Math.round(12 * Math.log2(freq / baseA4) + 69);
                                 const noteName = noteNames[midiNote % 12];
-                                const idealFreq = 440 * Math.pow(2, (midiNote - 69) / 12);
+                                const octave = Math.floor(midiNote / 12) - 1; 
+                                
+                                const idealFreq = baseA4 * Math.pow(2, (midiNote - 69) / 12);
                                 const currentCents = Math.round(1200 * Math.log2(freq / idealFreq));
 
                                 if (midiNote !== lastMidiNote) {
@@ -510,8 +706,7 @@
                                 }
 
                                 const displayCents = Math.round(smoothedCents);
-
-                                noteDisplay.innerText = noteName;
+                                noteDisplay.innerText = `${noteName}${octave}`; 
                                 centsDisplay.innerText = `${displayCents > 0 ? '+' : ''}${displayCents} cents`;
 
                                 const maxOffset = (dialWidth / 2) - 10; 
@@ -545,5 +740,51 @@
                 }
             });
         }
+
+        // --- Eventos del Piano Teclado/Mouse ---
+        const keysElements = document.querySelectorAll('.piano-key');
+        const getElByKey = (key) => document.querySelector(`.piano-key[data-key="${key}"]`);
+
+        document.addEventListener('keydown', (e) => {
+            if(e.repeat) return; 
+            const key = e.key.toLowerCase();
+            const el = getElByKey(key);
+            if (el && !activeNotes[key]) {
+                const freq = parseFloat(el.getAttribute('data-freq'));
+                activeNotes[key] = playPianoNote(freq, el);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            if (activeNotes[key]) {
+                stopPianoNote(activeNotes[key]);
+                delete activeNotes[key];
+            }
+        });
+
+        keysElements.forEach(keyEl => {
+            const pressKey = () => {
+                const key = keyEl.getAttribute('data-key');
+                if (!activeNotes[key]) {
+                    const freq = parseFloat(keyEl.getAttribute('data-freq'));
+                    activeNotes[key] = playPianoNote(freq, keyEl);
+                }
+            };
+            const releaseKey = () => {
+                const key = keyEl.getAttribute('data-key');
+                if (activeNotes[key]) {
+                    stopPianoNote(activeNotes[key]);
+                    delete activeNotes[key];
+                }
+            };
+
+            keyEl.addEventListener('mousedown', pressKey);
+            keyEl.addEventListener('touchstart', (e) => { e.preventDefault(); pressKey(); });
+            
+            keyEl.addEventListener('mouseup', releaseKey);
+            keyEl.addEventListener('mouseleave', releaseKey);
+            keyEl.addEventListener('touchend', (e) => { e.preventDefault(); releaseKey(); });
+        });
     });
 </script>
