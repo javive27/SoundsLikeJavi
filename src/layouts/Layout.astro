@@ -5,7 +5,7 @@ const { title = "Portafolio JavierF", lang = "es", description = "", pathEs = ""
 const isEn = lang === "en";
 const base = import.meta.env.BASE_URL;
 
-// Rutas adaptadas según el idioma (English at root /, Spanish at /es/)
+// Rutas adaptadas según el idioma
 const homePath = isEn ? `${base}` : `${base}es/`;
 
 const musicaPath = isEn ? `${base}music` : `${base}es/musica`;
@@ -18,7 +18,6 @@ const audioToolsPath = isEn ? `${base}audiotools` : `${base}es/audiotools`;
 const esTarget = pathEs ? `${base}es/${pathEs}` : `${base}es/`;
 const enTarget = pathEn ? `${base}${pathEn}` : `${base}`;
 
-// SEO: URLs canónicas y hreflang (activas cuando Astro.site esté definido en astro.config.mjs)
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
 const hreflangEs = Astro.site && pathEs ? new URL(pathEs, Astro.site) : null;
 const hreflangEn = Astro.site && pathEn ? new URL(pathEn, Astro.site) : null;
@@ -46,6 +45,8 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         <link rel="alternate icon" href={`${base}favicon.ico`} />
         <link rel="stylesheet" href={`${base}assets/css/main.css`} />
         <noscript><link rel="stylesheet" href={`${base}assets/css/noscript.css`} /></noscript>
+        
+        <!-- Cloudflare Analytics (Opcional, mantenido por si deseas doble medición) -->
         {import.meta.env.PROD && (
             <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
         )}
@@ -62,23 +63,10 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                             <span>{isEn ? "Music Production Engineer & Master in Communication and Media" : "Ingeniero en Producción Musical y Master en Comunicación y Medios"}</span>
                         </a>
                         <nav>
-                            <!-- Selector de Idiomas Mejorado (ESP | ENG) -->
                             <div style="display: inline-flex; align-items: center; margin-right: 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;">
-                                <a 
-                                    href={esTarget} 
-                                    style={`color: ${!isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}
-                                    title="Cambiar a Español"
-                                >
-                                    ESP
-                                </a>
+                                <a href={esTarget} style={`color: ${!isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`} title="Cambiar a Español">ESP</a>
                                 <span style="color: #555555; margin: 0 0.2rem;">/</span>
-                                <a 
-                                    href={enTarget} 
-                                    style={`color: ${isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}
-                                    title="Switch to English"
-                                >
-                                    ENG
-                                </a>
+                                <a href={enTarget} style={`color: ${isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`} title="Switch to English">ENG</a>
                             </div>
                             <a href="#menu">{isEn ? "Menu" : "Menú"}</a>
                         </nav>
@@ -106,7 +94,6 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                     <section id="contact">
                         <div class="inner">
                             <section>
-                                <!-- Formulario y Mensaje de Éxito Wrapper -->
                                 <div id="contact-wrapper">
                                     <form id="contact-form" action="https://formsubmit.co/ajax/musicproducerfj@gmail.com" method="POST">
                                         <input type="hidden" name="_subject" value="¡Nuevo mensaje de tu Portafolio web!">
@@ -132,10 +119,9 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                                         </ul>
                                     </form>
 
-                                    <!-- Mensaje de éxito (Oculto inicialmente) -->
                                     <div id="success-message" style="display: none; text-align: center; padding: 3rem 2rem; border: 2px solid #00e5ff; border-radius: 8px; background: rgba(0, 229, 255, 0.05); margin-top: 2rem;">
                                         <h3 style="color: #00e5ff; margin-bottom: 1rem; font-size: 1.5rem;">
-                                            {isEn ? "Message sent successfully! " : "¡Mensaje enviado con éxito! "}
+                                            {isEn ? "Message sent successfully! 🚀" : "¡Mensaje enviado con éxito! 🚀"}
                                         </h3>
                                         <p style="color: #fff; font-size: 1.1rem; margin: 0;">
                                             {isEn ? "Thank you for reaching out. I'll get back to you as soon as possible." : "Gracias por contactarme. Revisaré tu mensaje y te responderé lo más pronto posible."}
@@ -185,10 +171,9 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                             </ul>
                         </div>
                     </footer>
-
             </div>
 
-        <!-- Scripts -->
+        <!-- Scripts base -->
             <script is:inline src={`${base}assets/js/jquery.min.js`}></script>
             <script is:inline src={`${base}assets/js/jquery.scrolly.min.js`}></script>
             <script is:inline src={`${base}assets/js/jquery.scrollex.min.js`}></script>
@@ -217,9 +202,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                             fetch(form.action, {
                                 method: 'POST',
                                 body: formData,
-                                headers: {
-                                    'Accept': 'application/json'
-                                }
+                                headers: { 'Accept': 'application/json' }
                             })
                             .then(response => response.json())
                             .then(data => {
@@ -245,15 +228,15 @@ const ogLocale = isEn ? "en_US" : "es_MX";
 
     <style>
         .utility-header {
-            background-color: rgba(15, 19, 31, 0.15); /* Header con alta transparencia */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 3px solid rgb(0, 221, 255); /* Línea divisoria movida a la parte superior */
-            border-bottom: none; /* Se remueve la línea inferior anterior */
-            box-shadow: 0 -4px 20px rgba(0, 229, 255, 0.15); /* Resplandor superior en cyan */
-            display: flex;
-            justify-content: space-between ;
-            align-items: center;
+            background-color: rgba(15, 19, 31, 0.15) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-top: 1px solid rgba(0, 229, 255, 0.3) !important;
+            border-bottom: none !important;
+            box-shadow: 0 -4px 20px rgba(0, 229, 255, 0.15) !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
         }
         .utility-header nav {
             display: flex !important;
@@ -262,7 +245,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
     </style>
     <AmbientHUD lang={lang} />
 
-    <!-- Cookie Banner (Glassmorphism style, perfectly centered) -->
+    <!-- Cookie Banner -->
     <div id="cookie-banner" style="display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 480px; z-index: 9999; background: rgba(15, 19, 31, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 12px; padding: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.15); color: #ffffff; font-family: inherit; font-size: 0.9rem; text-align: center; flex-direction: column; align-items: center; gap: 1rem;">
         <div style="width: 100%;">
             <p style="margin: 0; line-height: 1.4; color: #e2e8f0; font-size: 0.85rem; text-align: center;">
@@ -281,22 +264,50 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         </div>
     </div>
 
-    <script>
+    <!-- Script Integrado de Cookies y GA4 -->
+    <script is:inline>
         document.addEventListener('DOMContentLoaded', () => {
+            // Tu ID de Medición de GA4
+            const GA_MEASUREMENT_ID = 'G-F7M06SDLDR'; 
+            
             const consent = localStorage.getItem('cookie_consent');
             const banner = document.getElementById('cookie-banner');
-            if (!consent && banner) {
-                banner.style.display = 'flex';
+
+            // Función encargada de inyectar GA4 dinámicamente
+            const loadGoogleAnalytics = () => {
+                if (window.gaLoaded) return; // Evita inyectar el script múltiples veces
+                
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ window.dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', GA_MEASUREMENT_ID);
+                
+                window.gaLoaded = true;
+            };
+
+            // Lógica de visualización inicial
+            if (consent === 'accepted') {
+                loadGoogleAnalytics(); // Carga en automático si ya había aceptado antes
+            } else if (!consent && banner) {
+                banner.style.display = 'flex'; // Muestra el banner si es usuario nuevo
             }
 
+            // Lógica de botones
             document.getElementById('cookie-accept')?.addEventListener('click', () => {
                 localStorage.setItem('cookie_consent', 'accepted');
                 if (banner) banner.style.display = 'none';
+                loadGoogleAnalytics(); // Inyecta el script de rastreo en este instante
             });
 
             document.getElementById('cookie-decline')?.addEventListener('click', () => {
                 localStorage.setItem('cookie_consent', 'declined');
                 if (banner) banner.style.display = 'none';
+                // No se carga GA4, respetando la privacidad del usuario
             });
         });
     </script>
