@@ -1,4 +1,4 @@
-np// astro.config.mjs
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
