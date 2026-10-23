@@ -8,7 +8,7 @@ export default defineConfig({
 
   // base no se necesita: el dominio personalizado apunta a la raíz del sitio
   i18n: {
-    defaultLocale: 'es',
+    defaultLocale: 'en',
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: false
