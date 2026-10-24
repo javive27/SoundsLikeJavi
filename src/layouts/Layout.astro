@@ -184,6 +184,15 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                     </footer>
             </div>
 
+        <!-- Mitigación de API unload obsoleta en jQuery para mejorar bfcache -->
+            <script is:inline>
+                window.addEventListener = (function(_add) {
+                    return function(type, listener, options) {
+                        if (type === 'unload') type = 'pagehide';
+                        return _add.call(this, type, listener, options);
+                    };
+                })(window.addEventListener);
+            </script>
         <!-- Scripts diferidos para liberar la ruta crítica y mejorar rendimiento -->
             <script is:inline defer src={`${base}assets/js/jquery.min.js`}></script>
             <script is:inline defer src={`${base}assets/js/jquery.scrolly.min.js`}></script>
@@ -258,6 +267,13 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         }
         #footer .copyright a:hover {
             color: #00e5ff !important;
+        }
+        /* Corrección de Aspect Ratio para Imágenes en Tiles */
+        .tiles article .image img {
+            object-fit: cover !important;
+            aspect-ratio: 4 / 3 !important;
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
     <AmbientHUD lang={lang} />
