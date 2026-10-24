@@ -51,6 +51,11 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;" />
 
+        <!-- Preconnect y Google Fonts con font-display: swap -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic&display=swap">
+
         <!-- Preload y carga optimizada de estilos para evitar bloqueo de renderizado -->
         <link rel="preload" href={`${base}assets/css/main.css`} as="style" />
         <link rel="stylesheet" href={`${base}assets/css/main.css`} />
