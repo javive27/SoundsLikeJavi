@@ -46,12 +46,13 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         <link rel="shortcut icon" href={`${base}favicon.ico`} />
         <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
         
-        <!-- Cabeceras de Seguridad Inyectadas -->
-        <meta http-equiv="X-Frame-Options" content="DENY" />
+        <!-- Cabeceras de Seguridad (CSP corregido para Cloudflare Insights; X-Frame-Options removido del HTML por requerimiento HTTP) -->
         <meta http-equiv="X-Content-Type-Options" content="nosniff" />
         <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formsubmit.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;" />
 
+        <!-- Preload y carga optimizada de estilos para evitar bloqueo de renderizado -->
+        <link rel="preload" href={`${base}assets/css/main.css`} as="style" />
         <link rel="stylesheet" href={`${base}assets/css/main.css`} />
         <noscript><link rel="stylesheet" href={`${base}assets/css/noscript.css`} /></noscript>
         
@@ -72,9 +73,9 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                         </a>
                         <nav aria-label={isEn ? "Main Navigation" : "Navegación Principal"}>
                             <div style="display: inline-flex; align-items: center; margin-right: 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;">
-                                <a href={esTarget} aria-label="Cambiar idioma a Español" style={`color: ${!isEn ? '#ffffff' : '#a1a1aa'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ESP</a>
-                                <span style="color: #a1a1aa; margin: 0 0.2rem;" aria-hidden="true">/</span>
-                                <a href={enTarget} aria-label="Switch language to English" style={`color: ${isEn ? '#ffffff' : '#a1a1aa'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ENG</a>
+                                <a href={esTarget} aria-label="Cambiar idioma a Español" style={`color: ${!isEn ? '#ffffff' : '#e2e8f0'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ESP</a>
+                                <span style="color: #e2e8f0; margin: 0 0.2rem;" aria-hidden="true">/</span>
+                                <a href={enTarget} aria-label="Switch language to English" style={`color: ${isEn ? '#ffffff' : '#e2e8f0'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ENG</a>
                             </div>
                             <a href="#menu" aria-label={isEn ? "Open Menu" : "Abrir Menú"}>{isEn ? "Menu" : "Menú"}</a>
                         </nav>
@@ -166,7 +167,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                         </div>
                     </section>
 
-                <!-- Footer -->
+                <!-- Footer (Contraste corregido para accesibilidad) -->
                     <footer id="footer">
                         <div class="inner">
                             <ul class="icons">
@@ -183,17 +184,17 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                     </footer>
             </div>
 
-        <!-- Scripts base -->
-            <script is:inline src={`${base}assets/js/jquery.min.js`}></script>
-            <script is:inline src={`${base}assets/js/jquery.scrolly.min.js`}></script>
-            <script is:inline src={`${base}assets/js/jquery.scrollex.min.js`}></script>
-            <script is:inline src={`${base}assets/js/browser.min.js`}></script>
-            <script is:inline src={`${base}assets/js/breakpoints.min.js`}></script>
-            <script is:inline src={`${base}assets/js/util.js`}></script>
-            <script is:inline src={`${base}assets/js/main.js`}></script>
+        <!-- Scripts diferidos para liberar la ruta crítica y mejorar rendimiento -->
+            <script is:inline defer src={`${base}assets/js/jquery.min.js`}></script>
+            <script is:inline defer src={`${base}assets/js/jquery.scrolly.min.js`}></script>
+            <script is:inline defer src={`${base}assets/js/jquery.scrollex.min.js`}></script>
+            <script is:inline defer src={`${base}assets/js/browser.min.js`}></script>
+            <script is:inline defer src={`${base}assets/js/breakpoints.min.js`}></script>
+            <script is:inline defer src={`${base}assets/js/util.js`}></script>
+            <script is:inline defer src={`${base}assets/js/main.js`}></script>
             
             <!-- Script de Envío AJAX para FormSubmit -->
-            <script is:inline>
+            <script is:inline defer>
                 document.addEventListener('DOMContentLoaded', function() {
                     const form = document.getElementById('contact-form');
                     const successMessage = document.getElementById('success-message');
@@ -251,6 +252,13 @@ const ogLocale = isEn ? "en_US" : "es_MX";
             display: flex;
             align-items: center;
         }
+        /* Corrección de contraste en el Footer */
+        #footer .copyright, #footer .copyright li, #footer .copyright a {
+            color: #e2e8f0 !important;
+        }
+        #footer .copyright a:hover {
+            color: #00e5ff !important;
+        }
     </style>
     <AmbientHUD lang={lang} />
 
@@ -274,7 +282,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
     </div>
 
     <!-- Script Integrado de Cookies y GA4 -->
-    <script is:inline>
+    <script is:inline defer>
         document.addEventListener('DOMContentLoaded', () => {
             const GA_MEASUREMENT_ID = 'G-F7M06SDLDR'; 
             
