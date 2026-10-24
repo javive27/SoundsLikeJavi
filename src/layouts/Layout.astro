@@ -280,6 +280,22 @@ const ogLocale = isEn ? "en_US" : "es_MX";
             width: 100% !important;
             height: 100% !important;
         }
+        /* Corrección de Márgenes y Padding en Banner para Móvil */
+        #banner .inner {
+            padding: 3rem 1.5rem !important;
+            box-sizing: border-box;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        #banner .content p {
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+        @media screen and (max-width: 736px) {
+            #banner .inner {
+                padding: 2.5rem 1.25rem !important;
+            }
+        }
     </style>
     <AmbientHUD lang={lang} />
 
