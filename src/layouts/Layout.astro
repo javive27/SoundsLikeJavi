@@ -29,7 +29,7 @@ const ogLocale = isEn ? "en_US" : "es_MX";
     <head>
         <title>{title}</title>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         {description && <meta name="description" content={description} />}
         {canonicalURL && <link rel="canonical" href={canonicalURL} />}
         {hreflangEs && <link rel="alternate" hreflang="es-MX" href={hreflangEs} />}
@@ -45,10 +45,16 @@ const ogLocale = isEn ? "en_US" : "es_MX";
         <link rel="icon" type="image/png" sizes="16x16" href={`${base}favicon-16x16.png`} />
         <link rel="shortcut icon" href={`${base}favicon.ico`} />
         <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
+        
+        <!-- Cabeceras de Seguridad Inyectadas -->
+        <meta http-equiv="X-Frame-Options" content="DENY" />
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+        <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formsubmit.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:;" />
+
         <link rel="stylesheet" href={`${base}assets/css/main.css`} />
         <noscript><link rel="stylesheet" href={`${base}assets/css/noscript.css`} /></noscript>
         
-        <!-- Cloudflare Analytics (Opcional, mantenido por si deseas doble medición) -->
         {import.meta.env.PROD && (
             <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
         )}
@@ -60,22 +66,22 @@ const ogLocale = isEn ? "en_US" : "es_MX";
 
                 <!-- Header -->
                     <header id="header" class="alt utility-header">
-                        <a href={homePath} class="logo">
+                        <a href={homePath} class="logo" aria-label="Javier Flores Audio Home">
                             <strong>Javier Flores Audio</strong> 
                             <span>{isEn ? "Music Production Engineer" : "Ingeniero en Producción Musical"}</span>
                         </a>
-                        <nav>
+                        <nav aria-label={isEn ? "Main Navigation" : "Navegación Principal"}>
                             <div style="display: inline-flex; align-items: center; margin-right: 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;">
-                                <a href={esTarget} style={`color: ${!isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`} title="Cambiar a Español">ESP</a>
-                                <span style="color: #555555; margin: 0 0.2rem;">/</span>
-                                <a href={enTarget} style={`color: ${isEn ? '#ffffff' : '#888888'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`} title="Switch to English">ENG</a>
+                                <a href={esTarget} aria-label="Cambiar idioma a Español" style={`color: ${!isEn ? '#ffffff' : '#a1a1aa'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ESP</a>
+                                <span style="color: #a1a1aa; margin: 0 0.2rem;" aria-hidden="true">/</span>
+                                <a href={enTarget} aria-label="Switch language to English" style={`color: ${isEn ? '#ffffff' : '#a1a1aa'}; text-decoration: none; padding: 0.2rem 0.4rem; transition: color 0.2s;`}>ENG</a>
                             </div>
-                            <a href="#menu">{isEn ? "Menu" : "Menú"}</a>
+                            <a href="#menu" aria-label={isEn ? "Open Menu" : "Abrir Menú"}>{isEn ? "Menu" : "Menú"}</a>
                         </nav>
                     </header>
 
                 <!-- Menu -->
-                    <nav id="menu">
+                    <nav id="menu" aria-label={isEn ? "Mobile Menu" : "Menú Móvil"}>
                         <ul class="links">
                             <li><a href={musicaPath}>{isEn ? "Music & Sound Design" : "Música y Diseño Sonoro"}</a></li>
                             <li><a href={ingenieriaPath}>{isEn ? "Engineering" : "Ingeniería"}</a></li>
@@ -89,8 +95,10 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                         </ul>
                     </nav>
 
-                <!-- Contenido Dinámico de la Página -->
-                <slot />
+                <!-- Contenido Principal con Landmark Semántico -->
+                <main id="main-content">
+                    <slot />
+                </main>
 
                 <!-- Contact -->
                     <section id="contact">
@@ -162,14 +170,14 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                     <footer id="footer">
                         <div class="inner">
                             <ul class="icons">
-                                <li><a href="https://vimeo.com/user98279329" class="icon alt fa-vimeo" target="_blank" rel="noopener"><span class="label">Vimeo</span></a></li>
-                                <li><a href="https://soundcloud.com/javier-flores-flores-96937841" class="icon alt fa-soundcloud" target="_blank" rel="noopener"><span class="label">SoundCloud</span></a></li>
-                                <li><a href="https://www.linkedin.com/in/javier-flores-5556b511b/" class="icon alt fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
-                                <li><a href="https://web.facebook.com/javier.sax.flores" class="icon alt fa-facebook" target="_blank" rel="noopener"><span class="label">Facebook</span></a></li>
-                                <li><a href="https://www.instagram.com/javier.flsfls/" class="icon alt fa-instagram" target="_blank" rel="noopener"><span class="label">Instagram</span></a></li>
+                                <li><a href="https://vimeo.com/user98279329" class="icon alt fa-vimeo" target="_blank" rel="noopener" aria-label="Vimeo Profile"><span class="label">Vimeo</span></a></li>
+                                <li><a href="https://soundcloud.com/javier-flores-flores-96937841" class="icon alt fa-soundcloud" target="_blank" rel="noopener" aria-label="SoundCloud Profile"><span class="label">SoundCloud</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/javier-flores-5556b511b/" class="icon alt fa-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn Profile"><span class="label">LinkedIn</span></a></li>
+                                <li><a href="https://web.facebook.com/javier.sax.flores" class="icon alt fa-facebook" target="_blank" rel="noopener" aria-label="Facebook Profile"><span class="label">Facebook</span></a></li>
+                                <li><a href="https://www.instagram.com/javier.flsfls/" class="icon alt fa-instagram" target="_blank" rel="noopener" aria-label="Instagram Profile"><span class="label">Instagram</span></a></li>
                             </ul>
                             <ul class="copyright">
-                                <li>&copy; {isEn ? "Page programming:" : "Programación de la página:"} Javier Flores</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+                                <li>&copy; {isEn ? "Page programming:" : "Programación de la página:"} Javier Flores</li><li>Design: <a href="https://html5up.net" aria-label="HTML5 UP Design">HTML5 UP</a></li>
                             </ul>
                         </div>
                     </footer>
@@ -268,15 +276,13 @@ const ogLocale = isEn ? "en_US" : "es_MX";
     <!-- Script Integrado de Cookies y GA4 -->
     <script is:inline>
         document.addEventListener('DOMContentLoaded', () => {
-            // Tu ID de Medición de GA4
             const GA_MEASUREMENT_ID = 'G-F7M06SDLDR'; 
             
             const consent = localStorage.getItem('cookie_consent');
             const banner = document.getElementById('cookie-banner');
 
-            // Función encargada de inyectar GA4 dinámicamente
             const loadGoogleAnalytics = () => {
-                if (window.gaLoaded) return; // Evita inyectar el script múltiples veces
+                if (window.gaLoaded) return;
                 
                 const script = document.createElement('script');
                 script.async = true;
@@ -291,24 +297,21 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                 window.gaLoaded = true;
             };
 
-            // Lógica de visualización inicial
             if (consent === 'accepted') {
-                loadGoogleAnalytics(); // Carga en automático si ya había aceptado antes
+                loadGoogleAnalytics();
             } else if (!consent && banner) {
-                banner.style.display = 'flex'; // Muestra el banner si es usuario nuevo
+                banner.style.display = 'flex';
             }
 
-            // Lógica de botones
             document.getElementById('cookie-accept')?.addEventListener('click', () => {
                 localStorage.setItem('cookie_consent', 'accepted');
                 if (banner) banner.style.display = 'none';
-                loadGoogleAnalytics(); // Inyecta el script de rastreo en este instante
+                loadGoogleAnalytics();
             });
 
             document.getElementById('cookie-decline')?.addEventListener('click', () => {
                 localStorage.setItem('cookie_consent', 'declined');
                 if (banner) banner.style.display = 'none';
-                // No se carga GA4, respetando la privacidad del usuario
             });
         });
     </script>
