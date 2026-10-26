@@ -101,5 +101,20 @@ const base = import.meta.env.BASE_URL;
         .hero-title {
             font-family: inherit;
         }
+        /* Contenedor central para el banner */
+        #banner .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Espaciado lateral para evitar que toque las orillas */
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        /* Ajuste de márgenes para pantallas móviles */
+        @media screen and (max-width: 736px) {
+            #banner .inner {
+                padding: 0 1.5rem;
+            }
+        }
     </style>
 </Layout>
