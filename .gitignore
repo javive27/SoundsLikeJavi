@@ -1,22 +1,47 @@
-# Dependencias y compilación de Astro
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Production Build outputs
 dist/
+build/
 .astro/
 
-# Variables de entorno y llaves secretas (CRÍTICO)
+# Environment variables & secrets (CRITICAL)
 .env
 .env.*
 *.pem
+*.key
+*.cert
 
-# Archivos de configuración local e IDEs
+# Operating System & IDE files
 .DS_Store
+.Thumbs.db
 .vscode/*
 !.vscode/extensions.json
+.idea/
 
-# Scripts de Python e imágenes temporales de prueba
+# Local AI Agents, CLI Skills, Hooks, & Model files (Gemini, Claude, Impeccable, Codex, Ollama)
+.agents/
+.codex/
+.impeccable/
+.gemini/
+.github/agents/
+.github/skills/
+.github/hooks/
+skills-lock.json
+AGENTS.md
+CLAUDE.md
+Modelfile
+*.prompt
+prompt-logs/
+ollama/
+
+# Python scripts & temp files
 *.pyc
 __pycache__/
 seo_renamer.py
 
-# Fotos originales de gran tamaño (no usadas por el sitio, solo fuente)
+# Large source assets not used in production
 public/images/Originals/
