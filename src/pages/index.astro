@@ -18,13 +18,12 @@ const base = import.meta.env.BASE_URL;
             </div>
 
             <div class="inner">
-                <header class="major">
-                    <h1 class="hero-title">Hello! I'm Javier Flores</h1>
-                </header>
+                <h1 class="hero-title">Hello! I'm Javier Flores</h1>
+                
                 <div class="content">
-                    <p>I am a Live Audio Engineer and Lead Audio Tech for Disney Cruise Line, with over 8 years of experience in the entertainment industry. I hold a degree in Music Production Engineering and a Masters degree in Communication and Digital Media, with expertise in Dante AoIP networks, Q-SYS systems, and sound design and mixing for musical theatre. I am always looking to collaborate and create all kinds of immersive experiences.<br /></p>
+                    <p>I am a Live Audio Engineer and Lead Audio Tech for Disney Cruise Line, with over 8 years of experience in the entertainment industry. I hold a degree in Music Production Engineering and a Masters degree in Communication and Digital Media, with expertise in Dante AoIP networks, Q-SYS systems, and sound design and mixing for musical theatre. I am always looking to collaborate and create all kinds of immersive experiences.</p>
                     <ul class="actions">
-                        <li><a href="#one" class="button next scrolly">More +</a></li>
+                        <li><a href="#one" class="button next scrolly">More</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,26 +93,79 @@ const base = import.meta.env.BASE_URL;
         </div>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         body, #wrapper {
             background-color: #0f131f !important;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif !important;
         }
-        .hero-title {
-            font-family: inherit;
-        }
-        
+
         /* Contenedor central para el banner */
         #banner .inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem; /* Espaciado lateral para evitar que toque las orillas */
+            padding: 0 2rem;
             box-sizing: border-box;
             width: 100%;
         }
 
-        /* Ajuste de márgenes para pantallas móviles */
+        .hero-title {
+            font-family: 'Inter', sans-serif !important;
+            font-size: clamp(2rem, 4vw, 3.5rem) !important;
+            font-weight: 700;
+            color: #00e5ff !important; 
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.5rem 0 !important;
+        }
+
+        /* Configuración de distribución en fila con línea separadora blanca */
+        #banner .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            border-top: 2px solid #ffffff;
+            padding-top: 1.5rem;
+        }
+
+        #banner .content p {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.8;
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            flex: 1; 
+            max-width: 850px;
+            margin: 0;
+        }
+
+        #banner .content .actions {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-shrink: 0; 
+        }
+
+        /* Ajuste responsivo para tablets y pantallas pequeñas */
+        @media screen and (max-width: 950px) {
+            #banner .content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+        }
+
         @media screen and (max-width: 736px) {
             #banner .inner {
                 padding: 0 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem !important;
             }
         }
     </style>

@@ -11,13 +11,14 @@ const base = import.meta.env.BASE_URL;
     pathEs="ingenieria"
     pathEn="engineering"
 >
+    <!-- Contenedor principal simplificado -->
     <div class="engineering-container">
-        <!-- Header Section -->
+        
+        <!-- Hero Section Homologado con music.astro -->
         <section class="engineering-hero">
-            <div class="inner">
-                <header class="major">
-                    <h1 class="hero-title">Ingeniería y Audio</h1>
-                </header>
+            <div class="hero-inner">
+                <span class="hero-badge">Sistemas y Audio en Vivo</span>
+                <h1 class="hero-title">Ingeniería y Audio</h1>
                 <p class="hero-subtitle">Mi experiencia en sistemas de audio incluye diseño Q-SYS, consolas de audio digitales y análogas, sistemas de comunicación, arreglos lineales (line arrays) y sistemas de PA, entre otros.</p>
                 <div class="divider-line"></div>
             </div>
@@ -135,17 +136,17 @@ const base = import.meta.env.BASE_URL;
             font-family: 'Inter', sans-serif !important;
         }
 
+        /* --- AJUSTES DEL HERO Y LAYOUT SUPERIOR HOMOLOGADOS --- */
         .engineering-container {
-            padding-top: 6rem;
             padding-bottom: 6rem;
         }
 
         .engineering-hero {
-            padding: 4rem 0 2rem 0;
+            padding: 7rem 0 4rem 0;
             text-align: left;
         }
 
-        .engineering-hero .inner, .eng-section .inner {
+        .hero-inner {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -153,60 +154,60 @@ const base = import.meta.env.BASE_URL;
             width: 100%;
         }
 
-        .hero-badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-pill {
-            background: rgba(15, 19, 31, 0.75);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            color: #00e5ff;
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
+        .hero-badge {
+            display: inline-block;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.1);
-        }
-
-        .accent-pill {
-            border-color: rgba(111, 195, 223, 0.3);
-            color: #6fc3df;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00e5ff;
+            margin-bottom: 1rem;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 4vw, 4rem) !important;
+            font-size: clamp(2.5rem, 5vw, 4rem) !important;
             font-weight: 700;
             color: #ffffff;
+            line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 1rem !important;
+            margin: 0 0 1.25rem 0 !important;
         }
 
         .hero-subtitle {
-            font-size: 1.15rem;
-            color: #cbd5e1;
-            max-width: 750px;
+            font-size: 1.2rem;
+            color: #cbd5e1; /* Ligeramente distinto al de música para resaltar sobre el fondo, o puedes usar #94a3b8 */
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin: 0 0 2.5rem 0;
+            max-width: 1000px;
         }
 
         .divider-line {
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, #00e5ff, #8d82c4);
+            background: linear-gradient(90deg, #00e5ff, #8d82c4); /* Mantiene tu gradiente original de esta página */
             border-radius: 2px;
+            margin-top: 2rem;
         }
 
+        /* --- RESTO DEL CONTENIDO --- */
         .main-content-wrapper {
             margin-top: 3rem;
         }
 
+        .eng-section .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
         .eng-section {
             padding: 4rem 0;
+        }
+
+        .eng-section.alt-bg {
+            background-color: rgba(21, 27, 43, 0.5); /* Añadí el fondo alterno sutil como en música si decides usarlo, aunque aquí no tienes la clase en HTML, no estorba */
         }
 
         .eng-grid {
@@ -302,13 +303,13 @@ const base = import.meta.env.BASE_URL;
                 gap: 2.5rem;
                 direction: ltr;
             }
-            .engineering-container {
-                padding-top: 4rem;
+            .engineering-hero {
+                padding: 5rem 0 2rem 0; 
             }
         }
 
         @media screen and (max-width: 736px) {
-            .engineering-hero .inner, .eng-section .inner {
+            .hero-inner, .eng-section .inner {
                 padding: 0 1.5rem;
             }
         }

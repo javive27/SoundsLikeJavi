@@ -19,13 +19,13 @@ const base = import.meta.env.BASE_URL;
             </div>
 
             <div class="inner">
-                <header class="major">
-                    <h1 class="hero-title">¡Hola! Soy Javier Flores</h1>
-                </header>
+                <!-- Se eliminó <header class="major"> para evitar la línea extra -->
+                <h1 class="hero-title">¡Hola! Soy Javier Flores</h1>
+                
                 <div class="content">
-                    <p>Soy Ingeniero de Audio en Vivo y Lead Audio Tech para Disney Cruise Line con más de 8 años de experiencia en la indsutria del entretenimiento. Soy Ingeniero en Producción Musical con un Master en Comucación y Medios Digitales, especialista en redes Dante AoIP, sistemas Q-SYS y mezcla y diseño sonoro para teatro musical. Busco colaborar y crear experiencias sonoras inmersivas.<br /></p>
+                    <p>Soy Ingeniero de Audio en Vivo y Lead Audio Tech para Disney Cruise Line con más de 8 años de experiencia en la industria del entretenimiento. Soy Ingeniero en Producción Musical con un Master en Comunicación y Medios Digitales, especialista en redes Dante AoIP, sistemas Q-SYS y mezcla y diseño sonoro para teatro musical. Busco colaborar y crear experiencias sonoras inmersivas.</p>
                     <ul class="actions">
-                        <li><a href="#one" class="button next scrolly">Más +</a></li>
+                        <li><a href="#one" class="button next scrolly">Más</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,25 +95,79 @@ const base = import.meta.env.BASE_URL;
         </div>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         body, #wrapper {
             background-color: #0f131f !important;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif !important;
         }
-        .hero-title {
-            font-family: inherit;
-        }
+
         /* Contenedor central para el banner */
         #banner .inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem; /* Espaciado lateral para evitar que toque las orillas */
+            padding: 0 2rem;
             box-sizing: border-box;
             width: 100%;
         }
 
-        /* Ajuste de márgenes para pantallas móviles */
+        .hero-title {
+            font-family: 'Inter', sans-serif !important;
+            font-size: clamp(2rem, 4vw, 3.5rem) !important;
+            font-weight: 700;
+            color: #00e5ff !important; 
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.5rem 0 !important;
+        }
+
+        /* Configuración de distribución en fila con línea separadora blanca */
+        #banner .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            border-top: 2px solid #ffffff;
+            padding-top: 1.5rem;
+        }
+
+        #banner .content p {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.8;
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            flex: 1; 
+            max-width: 850px;
+            margin: 0;
+        }
+
+        #banner .content .actions {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-shrink: 0; 
+        }
+
+        /* Ajuste responsivo para tablets y pantallas pequeñas */
+        @media screen and (max-width: 950px) {
+            #banner .content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+        }
+
         @media screen and (max-width: 736px) {
             #banner .inner {
                 padding: 0 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem !important;
             }
         }
     </style>

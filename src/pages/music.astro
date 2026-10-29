@@ -1,80 +1,374 @@
 ---
-// src/pages/en/Music.astro
+// src/pages/es/musica.astro
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-	title="Music & Sound Design | Javier Flores — Music Producer"
-	description="Music and sound design by Javier Flores: composition, music production, and original scores. Listen to Jardín en tu mirada, One Please, and Death and the Maiden."
-	lang="en"
-	pathEs="musica"
-	pathEn="music"
+    title="Music & Sound Design | Javier Flores — Music Producer & Sound Designer"
+    description="Music and sound design by Javier Flores: composition, music production, and original scores. Listen to Jardín en tu mirada, One Please, and Death and the Maiden."
+    lang="en"
+    pathEs="musica"
+    pathEn="music"
 >
-	<!-- Banner -->
-		<section id="banner" class="style2">
-			<div class="inner">
-				<span class="image">
-					<img src={`${base}images/Javier-Flores-Festival-ITESM.webp`} alt="Javier Flores at the ITESM Puebla Campus Song Festival, performing as composer and producer" />
-				</span>
-				<header class="major">
-					<h1>Music Production</h1>
-				</header>
-				<div class="content">
-					<p><br />Here you can find some examples of my audiovisual creations.</p>
-				</div>
-			</div>
-		</section>
+    <!-- Contenedor principal simplificado -->
+    <div class="music-container">
+        
+        <!-- Hero Section Corregido -->
+        <section class="music-hero">
+            <div class="hero-inner">
+                <span class="hero-badge">Audiovisual Creations</span>
+                <h1 class="hero-title">Music Production & Sound Design</h1>
+                <p class="hero-subtitle">Exploring narrative through sound, original orchestration, and sonic storytelling for film, theater, and song festivals.</p>
+                <div class="divider-line"></div>
+            </div>
+        </section>
 
-	<!-- Main -->
-		<div id="main">
-			<!-- Two -->
-				<section id="two" class="spotlights">
-					<section>
-						<iframe src="https://player.vimeo.com/video/334967419" width="640" height="340" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Jardín en tu mirada</h2>
-								</header>
-								<p>Composers: Victor Valle and Francisco Flores</p><br />
-								<p>This song won Best Lyrics at the ITESM Puebla Campus Song Festival and was nominated for Best Musical Arrangement in an audiovisual production award ceremony at the same university.</p>
-								<ul class="actions">
-								</ul>
-							</div>
-						</div>
-					</section>
-					<section>
-						<iframe src="https://player.vimeo.com/video/334967471" width="640" height="340" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>One Please</h2>
-								</header>
-								<p>This is an original composition I created for the horror short film "One Please". The purpose of the music is to add emotional depth to what we are viewing on screen, stepping away from the deafening silence of the original production.</p><br />
-								<p>I also added sound design enhancements and sound effects.</p>
-								<ul class="actions">
-									<li><a href="https://www.youtube.com/watch?v=YS8UgWEpXAM&" class="button">ORIGINAL</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-					<section>
-						<iframe src="https://player.vimeo.com/video/334967398" width="640" height="750" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Death And The Maiden</h2>
-								</header>
-								<p>Music composed with the purpose of translating the following literary excerpt into sound:</p> <br>
-								<p>"Franz-Josef — Emperor of Austria — awoke from a nightmare. It had taken the form of a hellish vision: mobs in the street, gunfire, and improvised incendiary weapons spilling fire across the cobblestones outside the palace. Field Marshal Radetzky, in reality dead for over half a century, had burst into the chancellery wing. All is lost, he had cried. It is over. Undone. In the strange permissive world of dreams there was nothing contradictory about Radetzky quoting a line from a tragedy written decades after his own death. Similarly, the emperor had not been troubled to question why a large orchestra had been playing a Strauss waltz while Vienna burned." - From "Death and the Maiden" by Frank Tallis.</p> <br>
-								<p>My composition relies on resources such as leitmotifs and idée fixes, modulations and harmonic region shifts, harmonic sequences, and symmetrical scales.</p>
-								<ul class="actions">
-									<li><a href={`${base}docs/DATM.pdf`} class="button">Score</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-				</section>
-		</div>
+        <!-- Main Content Sections -->
+        <div id="main" class="main-content-wrapper">
+            <!-- Project 1: Jardin en tu mirada -->
+            <section class="music-section">
+                <div class="inner">
+                    <div class="music-grid">
+                        <div class="music-media-wrapper">
+                            <div class="media-card">
+                                <div class="video-container">
+                                    <iframe src="https://player.vimeo.com/video/334967419" width="100%" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="media-caption">Jardín en tu mirada — Live Performance & Production</div>
+                            </div>
+                        </div>
+                        <div class="music-text-content">
+                            <span class="section-tag">01 / Song Festival & Composition</span>
+                            <h2>Jardín en tu mirada</h2>
+                            <p class="composers-tag"><strong>Composers:</strong> Victor Valle and Francisco Flores</p>
+                            <p>This song won <strong>Best Lyrics</strong> at the ITESM Puebla Campus Song Festival and was nominated for <strong>Best Musical Arrangement</strong> in an audiovisual production award ceremony at the same university.</p>
+                            <p>Blending contemporary harmonic structures with poetic lyricism, the piece showcases meticulous vocal arrangement and atmospheric instrumentation.</p>
+                            <div class="tech-specs">
+                                <span class="spec-badge">Song Festival Winner</span>
+                                <span class="spec-badge">Best Lyrics Award</span>
+                                <span class="spec-badge">Arrangement Nominee</span>
+                                <span class="spec-badge">ITESM Puebla</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project 2: One Please -->
+            <section class="music-section alt-bg">
+                <div class="inner">
+                    <div class="music-grid reverse">
+                        <div class="music-text-content">
+                            <span class="section-tag">02 / Original Film Score</span>
+                            <h2>One Please</h2>
+                            <p>An original composition created for the psychological horror short film <strong>"One Please"</strong>. The primary objective of the score is to amplify emotional tension and psychological dread, moving away from the deafening silence of the original production.</p>
+                            <p>In addition to the musical score, I engineered custom sound design enhancements and foley effects to heighten the cinematic atmosphere.</p>
+                            <div class="tech-specs">
+                                <span class="spec-badge">Original Score</span>
+                                <span class="spec-badge">Sound Design</span>
+                                <span class="spec-badge">Horror Short Film</span>
+                                <span class="spec-badge">Foley & Effects</span>
+                            </div>
+                        </div>
+                        <div class="music-media-wrapper">
+                            <div class="media-card">
+                                <div class="video-container">
+                                    <iframe src="https://player.vimeo.com/video/334967471" width="100%" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="media-caption">One Please — Original Short Film Score</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project 3: Death and the Maiden -->
+            <section class="music-section">
+                <div class="inner">
+                    <div class="music-grid">
+                        <div class="music-media-wrapper">
+                            <div class="media-card">
+                                <div class="video-container tall-video">
+                                    <iframe src="https://player.vimeo.com/video/334967398" width="100%" height="520" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="media-caption">Death and the Maiden — Orchestral Score Presentation</div>
+                            </div>
+                        </div>
+                        <div class="music-text-content">
+                            <span class="section-tag">03 / Orchestral Composition</span>
+                            <h2>Death And The Maiden</h2>
+                            <p class="excerpt-intro">Music composed to translate the following literary excerpt into sound:</p>
+                            <blockquote class="literary-excerpt">
+                                "Franz-Josef — Emperor of Austria — awoke from a nightmare. It had taken the form of a hellish vision: mobs in the street, gunfire, and improvised incendiary weapons spilling fire across the cobblestones outside the palace. Field Marshal Radetzky, in reality dead for over half a century, had burst into the chancellery wing. All is lost, he had cried. It is over. Undone... the emperor had not been troubled to question why a large orchestra had been playing a Strauss waltz while Vienna burned."
+                                <cite>— Frank Tallis, "Death and the Maiden"</cite>
+                            </blockquote>
+                            <p>The composition relies on advanced motivic devices such as <strong>leitmotifs</strong> and <strong>idée fixes</strong>, harmonic region shifts, chromatic modulation sequences, and symmetrical scales to mirror the chaotic dissolution of the Austro-Hungarian dream.</p>
+                            <div class="tech-specs">
+                                <span class="spec-badge">Orchestral Score</span>
+                                <span class="spec-badge">Leitmotif Architecture</span>
+                                <span class="spec-badge">Symmetrical Scales</span>
+                                <span class="spec-badge">Frank Tallis Adaptation</span>
+                            </div>
+                            <div class="actions-wrapper">
+                                <a href={`${base}docs/DATM.pdf`} target="_blank" rel="noopener noreferrer" class="button primary-btn icon fa-download">View Full Score (PDF)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body, #wrapper {
+            background-color: #0f131f !important;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        /* --- AJUSTES DEL HERO Y LAYOUT SUPERIOR --- */
+        .music-container {
+            /* Eliminamos el padding-top excesivo aquí para controlarlo en el Hero */
+            padding-bottom: 6rem; 
+        }
+
+        .music-hero {
+            /* Aumentamos el padding superior para separarlo del menú de navegación */
+            padding: 7rem 0 4rem 0; 
+            text-align: left;
+        }
+
+       .hero-inner {
+            /* Aumentamos de 900px a 1200px para igualarlo con el grid de abajo. 
+               Esto hará que todo el bloque comience más hacia la izquierda en pantallas grandes. */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00e5ff;
+            margin-bottom: 1rem; /* Espacio natural hacia el título */
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            margin: 0 0 1.25rem 0; /* Eliminado el margen negativo destructivo */
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0 0 2.5rem 0;
+            /* Aumentamos el ancho máximo del párrafo para que llegue más lejos de lado a lado */
+            max-width: 1000px; 
+        }
+
+        .divider-line {
+            /* Forzamos a que la línea ocupe el 100% de los 1200px del contenedor */
+            width: 100%; 
+            height: 3px;
+            background: linear-gradient(90deg, #00e5ff, #6fc3df);
+            border-radius: 2px;
+            margin-top: 2rem;
+        }
+
+        /* --- RESTO DEL CONTENIDO (SIN CAMBIOS ESTRUCTURALES) --- */
+        .music-section .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .music-section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .music-section.alt-bg {
+            background-color: rgba(21, 27, 43, 0.5);
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .music-grid.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .music-grid.reverse .music-text-content {
+            order: 1;
+        }
+
+        .music-grid.reverse .music-media-wrapper {
+            order: 2;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #00e5ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .music-text-content h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .music-text-content p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .composers-tag {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem !important;
+        }
+
+        .excerpt-intro {
+            font-style: italic;
+            color: #94a3b8;
+            margin-bottom: 0.75rem !important;
+        }
+
+        .literary-excerpt {
+            background: rgba(15, 19, 31, 0.7);
+            border-left: 3px solid #00e5ff;
+            padding: 1.25rem;
+            margin: 1rem 0 1.5rem 0;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .literary-excerpt cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #00e5ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .tech-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.75rem 0;
+        }
+
+        .spec-badge {
+            background-color: rgba(0, 229, 255, 0.1);
+            color: #00e5ff;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .media-card {
+            background: #151b2b;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .media-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background: #000;
+        }
+
+        .video-container.tall-video {
+            height: 440px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .media-caption {
+            padding: 1rem 1.25rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            background: #111726;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 500;
+        }
+
+        .actions-wrapper {
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #00e5ff, #0088cc) !important;
+            color: #0f131f !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 4px 14px rgba(0, 229, 255, 0.3);
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media screen and (max-width: 960px) {
+            .music-grid, .music-grid.reverse {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .music-grid.reverse .music-text-content,
+            .music-grid.reverse .music-media-wrapper {
+                order: unset;
+            }
+            .music-hero {
+                padding: 5rem 0 2rem 0; 
+            }
+        }
+    </style>
 </Layout>
