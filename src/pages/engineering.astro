@@ -1,5 +1,5 @@
 ---
-// src/pages/en/Engineering.astro
+// src/pages/engineering.astro
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 ---
@@ -11,31 +11,307 @@ const base = import.meta.env.BASE_URL;
 	pathEs="ingenieria"
 	pathEn="engineering"
 >
-	<!-- Main -->
-		<div id="main" class="alt">
-			<!-- One -->
-				<section id="one">
-					<div class="inner">
-						<header class="major">
-							<h1>Engineering and Audio</h1>
-							<h2>Live Audio</h2>
-						</header>
-						<span class="image main"><img src={`${base}images/Javier-Flores-Casa-de-la-Musica-de-Viena.webp`} alt="Javier Flores as FOH audio technician at the La Casa de la Música de Viena auditorium in Puebla" loading="lazy" decoding="async" /></span>
-						<p>I have had two major jobs in live audio. The first one was at one of the museums of La Constancia Mexicana in Puebla, specifically at the "Vienna House of Music in Puebla" museum. There, my duties included museum maintenance, guiding tours, and—most importantly for me—working as the audio engineer in their 500-seat auditorium.</p>
-						<p>My second live audio job is with the "Compañía Folklórica Magisterial de Hidalgo," where I am part of the musician team while also serving as the sound engineer on certain occasions. For international tours, I act as the liaison between the musicians, company directors, and the host country's audio engineers.</p>
+	<div class="engineering-container">
+		<!-- Header Section -->
+		<section class="engineering-hero">
+			<div class="inner">
+				<div class="hero-badge-container">
+					<span class="hero-pill">🎙️ Disney Cruise Line Lead Audio Tech</span>
+					<span class="hero-pill accent-pill">🎭 Musical Theater & Broadway Training</span>
+				</div>
+				<header class="major">
+					<h1 class="hero-title">Engineering & Audio</h1>
+				</header>
+				<p class="hero-subtitle">Professional expertise in cruise line audio production, Q-SYS networks, Yamaha Rivage consoles, Clear-Com comms, and Broadway musical theater engineering.</p>
+				<div class="divider-line"></div>
+			</div>
+		</section>
+
+		<!-- Main Content Sections -->
+		<div id="main" class="main-content-wrapper">
+			<!-- Section 1: Disney Cruise Line (At the top) -->
+			<section class="eng-section">
+				<div class="inner">
+					<div class="eng-grid">
+						<div class="eng-text-content">
+							<span class="section-tag">01 / Enterprise Cruise Audio</span>
+							<h2>Disney Cruise Line</h2>
+							<p>As a Lead Audio Technician for Disney Cruise Line, I manage complex, mission-critical audio systems aboard world-class vessels. Operating primarily out of the iconic <strong>Walt Disney Theater</strong>, my responsibilities encompass state-of-the-art audio infrastructures based on <strong>Q-SYS</strong> audio processing and routing networks, <strong>Yamaha Rivage</strong> digital mixing consoles, and robust <strong>Clear-Com</strong> communication matrices.</p>
+							<p>Working in high-pressure theatrical environments demands faultless show control, rapid troubleshooting, and pristine audio fidelity for thousands of guests daily across Broadway-caliber productions.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Q-SYS Ecosystems</span>
+								<span class="spec-badge">Yamaha Rivage Consoles</span>
+								<span class="spec-badge">Clear-Com Intercoms</span>
+								<span class="spec-badge">Walt Disney Theater</span>
+							</div>
+						</div>
+						<div class="eng-image-wrapper">
+							<div class="image-card">
+								<img src={`${base}images/Javier-Flores-Frozen.webp`} alt="Javier Flores Lead Audio Engineer testing live sound engineering tools and equipment on Disney Cruise Line" loading="lazy" decoding="async" width="800" height="600" />
+								<div class="image-caption">Lead Audio Tech & Systems Operation — Walt Disney Theater</div>
+							</div>
+						</div>
 					</div>
-				</section>
-		</div>
-		<div id="main" class="alt">
-			<!-- One -->
-				<section id="one">
-					<div class="inner">
-						<header class="major">
+				</div>
+			</section>
+
+			<!-- Section 2: Musical Theater & Broadway Training -->
+			<section class="eng-section alt-bg">
+				<div class="inner">
+					<div class="eng-grid reverse">
+						<div class="eng-text-content">
+							<span class="section-tag">02 / Theatrical Productions</span>
+							<h2>Musical Theater & Broadway Training</h2>
+							<p>My career in theatrical sound engineering spans major productions including <em>Beauty and the Beast</em>, <em>Golden Mickeys</em>, <em>Frozen</em>, <em>Tangled</em>, and <em>Twice Charmed</em>. Each show requires precise wireless microphone management, complex cue sequencing, and immersive orchestral mixing.</p>
+							<p>Furthering my expertise, I had the privilege of studying musical theater sound and production on Broadway in New York City, analyzing landmark shows like <em>Moulin Rouge</em> and <em>Wicked</em>, and taking masterclasses directly with active Broadway sound designers and supervisors.</p>
+							<p>Locally in Mexico, I had the incredible opportunity to work at the prestigious <strong>National Auditorium's Lunario</strong> in Mexico City, engineering the musical production <em>"All Shook Up"</em> in collaboration with UDLAP.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Broadway Training (NYC)</span>
+								<span class="spec-badge">Lunario del Auditorio Nacional</span>
+								<span class="spec-badge">Theatrical RF & Mixing</span>
+							</div>
+						</div>
+						<div class="eng-image-wrapper">
+							<div class="image-card">
+								<img src={`${base}images/Javier-Flores-Broadway.webp`} alt="Javier Flores during musical theater training and Broadway productions" loading="lazy" decoding="async" width="800" height="600" />
+								<div class="image-caption">Broadway Training & Theatrical Production Experience</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 3: Live Audio -->
+			<section class="eng-section">
+				<div class="inner">
+					<div class="eng-grid">
+						<div class="eng-text-content">
+							<span class="section-tag">03 / Field Experience</span>
+							<h2>Live Audio & Touring</h2>
+							<p>I have had two major roles in live audio. The first was at one of the museums of La Constancia Mexicana in Puebla, specifically at the "Vienna House of Music in Puebla" museum. There, my duties included museum maintenance, guiding tours, and—most importantly for me—working as the audio engineer in their 500-seat auditorium.</p>
+							<p>My second live audio role is with the "Compañía Folklórica Magisterial de Hidalgo," where I am part of the musician team while also serving as the sound engineer on certain occasions. For international tours, I act as the liaison between the musicians, company directors, and the host country's audio engineers.</p>
+						</div>
+						<div class="eng-image-wrapper">
+							<div class="image-card">
+								<img src={`${base}images/Javier-Flores-Casa-de-la-Musica-de-Viena.webp`} alt="Javier Flores as FOH audio technician at the La Casa de la Música de Viena auditorium in Puebla" loading="lazy" decoding="async" width="800" height="600" />
+								<div class="image-caption">FOH Audio Engineer — La Casa de la Música de Viena, Puebla</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 4: Recording and Mixing -->
+			<section class="eng-section alt-bg">
+				<div class="inner">
+					<div class="eng-grid reverse">
+						<div class="eng-text-content">
+							<span class="section-tag">04 / Studio Craft</span>
 							<h2>Recording and Mixing</h2>
-						</header>
-						<span class="image main"><img src={`${base}images/Javier-Flores-estudio-Tec-Puebla.webp`} alt="Javier Flores at the Tec de Monterrey Puebla recording studio during a mixing session" loading="lazy" decoding="async" /></span>
-						<p>Studying Music Production Engineering has equipped me with skills such as miking techniques, analog and digital mixing, and many other audio-related disciplines.</p>
+							<p>Studying Music Production Engineering has equipped me with skills such as advanced miking techniques, analog and digital mixing, and critical acoustic analysis.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Analog & Digital Consoles</span>
+								<span class="spec-badge">Advanced Miking</span>
+								<span class="spec-badge">Acoustics & Signal Flow</span>
+							</div>
+						</div>
+						<div class="eng-image-wrapper">
+							<div class="image-card">
+								<img src={`${base}images/Javier-Flores-estudio-Tec-Puebla.webp`} alt="Javier Flores at the Tec de Monterrey Puebla recording studio during a mixing session" loading="lazy" decoding="async" width="800" height="600" />
+								<div class="image-caption">Recording & Mixing Session — Tec de Monterrey Puebla Studio</div>
+							</div>
+						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 		</div>
+	</div>
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+		body, #wrapper {
+			background-color: #0f131f !important;
+			color: #e2e8f0;
+			font-family: 'Inter', sans-serif !important;
+		}
+
+		.engineering-container {
+			padding-top: 6rem;
+			padding-bottom: 6rem;
+		}
+
+		.engineering-hero {
+			padding: 4rem 0 2rem 0;
+			text-align: left;
+		}
+
+		.engineering-hero .inner, .eng-section .inner {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.hero-badge-container {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.hero-pill {
+			background: rgba(15, 19, 31, 0.75);
+			border: 1px solid rgba(0, 229, 255, 0.3);
+			color: #00e5ff;
+			padding: 0.4rem 1rem;
+			border-radius: 50px;
+			font-size: 0.85rem;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			backdrop-filter: blur(10px);
+			box-shadow: 0 4px 20px rgba(0, 229, 255, 0.1);
+		}
+
+		.accent-pill {
+			border-color: rgba(111, 195, 223, 0.3);
+			color: #6fc3df;
+		}
+
+		.hero-title {
+			font-size: clamp(2.5rem, 4vw, 4rem) !important;
+			font-weight: 700;
+			color: #ffffff;
+			letter-spacing: -0.02em;
+			margin-bottom: 1rem !important;
+		}
+
+		.hero-subtitle {
+			font-size: 1.15rem;
+			color: #cbd5e1;
+			max-width: 750px;
+			line-height: 1.6;
+			margin-bottom: 2rem;
+		}
+
+		.divider-line {
+			width: 60px;
+			height: 3px;
+			background: linear-gradient(90deg, #00e5ff, #8d82c4);
+			border-radius: 2px;
+		}
+
+		.main-content-wrapper {
+			margin-top: 3rem;
+		}
+
+		.eng-section {
+			padding: 4rem 0;
+		}
+
+		.eng-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+			align-items: center;
+		}
+
+		.eng-grid.reverse {
+			direction: rtl;
+		}
+
+		.eng-grid.reverse > * {
+			direction: ltr;
+		}
+
+		.section-tag {
+			display: inline-block;
+			color: #00e5ff;
+			text-transform: uppercase;
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.2em;
+			margin-bottom: 0.75rem;
+		}
+
+		.eng-text-content h2 {
+			font-size: clamp(1.8rem, 2.5vw, 2.5rem) !important;
+			color: #ffffff !important;
+			font-weight: 700 !important;
+			margin-bottom: 1.5rem !important;
+			letter-spacing: -0.02em !important;
+		}
+
+		.eng-text-content p {
+			font-size: 1.05rem;
+			line-height: 1.8;
+			color: #cbd5e1;
+			margin-bottom: 1.5rem;
+		}
+
+		.tech-specs {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			margin-top: 2rem;
+		}
+
+		.spec-badge {
+			background: rgba(111, 195, 223, 0.08);
+			border: 1px solid rgba(111, 195, 223, 0.25);
+			color: #6fc3df;
+			padding: 0.4rem 0.9rem;
+			border-radius: 6px;
+			font-size: 0.85rem;
+			font-weight: 600;
+		}
+
+		.image-card {
+			background: rgba(15, 19, 31, 0.6);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+			transition: transform 0.3s ease, border-color 0.3s ease;
+		}
+
+		.image-card:hover {
+			transform: translateY(-5px);
+			border-color: rgba(0, 229, 255, 0.4);
+		}
+
+		.image-card img {
+			width: 100%;
+			height: auto;
+			display: block;
+			object-fit: cover;
+		}
+
+		.image-caption {
+			padding: 1rem 1.25rem;
+			font-size: 0.85rem;
+			color: #94a3b8;
+			background: rgba(15, 19, 31, 0.9);
+			border-top: 1px solid rgba(255, 255, 255, 0.05);
+			font-weight: 500;
+		}
+
+		@media screen and (max-width: 900px) {
+			.eng-grid, .eng-grid.reverse {
+				grid-template-columns: 1fr;
+				gap: 2.5rem;
+				direction: ltr;
+			}
+			.engineering-container {
+				padding-top: 4rem;
+			}
+		}
+
+		@media screen and (max-width: 736px) {
+			.engineering-hero .inner, .eng-section .inner {
+				padding: 0 1.5rem;
+			}
+		}
+	</style>
 </Layout>
