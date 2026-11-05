@@ -136,53 +136,54 @@ const base = import.meta.env.BASE_URL;
         }
 
         .music-hero {
-            /* Aumentamos el padding superior para separarlo del menú de navegación */
-            padding: 7rem 0 4rem 0; 
-            text-align: left;
+            padding: 8rem 2rem 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(15, 19, 31, 0.95) 0%, rgba(21, 27, 43, 0.8) 100%);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
         }
 
-       .hero-inner {
-            /* Aumentamos de 900px a 1200px para igualarlo con el grid de abajo. 
-               Esto hará que todo el bloque comience más hacia la izquierda en pantallas grandes. */
-            max-width: 1200px;
+        .hero-inner {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .hero-badge {
             display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            background: rgba(0, 229, 255, 0.1);
             color: #00e5ff;
-            margin-bottom: 1rem; /* Espacio natural hacia el título */
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
         }
 
         .hero-title {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
             line-height: 1.1;
-            margin: 0 0 1.25rem 0; /* Eliminado el margen negativo destructivo */
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
             line-height: 1.6;
-            margin: 0 0 2.5rem 0;
-            /* Aumentamos el ancho máximo del párrafo para que llegue más lejos de lado a lado */
-            max-width: 1000px; 
         }
 
         .divider-line {
-            /* Forzamos a que la línea ocupe el 100% de los 1200px del contenedor */
-            width: 100%; 
+            width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, #00e5ff, #6fc3df);
+            background: linear-gradient(90deg, #00e5ff, #8d82c4);
+            margin: 0 auto;
             border-radius: 2px;
-            margin-top: 2rem;
         }
 
         /* --- RESTO DEL CONTENIDO (SIN CAMBIOS ESTRUCTURALES) --- */
