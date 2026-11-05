@@ -4,8 +4,8 @@ const isEn = lang === "en";
 ---
 
 <div id="ambient-hud" class="fixed-hud">
-    <!-- Contenedor invisible para el reproductor de Spotify -->
-    <div id="spotify-invisible-player" class="visually-hidden"></div>
+    <!-- Contenedor fuera de pantalla con dimensiones reales para que Spotify IFrame API funcione correctamente -->
+    <div id="spotify-invisible-player" class="spotify-offscreen-container"></div>
 
     <button id="ambient-toggle-btn" class="hud-circle-btn" aria-label="Toggle Spotify Audio">
         
@@ -40,17 +40,16 @@ const isEn = lang === "en";
         z-index: 100;
     }
 
-    /* Ocultamos el iframe de Spotify pero lo mantenemos en el DOM para que suene */
-    .visually-hidden {
+    /* Contenedor off-screen con tamaño real para que Spotify API renderice y reproduzca audio sin problemas */
+    .spotify-offscreen-container {
         position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
+        left: -9999px;
+        top: 0;
+        width: 300px;
+        height: 380px;
+        opacity: 0.01;
+        pointer-events: none;
         overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
     }
 
     .hud-circle-btn {
@@ -166,8 +165,10 @@ const isEn = lang === "en";
         return text.repeat(repeats);
     };
 
-    window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    function initPlayer(IFrameAPI) {
         const element = document.getElementById('spotify-invisible-player');
+        if (!element) return;
+        
         const options = {
             uri: `spotify:playlist:${PLAYLIST_ID}`,
             width: 300,
@@ -180,33 +181,63 @@ const isEn = lang === "en";
             const toggleBtn = document.getElementById('ambient-toggle-btn');
             const textContent = document.getElementById('hud-text-content');
 
-            // Habilitar el botón cuando la API está lista
-            toggleBtn.classList.add('is-ready');
-            textContent.textContent = fillCircleWithText(textPlay);
+            if (toggleBtn && textContent) {
+                // Habilitar el botón cuando la API está lista
+                toggleBtn.classList.add('is-ready');
+                textContent.textContent = fillCircleWithText(textPlay);
 
-            // Al hacer clic, alternar reproducción
-            toggleBtn.addEventListener('click', () => {
-                embedController.togglePlay();
-            });
+                // Al hacer clic, alternar reproducción
+                toggleBtn.addEventListener('click', () => {
+                    if (embedController && typeof embedController.togglePlay === 'function') {
+                        embedController.togglePlay();
+                    }
+                });
 
-            // Escuchar cambios en la pista o pausa/reproducción
-            embedController.addListener('playback_update', e => {
-                const state = e.data;
-                isPlaying = !state.isPaused;
+                // Escuchar cambios en la pista o pausa/reproducción
+                embedController.addListener('playback_update', e => {
+                    const state = e.data;
+                    if (!state) return;
+                    isPlaying = !state.isPaused;
 
-                if (isPlaying && state.track.name) {
-                    toggleBtn.classList.add('is-playing');
-                    // Actualizar nombre de la canción
-                    const trackName = state.track.name.toUpperCase();
-                    const fullText = `${prefixNowPlaying}${trackName} • `;
-                    textContent.textContent = fillCircleWithText(fullText);
-                } else {
-                    toggleBtn.classList.remove('is-playing');
-                    textContent.textContent = fillCircleWithText(textPlay);
-                }
-            });
+                    if (isPlaying && state.track && state.track.name) {
+                        toggleBtn.classList.add('is-playing');
+                        const trackName = state.track.name.toUpperCase();
+                        const fullText = `${prefixNowPlaying}${trackName} • `;
+                        textContent.textContent = fillCircleWithText(fullText);
+                    } else {
+                        toggleBtn.classList.remove('is-playing');
+                        textContent.textContent = fillCircleWithText(textPlay);
+                    }
+                });
+            }
         };
 
-        IFrameAPI.createController(element, options, callback);
+        try {
+            IFrameAPI.createController(element, options, callback);
+        } catch (err) {
+            console.error("Spotify IFrame API error:", err);
+            const toggleBtn = document.getElementById('ambient-toggle-btn');
+            const textContent = document.getElementById('hud-text-content');
+            if (toggleBtn && textContent) {
+                toggleBtn.classList.add('is-ready');
+                textContent.textContent = fillCircleWithText(isEn ? "PLAYLIST • " : "PLAYLIST • ");
+            }
+        }
+    }
+
+    window.onSpotifyIframeApiReady = (IFrameAPI) => {
+        initPlayer(IFrameAPI);
     };
+
+    // Safety fallback in case the API callback doesn't fire
+    setTimeout(() => {
+        const toggleBtn = document.getElementById('ambient-toggle-btn');
+        const textContent = document.getElementById('hud-text-content');
+        if (toggleBtn && !toggleBtn.classList.contains('is-ready')) {
+            toggleBtn.classList.add('is-ready');
+            if (textContent) {
+                textContent.textContent = fillCircleWithText(isEn ? "PLAYLIST • " : "PLAYLIST • ");
+            }
+        }
+    }, 4000);
 </script>
