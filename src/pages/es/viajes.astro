@@ -1,0 +1,418 @@
+---
+// src/pages/es/viajes.astro
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+    title="Mi Historia — Javier Flores | Un viaje de música, sonido y vida"
+    description="Más que una lista de países, este es el recorrido de una década aprendiendo del sonido, el trabajo constante y el mundo."
+    lang="es"
+    pathEs="viajes"
+    pathEn="journey"
+>
+    <div class="journey-container">
+        <!-- Hero Section -->
+        <section class="journey-hero">
+            <div class="hero-inner">
+                <span class="hero-badge">Bitácora & Biografía</span>
+                <h1 class="hero-title">Mis veintes a través del mundo</h1>
+                <p class="hero-subtitle">
+                   Pequeña reflexión sobre cómo empezó todo y como he sido increíblemente afortunado de recorrer el planeta haciendo lo que amo.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">40+</span>
+                        <span class="stat-label">Países y Regiones</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">180+</span>
+                        <span class="stat-label">Ciudades Recorridas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Viajes y Rutas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2000+</span>
+                        <span class="stat-label">Días en el Camino</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content & Timeline -->
+        <div id="main">
+            <section class="wrapper style1">
+                <div class="inner">
+                    <header class="major">
+                        <h2>El camino recorrido</h2>
+                        <p>Cada etapa ha sido un aula distinta: desde festivales tradicionales en Asia hasta la exigencia técnica de los espectáculos en altamar.</p>
+                    </header>
+
+                    <div class="timeline-container">
+
+                        <!-- Phase 1: 2018 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2018</span>
+                                <h3>El primer gran salto: Asia</h3>
+                                <p>
+                                    Mis veintes empezaron con un salto directo al otro lado del planeta. Como músico e integrante del equipo técnico en la Compañía Folklórica Magisterial de Hidalgo, llegué a <strong>Taiwán</strong> para tocar en el Festival Internacional de Folklore de Yilan, y después a <strong>Corea del Sur</strong>. Fue mi primer choque cultural real y la confirmación de que la música y el sonido son un lenguaje universal.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Taipei-Taiwan.webp`} alt="Javier Flores en Taiwán" loading="lazy" decoding="async" width="600" height="400" />
+                                    <img src={`${base}images/Javier-Flores-Yilan-Taiwan.webp`} alt="Javier Flores tocando en el Festival Internacional de Yilan" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2: Late 2018 - Early 2019 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">Fines de 2018 - Principios de 2019</span>
+                                <h3>Europa en tren y mochila</h3>
+                                <p>
+                                    Aterricé en Brno, <strong>República Checa</strong>, para estudiar Gestión de Economías Creativas. Esos meses me abrieron la puerta a recorrer Europa en trayectos largos y con presupuesto medido: pasé por Praga, <strong>Eslovaquia</strong>, <strong>Hungría</strong> y <strong>Polonia</strong>, y más tarde por <strong>Alemania</strong>, <strong>Francia</strong>, <strong>Bélgica</strong> y los <strong>Países Bajos</strong>. Aprendí a moverme solo, a escuchar y a absorber la arquitectura y cultura de cada lugar.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Casa-de-la-Musica-de-Viena.webp`} alt="Javier Flores durante su estancia en Europa" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3: 2019 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2019</span>
+                                <h3>Tradición e historia en Medio Oriente</h3>
+                                <p>
+                                    El camino me llevó a los <strong>Emiratos Árabes Unidos</strong> para participar en los Sharjah Heritage Days. Fue una experiencia transformadora estar rodeado de una cultura tan distinta, caminando entre la arquitectura tradicional de Sharjah y la escala urbana de Dubái.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 4: 2022 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2022</span>
+                                <h3>Costas mediterráneas e islas del Atlántico</h3>
+                                <p>
+                                    Tras la pausa global, regresé a la ruta en una etapa intensa de trabajo y aprendizaje por el Mediterráneo y el Atlántico. Recorrí puertos e historias en <strong>Grecia</strong>, <strong>Francia</strong>, <strong>Noruega</strong>, <strong>Irlanda</strong>, <strong>Croacia</strong>, <strong>Mónaco</strong>, y más tarde islas como <strong>Jamaica</strong> y <strong>Bermuda</strong>.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Australia.webp`} alt="Javier Flores en viaje internacional" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 5: 2023 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2023</span>
+                                <h3>La vida en el mar: El Caribe</h3>
+                                <p>
+                                    Mi carrera dio un giro decisivo cuando asumí responsabilidades técnicas a bordo de Disney Cruise Line. Integrar y operar sistemas de audio de nivel profesional mientras navegábamos por <strong>Colombia</strong>, <strong>Panamá</strong> y decenas de islas del Caribe (<strong>Bahamas</strong>, <strong>Aruba</strong>, <strong>Curaçao</strong>, <strong>Sint Maarten</strong>, entre otras) significó jornadas largas, mucha disciplina y la satisfacción de hacer funcionar espectáculos complejos a diario.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Frozen.webp`} alt="Javier Flores en producciones de Disney Cruise Line" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 6: 2025 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2025</span>
+                                <h3>Oceanía y Norteamérica</h3>
+                                <p>
+                                    Crucé el ecuador hacia el Pacífico Sur para llegar a <strong>Australia</strong> y <strong>Nueva Zelanda</strong>, combinando el ritmo de las producciones con espacios para explorar la naturaleza de la región, antes de continuar con giras y estancias de trabajo en <strong>Canadá</strong>.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Sydney.webp`} alt="Javier Flores en Sídney, Australia" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 7: Mayo 2026 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">Mayo 2026</span>
+                                <h3>El sur de Europa y la acústica histórica</h3>
+                                <p>
+                                    Volví a Europa para recorrer <strong>Italia</strong>, <strong>España</strong> y <strong>Portugal</strong>. Esta vez, además del viaje personal, el enfoque estuvo puesto en escuchar: analizar la acústica de recintos históricos, la arquitectura del sonido y seguir preparándome académicamente para los proyectos del futuro.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Coctel-Calavera.webp`} alt="Javier Flores en Europa del Sur" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 8: Reciente -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">Meses Recientes</span>
+                                <h3>Caminos globales y la raíz en casa</h3>
+                                <p>
+                                    Mis días recientes han sido una mezcla de movimiento constante por <strong>Puerto Rico</strong>, el <strong>Reino Unido</strong>, <strong>Dinamarca</strong> y distintas ciudades de <strong>Estados Unidos</strong>. Pero sin importar cuántos kilómetros recorra, mi centro siempre está de vuelta en <strong>México</strong> y en mi querido <strong>Atlixco, Puebla</strong>. Viajar enseña a valorar el trabajo, pero sobre todo, te enseña el valor de regresar.
+                                </p>
+                                <div class="timeline-images">
+                                    <img src={`${base}images/Javier-Flores-Alaska.webp`} alt="Javier Flores en viajes recientes" loading="lazy" decoding="async" width="600" height="400" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="back-action">
+                        <a href={`${base}`} class="primary-btn">Volver al Inicio</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body, #wrapper {
+            background-color: #0f131f !important;
+            color: #cbd5e1;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .journey-container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #0f131f;
+        }
+
+        .journey-hero {
+            padding: 8rem 2rem 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(15, 19, 31, 0.95) 0%, rgba(21, 27, 43, 0.8) 100%);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+        }
+
+        .hero-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: #00e5ff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(21, 27, 43, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00e5ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 4rem auto;
+            padding-left: 2rem;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #00e5ff 0%, #6fc3df 50%, #8d82c4 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3.5rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -2rem;
+            top: 4px;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: #0f131f;
+            border: 3px solid #00e5ff;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        .timeline-content {
+            background: rgba(21, 27, 43, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #00e5ff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .timeline-images img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.25s ease;
+        }
+
+        .timeline-images img:hover {
+            transform: scale(1.02);
+        }
+
+        .back-action {
+            text-align: center;
+            margin: 5rem 0 3rem 0;
+        }
+
+        .journey-container header.major {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .journey-container header.major p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00e5ff, #0088cc);
+            color: #0f131f !important;
+            padding: 0.85rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 229, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .journey-hero {
+                padding: 6rem 1rem 3rem 1rem;
+            }
+            .timeline-container {
+                padding-left: 1.5rem;
+            }
+            .timeline-content {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</Layout>

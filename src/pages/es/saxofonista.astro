@@ -1,5 +1,5 @@
 ---
-// src/pages/saxofonista.astro
+// src/pages/es/saxofonista.astro
 import Layout from '../../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 ---
@@ -11,96 +11,165 @@ const base = import.meta.env.BASE_URL;
 	pathEs="saxofonista"
 	pathEn="saxophonist"
 >
-	<!-- Banner -->
-		<section id="banner" class="style2">
-			<div class="inner">
-				<span class="image">
-					<img src={`${base}images/Javier-Flores-Yilan-Taiwan.webp`} alt="Javier Flores como saxofonista durante la gira internacional en Yilan, Taiwán" />
-				</span>
-				<header class="major">
-					<h1>Saxofonista</h1>
-				</header>
-				<div class="content">
-					<p>Inicié a los 8 años y para ahora he tenido grandes experiencias siendo músico, experiencias que van desde obtener una beca universitaria hasta haber formado una orquesta en mi ciudad natal y el haber participado en 2 giras internacionales.</p> <br>
-					<p>Aquí dejo algunos de los proyectos, agrupaciones y eventos en los que he tenido la fortuna de ser parte.</p>
-				</div>
+	<div class="sax-container">
+		<!-- Hero Section Homologado -->
+		<section class="sax-hero">
+			<div class="hero-inner">
+				<span class="hero-badge">Saxofonista Profesional y Giras Internacionales</span>
+				<h1 class="hero-title">Saxofonista e Intérprete</h1>
+				<p class="hero-subtitle">Aportando expresividad, precisión técnica y arte dinámico a interpretaciones solistas, ensambles de cámara y escenarios internacionales desde los 8 años.</p>
+				<div class="divider-line"></div>
 			</div>
 		</section>
 
-	<!-- Main -->
-		<div id="main">
-			<!-- Two -->
-				<section id="two" class="spotlights">
-					<section>
-						<iframe src="https://player.vimeo.com/video/334967451" width="640" height="500" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Músico Representativo ITESM Puebla</h2>
-								</header>
-								<p>Soy estudiante becado en el Tecnológico de Monterrey por talento cultural, toco saxofón alto, tenor y soprano. Presto servicio becario como músico representativo en la universidad pero también he participado con la orquesta de cámara de la universidad y la marching band.</p> <br>
-								<p>He participado en musicales, conciertos, ensambles y muchos otros eventos organizados por la escuela donde he tenido el placer de ser solista en muchas ocasiones y tocar en grandes recintos donde han asistido más de 4 mil personas.</p>
+		<!-- Main Content Sections -->
+		<div id="main" class="main-content-wrapper">
+			<!-- Section 1: ITESM Puebla -->
+			<section class="sax-section">
+				<div class="inner">
+					<div class="sax-grid">
+						<div class="sax-media-wrapper">
+							<div class="media-card">
+								<div class="video-container">
+									<iframe src="https://player.vimeo.com/video/334967451" width="100%" height="340" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+								</div>
+								<div class="media-caption">Interpretación como Músico Representativo — ITESM Puebla</div>
 							</div>
 						</div>
-					</section>
-					<section>
-						<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Falejandro.c.gonzalez.12%2Fvideos%2F10155880273594613%2F&width=600&show_text=false&height=500&appId" width="600" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" allowFullScreen="true"></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Giras Internacionales</h2>
-								</header>
-								<p>Actualmente soy parte del equipo de músicos de la compañía Folklórica Magisterial de Hidalgo con quienes he tenido la suerte de colaborar en 2 giras fuera del país.</p><br>
-								<p>La primera gira tuvo lugar en Taiwán, "Yilan International Children´s Folklore and Folkgame Festival" es el nombre del evento donde participamos en 2018, este es uno de los festivales más grandes de folklore a nivel mundial. </p> <br>
-								<p>Mi segunda experiencia fue en Emiratos Árabes Unidos en el festival "Sharjah Heritage Days", en este festival tuvimos la oportunidad de tocar nuestra música en las ciudades de Sharjah y Dubai, además tuvimos la oportunidad de grabar en un estudio de grabación de la ciudad universitaria de Sharjah.</p>
+						<div class="sax-text-content">
+							<span class="section-tag">01 / Talento Cultural Universitario</span>
+							<h2>Músico Representativo — ITESM Puebla</h2>
+							<p>Soy estudiante becado en el Tecnológico de Monterrey por talento cultural, interpretando saxofón alto, tenor y soprano. Presto mi servicio becario como músico representativo de la universidad, participando activamente como solista y músico de ensamble con la orquesta de cámara y la marching band.</p>
+							<p>He participado en musicales a gran escala, conciertos y producciones institucionales, teniendo el privilegio de fungir como solista en importantes recintos con más de 4,000 asistentes.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Músico Becario</span>
+								<span class="spec-badge">ITESM Puebla</span>
+								<span class="spec-badge">Alto / Tenor / Soprano</span>
+								<span class="spec-badge">Solista y Ensambles</span>
 							</div>
 						</div>
-					</section>
-					<section>
-						<iframe width="600" height="500" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135787483&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Cóctel Calavera</h2>
-								</header>
-								<p>He sido parte de varias bandas musicales, pero una que me ha dejado grandes experiencias fue Cóctel Calavera con quienes tuve la oportunidad de tocar en varios festivales, eventos y concursos, además de grabar algunas canciones. Escucha un poco de Cóctel Calavera en SoundCloud.</p>
-								<ul class="actions">
-									<li><a href="https://www.facebook.com/CoctelCalavera/" class="button">Cóctel Calavera en Facebook</a></li>
-								</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 2: Giras Internacionales -->
+			<section class="sax-section alt-bg">
+				<div class="inner">
+					<div class="sax-grid reverse">
+						<div class="sax-text-content">
+							<span class="section-tag">02 / Escenarios Globales</span>
+							<h2>Giras Internacionales</h2>
+							<p>Como parte del elenco musical de la <strong>Compañía Folklórica Magisterial de Hidalgo</strong>, he tenido la fortuna de colaborar en dos destacadas giras internacionales.</p>
+							<p>La primera gira tuvo lugar en Taiwán para el <strong>"Yilan International Children’s Folklore and Folkgame Festival"</strong> en 2018, considerado uno de los festivales de folklore más grandes del mundo.</p>
+							<p>Mi segunda experiencia internacional se desarrolló en los Emiratos Árabes Unidos en el festival <strong>"Sharjah Heritage Days"</strong>, donde realizamos conciertos en las ciudades de Sharjah y Dubái, además de grabar en los estudios profesionales de la Ciudad Universitaria de Sharjah.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Giras Internacionales</span>
+								<span class="spec-badge">Festival Yilan Taiwán 2018</span>
+								<span class="spec-badge">Sharjah EAU</span>
+								<span class="spec-badge">Compañía Folklórica</span>
 							</div>
 						</div>
-					</section>
-					<section>
-						<iframe src="https://player.vimeo.com/video/334967419" width="640" height="500" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Festivales de la canción</h2>
-								</header>
-								<p>Uno de mis festivales favoritos en la universidad es el festival de la canción, donde desde que entré a la universidad he tenido el placer de participar y competir con grandes músicos y compositores de mi universidad.</p> <br>
-								<p>En este festival he tenido la suerte de tener menciones honoríficas como uno de los mejores músicos del festival y también, en una canción en la que tuve el placer de cooperar con un amigo de la universidad en la composición, ganó mejor letra en el festival del 2018. Las partes del sax siempre fueron arreglos míos para la canción en la que participara.</p>
+						<div class="sax-media-wrapper">
+							<div class="media-card">
+								<div class="video-container">
+									<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Falejandro.c.gonzalez.12%2Fvideos%2F10155880273594613%2F&width=600&show_text=false&height=340&appId" width="100%" height="340" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" allowFullScreen="true"></iframe>
+								</div>
+								<div class="media-caption">Presentación en Gira Internacional — Taiwán y Emiratos Árabes Unidos</div>
 							</div>
 						</div>
-					</section>
-					<section>
-						<a href="#" class="image" aria-label="Orquesta de Cámara de Atlixco">
-							<img src={`${base}images/Orquesta-de-Camara-de-Atlixco.webp`} alt="Orquesta de Cámara de Atlixco, fotografía de la agrupación con Javier Flores como miembro fundador" width="600" height="320" loading="lazy" decoding="async" />
-						</a>
-						<div class="content">
-							<div class="inner">
-								<header class="major">
-									<h2>Orquesta de Cámara de Atlixco</h2>
-								</header>
-								<p>La orquesta de cámara de Atlixco fue un proyecto que inició en 2013, el proyecto buscaba tener a los mejores músicos jóvenes de Atlixco y formar la primera orquesta de la ciudad.</p><br>
-								<p>Yo fui uno de los miembros fundadores del proyecto donde, a parte de ser uno de los músicos, desempeñé cargos como manager, arreglista, líder de sección, entre otros.</p>
-								<ul class="actions">
-									<li><a href="https://www.facebook.com/Orquesta-de-C%C3%A1mara-de-Atlixco-232123190316860/" class="button">OCA en Facebook</a></li>
-								</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 3: Cóctel Calavera -->
+			<section class="sax-section">
+				<div class="inner">
+					<div class="sax-grid">
+						<div class="sax-media-wrapper">
+							<div class="media-card">
+								<div class="video-container soundcloud-container">
+									<iframe width="100%" height="340" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135787483&color=%2300e5ff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+								</div>
+								<div class="media-caption">Cóctel Calavera — Reproducción de temas en SoundCloud</div>
 							</div>
 						</div>
-					</section>
-				</section>
+						<div class="sax-text-content">
+							<span class="section-tag">03 / Bandas Independientes</span>
+							<h2>Cóctel Calavera</h2>
+							<p>A lo largo de mi trayectoria, colaborar con agrupaciones independientes ha enriquecido mi versatilidad musical. Con <strong>Cóctel Calavera</strong> me presenté en diversos festivales, recintos y concursos musicales, además de participar en grabaciones de estudio.</p>
+							<p>Escucha algunos de los temas representativos de Cóctel Calavera en SoundCloud.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Músico de Banda</span>
+								<span class="spec-badge">Grabaciones de Estudio</span>
+								<span class="spec-badge">SoundCloud</span>
+								<span class="spec-badge">Festivales en Vivo</span>
+							</div>
+							<div class="actions-wrapper">
+								<a href="https://www.facebook.com/CoctelCalavera/" target="_blank" rel="noopener noreferrer" class="button primary-btn icon fa-facebook">Cóctel Calavera en Facebook</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 4: Festivales de la Canción -->
+			<section class="sax-section alt-bg">
+				<div class="inner">
+					<div class="sax-grid reverse">
+						<div class="sax-text-content">
+							<span class="section-tag">04 / Composición y Certámenes</span>
+							<h2>Festivales de la Canción</h2>
+							<p>Los festivales universitarios de la canción han sido un espacio creativo fundamental desde mi ingreso, permitiéndome competir y colaborar junto a destacados músicos y compositores.</p>
+							<p>He recibido menciones honoríficas como uno de los mejores músicos del festival. Asimismo, un tema en el que colaboré en la composición junto a un compañero de la universidad obtuvo el reconocimiento a <strong>Mejor Letra</strong> en la edición 2018. Los arreglos de saxofón para cada pieza interpretada fueron de mi autoría.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Premio Festival de la Canción</span>
+								<span class="spec-badge">Mejor Letra</span>
+								<span class="spec-badge">Arreglos Propios</span>
+								<span class="spec-badge">Músico Universitario</span>
+							</div>
+						</div>
+						<div class="sax-media-wrapper">
+							<div class="media-card">
+								<div class="video-container">
+									<iframe src="https://player.vimeo.com/video/334967419" width="100%" height="340" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+								</div>
+								<div class="media-caption">Muestra de Participación y Arreglos en Festival de la Canción</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 5: Orquesta de Cámara de Atlixco -->
+			<section class="sax-section">
+				<div class="inner">
+					<div class="sax-grid">
+						<div class="sax-media-wrapper">
+							<div class="image-card">
+								<img src={`${base}images/Orquesta-de-Camara-de-Atlixco.webp`} alt="Orquesta de Cámara de Atlixco, fotografía de la agrupación con Javier Flores como miembro fundador" width="800" height="450" loading="lazy" decoding="async" />
+								<div class="image-caption">Orquesta de Cámara de Atlixco — Miembro Fundador y Arreglista</div>
+							</div>
+						</div>
+						<div class="sax-text-content">
+							<span class="section-tag">05 / Liderazgo Orquestal</span>
+							<h2>Orquesta de Cámara de Atlixco</h2>
+							<p>La Orquesta de Cámara de Atlixco surgió en 2013 con el propósito de reunir al talento joven más destacado de Atlixco para consolidar la primera orquesta formal de la ciudad.</p>
+							<p>Fui uno de los miembros fundadores del proyecto, donde además de desempeñar el rol de instrumentista, asumí responsabilidades como gestor (manager), arreglista y líder de sección.</p>
+							<div class="tech-specs">
+								<span class="spec-badge">Miembro Fundador</span>
+								<span class="spec-badge">Orquesta de Cámara</span>
+								<span class="spec-badge">Gestor y Arreglista</span>
+								<span class="spec-badge">Líder de Sección</span>
+							</div>
+							<div class="actions-wrapper">
+								<a href="https://www.facebook.com/Orquesta-de-C%C3%A1mara-de-Atlixco-232123190316860/" target="_blank" rel="noopener noreferrer" class="button primary-btn icon fa-facebook">OCA en Facebook</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 		</div>
+	</div>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -111,8 +180,208 @@ const base = import.meta.env.BASE_URL;
             font-family: 'Inter', sans-serif !important;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', sans-serif !important;
+        .sax-container {
+            padding-bottom: 6rem;
+        }
+
+        .sax-hero {
+            padding: 7rem 0 4rem 0;
+            text-align: left;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00e5ff;
+            margin-bottom: 1rem;
+            background: rgba(0, 229, 255, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 850px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .divider-line {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(90deg, #00e5ff, #8d82c4);
+            border-radius: 2px;
+        }
+
+        .sax-section {
+            padding: 5rem 0;
+        }
+
+        .sax-section.alt-bg {
+            background-color: rgba(21, 27, 43, 0.5);
+        }
+
+        .sax-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sax-grid.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .sax-grid.reverse .sax-text-content {
+            order: 1;
+        }
+
+        .sax-grid.reverse .sax-media-wrapper {
+            order: 2;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #00e5ff;
+            margin-bottom: 0.75rem;
+        }
+
+        .sax-text-content h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .sax-text-content p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .tech-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.75rem 0;
+        }
+
+        .spec-badge {
+            background-color: rgba(0, 229, 255, 0.1);
+            color: #00e5ff;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .media-card, .image-card {
+            background: #151b2b;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .media-card:hover, .image-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 229, 255, 0.4);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .media-caption, .image-caption {
+            padding: 1rem 1.25rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            background: #111726;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 500;
+        }
+
+        .actions-wrapper {
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #00e5ff, #0088cc) !important;
+            color: #0f131f !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0 4px 14px rgba(0, 229, 255, 0.3);
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media screen and (max-width: 960px) {
+            .sax-grid, .sax-grid.reverse {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .sax-grid.reverse .sax-text-content,
+            .sax-grid.reverse .sax-media-wrapper {
+                order: unset;
+            }
+            .sax-hero {
+                padding: 5rem 0 2rem 0;
+            }
         }
     </style>
 </Layout>

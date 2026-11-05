@@ -1,26 +1,45 @@
 ---
-// src/pages/audio-tools.astro
+// src/pages/es/audiotools.astro
 import Layout from '../../layouts/Layout.astro';
 import SoundEngineeringTools from '../../components/SoundEngineeringTools.astro';
+import MusicToolsEnhanced from '../../components/MusicToolsEnhanced.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-    title="Herramientas de Ingeniería de Sonido | Javier Flores"
-    description="Herramientas y recursos técnicos de ingeniería de sonido profesional por Javier Flores."
+    title="Herramientas de Audio y Música | Javier Flores"
+    description="Herramientas de ingeniería de sonido, RTA, generador de tonos, metrónomo, afinador y biblioteca de acordes por Javier Flores."
     lang="es"
     pathEs="audiotools"
     pathEn="audiotools"
 >
-    <div id="main" class="alt">
-        <section id="one">
-            <div class="inner">
-                <header class="major">
-                    <h1>Audio Engineering Tools</h1>
-                </header>
-                <SoundEngineeringTools />
+    <div class="tools-container">
+        <!-- Hero Section Homologado -->
+        <section class="tools-hero">
+            <div class="hero-inner">
+                <span class="hero-badge">Aplicaciones Web y Utilidades</span>
+                <h1 class="hero-title">Herramientas de Audio y Música</h1>
+                <p class="hero-subtitle">Aplicaciones web interactivas y utilidades para ingeniería de sonido en vivo, cálculos acústicos, metrónomo, afinador y biblioteca de acordes.</p>
+                <div class="divider-line"></div>
             </div>
         </section>
+
+        <!-- Main Content -->
+        <div id="main" class="main-content-wrapper">
+            <section class="wrapper style1">
+                <div class="inner">
+                    <div style="margin-bottom: 4rem;">
+                        <h2 style="color: #00e5ff; margin-bottom: 1.5rem; font-size: 1.8rem; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 0.5rem;">Herramientas de Ingeniería de Sonido</h2>
+                        <SoundEngineeringTools />
+                    </div>
+
+                    <div>
+                        <h2 style="color: #00e5ff; margin-bottom: 1.5rem; font-size: 1.8rem; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 0.5rem;">Herramientas Musicales</h2>
+                        <MusicToolsEnhanced />
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <style>
@@ -28,8 +47,75 @@ const base = import.meta.env.BASE_URL;
 
         body, #wrapper {
             background-color: #0f131f !important;
-            color: #e2e8f0;
+            color: #cbd5e1;
             font-family: 'Inter', sans-serif !important;
+        }
+
+        .tools-container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #0f131f;
+        }
+
+        .tools-hero {
+            padding: 8rem 2rem 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(15, 19, 31, 0.95) 0%, rgba(21, 27, 43, 0.8) 100%);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+        }
+
+        .hero-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: #00e5ff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+        }
+
+        .divider-line {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #00e5ff, #8d82c4);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .main-content-wrapper {
+            padding: 4rem 0;
+        }
+
+        .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         h1, h2, h3, h4, h5, h6 {
