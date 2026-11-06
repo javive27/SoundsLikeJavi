@@ -4,32 +4,30 @@ const isEn = lang === "en";
 ---
 
 <div id="ambient-hud" class="fixed-hud">
-    <!-- Contenedor fuera de pantalla con dimensiones reales para que Spotify IFrame API funcione correctamente -->
-    <div id="spotify-invisible-player" class="spotify-offscreen-container"></div>
+    <div class="spotify-hidden-wrapper">
+        <div id="spotify-invisible-player"></div>
+    </div>
 
     <button id="ambient-toggle-btn" class="hud-circle-btn" aria-label="Toggle Spotify Audio">
         
-        <!-- SVG para el texto circular giratorio -->
         <svg viewBox="0 0 100 100" class="rotating-text-svg">
             <path id="textPath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
             <text>
                 <textPath href="#textPath" startOffset="0%" id="hud-text-content">
-                    {isEn ? "LOADING MUSIC • LOADING MUSIC • " : "CARGANDO MÚSICA • CARGANDO MÚSICA • "}
+                    {isEn ? "CURATED PLAYLIST • " : "LISTA CURADA • "}
                 </textPath>
             </text>
         </svg>
 
-        <!-- Contenedor de la Onda -->
         <div class="wave-container">
-            <svg viewBox="0 0 48 24" class="sine-wave-svg" width="72" height="36">
-                <path d="M 0 12 Q 6 2, 12 12 T 24 12 T 36 12 T 48 12" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg viewBox="0 0 72 24" class="sine-wave-svg" width="72" height="24">
+                <path d="M 0 12 Q 9 2, 18 12 T 36 12 Q 45 2, 54 12 T 72 12" fill="none" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
 
     </button>
 </div>
 
-<!-- Cargamos la API de Spotify -->
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 
 <style>
@@ -40,16 +38,18 @@ const isEn = lang === "en";
         z-index: 100;
     }
 
-    /* Contenedor off-screen con tamaño real para que Spotify API renderice y reproduzca audio sin problemas */
-    .spotify-offscreen-container {
+    .spotify-hidden-wrapper {
         position: absolute;
-        left: -9999px;
-        top: 0;
-        width: 300px;
-        height: 380px;
-        opacity: 0.01;
-        pointer-events: none;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
         overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        opacity: 0;
+        pointer-events: none;
     }
 
     .hud-circle-btn {
@@ -68,7 +68,7 @@ const isEn = lang === "en";
         box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 229, 255, 0.1);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0.5;
-        pointer-events: none; /* Desactivado hasta que cargue Spotify */
+        pointer-events: none;
     }
 
     .hud-circle-btn.is-ready {
@@ -80,7 +80,7 @@ const isEn = lang === "en";
         background: rgba(15, 19, 31, 0.95);
         border-color: #00e5ff;
         transform: scale(1.05);
-        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.2);
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.2);
     }
 
     .rotating-text-svg {
@@ -95,11 +95,11 @@ const isEn = lang === "en";
 
     .rotating-text-svg text {
         font-family: monospace, system-ui;
-        font-size: 9.5px;
+        font-size: 8px;
         font-weight: 600;
         fill: #00e5ff;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 1px;
         transition: fill 0.3s ease;
     }
 
@@ -110,7 +110,7 @@ const isEn = lang === "en";
 
     .wave-container {
         width: 36px;
-        height: 36px;
+        height: 24px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -126,18 +126,19 @@ const isEn = lang === "en";
         opacity: 0.3;
     }
 
-    /* Estados de Reproducción Activa */
-    .is-playing.hud-circle-btn {
-        box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.2);
+    /* Activación del movimiento basada puramente en la clase is-playing */
+    .hud-circle-btn.is-playing {
+        border-color: #00e5ff;
+        box-shadow: 0 0 25px rgba(0, 229, 255, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.3);
     }
 
-    .is-playing .rotating-text-svg {
-        animation: spinText 12s linear infinite;
+    .hud-circle-btn.is-playing .rotating-text-svg {
+        animation: spinText 10s linear infinite;
     }
 
-    .is-playing .sine-wave-svg {
+    .hud-circle-btn.is-playing .sine-wave-svg {
         opacity: 1;
-        animation: harmonicMotion 1s linear infinite;
+        animation: harmonicMotion 1.2s linear infinite;
     }
 
     @keyframes harmonicMotion {
@@ -147,32 +148,41 @@ const isEn = lang === "en";
 </style>
 
 <script>
-    // ID de tu lista de reproducción de French House / Daft Punk vibe
     const PLAYLIST_ID = '06ENdYdT8sOg2eYrnjxoPP'; 
 
     const isEn = document.documentElement.lang === 'en';
-    const textPlay = "CURATED PLAYLIST • CURATED PLAYLIST • ";
+    const textPlay = isEn ? "CURATED PLAYLIST • " : "LISTA CURADA • ";
     const prefixNowPlaying = isEn ? "NOW PLAYING: " : "SONANDO: ";
 
     let embedController = null;
-    let isPlaying = false;
 
-    // Función para repetir el texto hasta que llene el círculo SVG
-    const fillCircleWithText = (text) => {
-        const targetLength = 65; 
-        if (text.length >= targetLength) return text;
-        const repeats = Math.ceil(targetLength / text.length);
-        return text.repeat(repeats);
+    const fitTextToCircle = (text) => {
+        const targetCharLength = 42;
+        if (!text) return "";
+        let formatted = text.trim();
+        if (!formatted.endsWith("•")) formatted += " • ";
+        
+        if (formatted.length >= targetCharLength) {
+            return formatted.substring(0, targetCharLength - 3) + "... • ";
+        }
+        
+        const repeats = Math.floor(targetCharLength / formatted.length);
+        let result = formatted.repeat(repeats);
+        
+        while (result.length < targetCharLength - formatted.length / 2) {
+            result += formatted;
+        }
+        return result;
     };
 
     function initPlayer(IFrameAPI) {
         const element = document.getElementById('spotify-invisible-player');
         if (!element) return;
-        
+
         const options = {
             uri: `spotify:playlist:${PLAYLIST_ID}`,
-            width: 300,
-            height: 380,
+            width: '100%',
+            height: '152',
             theme: 'dark'
         };
 
@@ -182,31 +192,33 @@ const isEn = lang === "en";
             const textContent = document.getElementById('hud-text-content');
 
             if (toggleBtn && textContent) {
-                // Habilitar el botón cuando la API está lista
                 toggleBtn.classList.add('is-ready');
-                textContent.textContent = fillCircleWithText(textPlay);
+                textContent.textContent = fitTextToCircle(textPlay);
 
-                // Al hacer clic, alternar reproducción
+                // Clic limpio: solo manda la orden a Spotify, no manipula CSS
                 toggleBtn.addEventListener('click', () => {
-                    if (embedController && typeof embedController.togglePlay === 'function') {
+                    if (embedController) {
                         embedController.togglePlay();
                     }
                 });
 
-                // Escuchar cambios en la pista o pausa/reproducción
+                // Spotify como fuente de verdad: el CSS responde solo al estado real del reproductor
                 embedController.addListener('playback_update', e => {
                     const state = e.data;
                     if (!state) return;
-                    isPlaying = !state.isPaused;
+                    
+                    const isActuallyPlaying = !state.isPaused;
 
-                    if (isPlaying && state.track && state.track.name) {
+                    if (isActuallyPlaying) {
                         toggleBtn.classList.add('is-playing');
-                        const trackName = state.track.name.toUpperCase();
-                        const fullText = `${prefixNowPlaying}${trackName} • `;
-                        textContent.textContent = fillCircleWithText(fullText);
+                        if (state.track && state.track.name) {
+                            const trackName = state.track.name.toUpperCase();
+                            const fullText = `${prefixNowPlaying}${trackName}`;
+                            textContent.textContent = fitTextToCircle(fullText);
+                        }
                     } else {
                         toggleBtn.classList.remove('is-playing');
-                        textContent.textContent = fillCircleWithText(textPlay);
+                        textContent.textContent = fitTextToCircle(textPlay);
                     }
                 });
             }
@@ -216,12 +228,6 @@ const isEn = lang === "en";
             IFrameAPI.createController(element, options, callback);
         } catch (err) {
             console.error("Spotify IFrame API error:", err);
-            const toggleBtn = document.getElementById('ambient-toggle-btn');
-            const textContent = document.getElementById('hud-text-content');
-            if (toggleBtn && textContent) {
-                toggleBtn.classList.add('is-ready');
-                textContent.textContent = fillCircleWithText(isEn ? "PLAYLIST • " : "PLAYLIST • ");
-            }
         }
     }
 
@@ -229,14 +235,13 @@ const isEn = lang === "en";
         initPlayer(IFrameAPI);
     };
 
-    // Safety fallback in case the API callback doesn't fire
     setTimeout(() => {
         const toggleBtn = document.getElementById('ambient-toggle-btn');
         const textContent = document.getElementById('hud-text-content');
         if (toggleBtn && !toggleBtn.classList.contains('is-ready')) {
             toggleBtn.classList.add('is-ready');
             if (textContent) {
-                textContent.textContent = fillCircleWithText(isEn ? "PLAYLIST • " : "PLAYLIST • ");
+                textContent.textContent = fitTextToCircle(textPlay);
             }
         }
     }, 4000);
