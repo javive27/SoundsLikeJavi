@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL;
 
 <Layout
     title="Portfolio — Masters Application | Javier Flores"
-    description="Selected projects for ReSound, Chalmers, WAVES Plus, and Pompeu Fabra Master's applications. Lead Audio Engineer at Disney Cruise Line, STELA Founder, OCA Founding Member."
+    description="Selected projects for ReSound, Chalmers, WAVES Plus, and Pompeu Fabra Master's applications. Lead Audio Engineer at Disney Cruise Line, IBTRDAI Developer, STELA Founder."
     lang="en"
     pathEs=""
     pathEn="portfolio"
@@ -98,6 +98,10 @@ const base = import.meta.env.BASE_URL;
                             </div>
                         </div>
 
+                        <div class="ip-notice-box">
+                            <p><strong>Note on Intellectual Property:</strong> Process and methodology description only. Proprietary Disney show files, venue schematics, Yamaha PM10 scenes, and QLab show archives are confidential and not disclosed.</p>
+                        </div>
+
                         <div class="project-actions">
                             <a href={`${base}engineering`} class="button small">Read more on Audio Engineering</a>
                         </div>
@@ -105,11 +109,77 @@ const base = import.meta.env.BASE_URL;
                 </div>
             </section>
 
-            <!-- Project 2: STELA -->
+            <!-- Project 2: IBTRDAI -->
             <section class="project-section alt-bg">
                 <div class="inner">
                     <div class="project-header">
-                        <span class="section-tag">Project 02 &middot; Digital Leadership & Community Strategy</span>
+                        <span class="section-tag">Project 02 &middot; Audio DSP & Immersive Research</span>
+                        <h2>IBTRDAI — Immersive Binaural Tools Research and Development with AI</h2>
+                        <p class="role-statement"><strong>My role:</strong> Independent researcher / developer, personal learning tool</p>
+                        <p class="project-status"><strong>Status:</strong> Research in progress, v1.1, UI currently being rebuilt. Not a finished commercial plugin, not distributed.</p>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="reflective-block">
+                            <h3>Reflective Overview & Technical Methodology</h3>
+                            <p>
+                                <strong>IBTRDAI</strong> (Immersive Binaural Tools Research and Development with AI) is a personal, independent research tool engineered specifically for my own workflow, created to master immersive mixing &ldquo;in the box&rdquo; using my Neumann NDH 30 open-back reference headphones.
+                            </p>
+                            <p>
+                                The core research objective was twofold: investigate how artificial intelligence can accelerate the mathematical and structural design of novel audio plugins, and explore reverse engineering with AI as an advanced learning methodology by rigorously analyzing complex, functional reference architectures.
+                            </p>
+                            <p>
+                                <strong>Strict Clean-Room Methodology:</strong> The reverse engineering approach was applied strictly and exclusively to open-source reference plugins (notably the IEM Plug-in Suite and SPARTA), with licenses thoroughly verified and attributed. Absolutely zero code was copied from any commercial plugin. No proprietary code, closed-source FIR correction curve, or decompiled binary data from any commercial product was extracted or used.
+                            </p>
+                            <p>
+                                <strong>Headphone Calibration:</strong> Headphone acoustic compensation is derived entirely from public measurement data published by Oratory1990 for the Neumann NDH 30. This is an open, community-accessible measurement dataset, rather than any manufacturer-proprietary correction profile. The calibration curve is tailored specifically for my own reference headphones and listening chain.
+                            </p>
+                            <p>
+                                <strong>Multi-Channel Architecture & Performance:</strong> IBTRDAI supports comprehensive immersive monitor mixing formats: Stereo, 5.0, 7.0, 7.1, 7.0.4, 7.1.2, and 7.1.4. The engine features FIR convolution, spatial HRTF / binaural rendering, SOFA dataset loading, personalized ITD (Interaural Time Difference) calculation, and dynamic real-time head tracking via OSC (Yaw, Pitch, Roll). Built in C++ using the JUCE framework as both Standalone and VST3 formats, the DSP convolution pipeline is heavily accelerated with Apple vDSP vector instructions on Apple Silicon (M1 Pro).
+                            </p>
+                            <p>
+                                <strong>Academic Value for Master's Studies:</strong> This project consolidates essential domains of advanced acoustic and audio engineering: real-time digital signal processing (DSP), high-order FIR convolution, spatialized HRTF synthesis, object-based multi-channel routing, and AI-assisted software architecture.
+                            </p>
+                            <p class="disclaimer-text">
+                                <em>Independent Research Notice: IBTRDAI is an independent academic learning project. It is not affiliated with, endorsed by, or a copy of any commercial hardware or software manufacturer, and is not distributed commercially.</em>
+                            </p>
+                        </div>
+
+                        <!-- Tech Badges -->
+                        <div class="tech-specs">
+                            <span class="spec-badge">C++ / JUCE Framework</span>
+                            <span class="spec-badge">Apple vDSP (M1 Pro Vectorized)</span>
+                            <span class="spec-badge">Spatial HRTF & .sofa Loading</span>
+                            <span class="spec-badge">FIR Partitioned Convolution</span>
+                            <span class="spec-badge">Immersive Formats (up to 7.1.4)</span>
+                            <span class="spec-badge">OSC Head Tracking (Yaw/Pitch/Roll)</span>
+                            <span class="spec-badge">Oratory1990 NDH 30 Calibration</span>
+                            <span class="spec-badge">Clean-Room Open-Source DSP (IEM / SPARTA)</span>
+                            <span class="spec-badge">AI-Assisted Plugin Engineering</span>
+                        </div>
+
+                        <!-- Media Placeholders (Empty slots clearly labelled) -->
+                        <div class="media-slots-container">
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>IBTRDAI demo video</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan, duration to be stated then ]</p>
+                            </div>
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>UI screenshot, after UI rebuild</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan ]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project 3: STELA -->
+            <section class="project-section">
+                <div class="inner">
+                    <div class="project-header">
+                        <span class="section-tag">Project 03 &middot; Digital Leadership & Community Strategy</span>
                         <h2>STELA — Sociedad de Técnicos del Entretenimiento Latino Americanos</h2>
                         <p class="role-statement"><strong>My role:</strong> Founder / Lead &mdash; Master's Field Project in Communication and Digital Media, UDLAP</p>
                         <p class="project-status"><strong>Status:</strong> Research and identity phase finalized. Now moving into implementation, after the first trial.</p>
@@ -119,13 +189,13 @@ const base = import.meta.env.BASE_URL;
                         <div class="reflective-block">
                             <h3>Reflective Overview</h3>
                             <p>
-                                STELA is a Master's degree final field project conceived to conceptualize, launch, and position a dedicated digital community and professional network for audio, lighting, video, and stage entertainment technicians across Latin America. Recognizing the systemic deficit of localized, high-standard technical knowledge and accessible training in the region, the project seeks to bridge technical divides and elevate the broader Latin American entertainment workforce.
+                                <strong>STELA</strong> (Sociedad de T&eacute;cnicos del Entretenimiento Latino Americanos) is a Master's degree final field project conceived to conceptualize, launch, and position a dedicated digital community and professional network for audio, lighting, video, and stage entertainment technicians across Latin America. Recognizing the systemic deficit of localized, high-standard technical knowledge and accessible training in the region, the project seeks to bridge technical divides and elevate the broader Latin American entertainment workforce.
                             </p>
                             <p>
                                 The project spans the comprehensive strategic lifecycle of digital brand deployment: establishing core institutional philosophy, creating a coherent brand identity, and formulating an exhaustive digital style guide. This strategic foundation feeds directly into multi-channel digital activation across Facebook, Instagram, LinkedIn, and WhatsApp.
                             </p>
                             <p>
-                                To effectively resolve the cold-start problem inherent to new communities, the deployment model couples identity-building with utility marketing, qualitative audience engagement, cross-platform distribution within established industry channels, and granular performance analytics. The ultimate objective is clear and lasting: empower technicians with premier technical education, professional recognition, and collaborative regional networking.
+                                To effectively resolve the cold-start problem inherent to new professional communities, the deployment model couples identity-building with utility marketing, qualitative audience engagement, cross-platform distribution within established industry channels, and granular performance analytics. The ultimate objective is clear and lasting: empower technicians with premier technical education, professional recognition, and collaborative regional networking.
                             </p>
                         </div>
 
@@ -157,71 +227,22 @@ const base = import.meta.env.BASE_URL;
                 </div>
             </section>
 
-            <!-- Project 3: OCA -->
-            <section class="project-section">
-                <div class="inner">
-                    <div class="project-header">
-                        <span class="section-tag">Project 03 &middot; Artistic Leadership & Orchestral Direction</span>
-                        <h2>OCA — Orquesta de Cámara de Atlixco (Atlixco Chamber Orchestra)</h2>
-                        <p class="role-statement"><strong>My role:</strong> Founding member, section leader, arranger & manager &mdash; first leadership project</p>
-                    </div>
-
-                    <div class="project-body">
-                        <div class="reflective-block">
-                            <h3>Reflective Overview</h3>
-                            <p>
-                                Founded in 2013, the Atlixco Chamber Orchestra (OCA) was established to unite the finest young musicians across Atlixco and form the city's premier chamber orchestra. As one of the founding members alongside close musical peers, the initiative was driven by a deep commitment to promote symphonic culture, artistic expression, and classical appreciation in our hometown.
-                            </p>
-                            <p>
-                                My responsibilities extended far beyond instrumental performance: I managed day-to-day operations and logistics, authored custom musical arrangements adapted to the ensemble's unique instrumentation, and served as section leader.
-                            </p>
-                            <p>
-                                As my first foundational leadership project, directing and coordinating a young orchestral ensemble in Atlixco provided critical insights into group dynamics, rehearsal discipline, acoustic orchestration, and community-driven cultural mobilization. This foundational experience directly shaped my subsequent leadership style in large-scale theatrical sound engineering at Disney Cruise Line and in structural community architecture with STELA.
-                            </p>
-                        </div>
-
-                        <!-- Tech / Role Badges -->
-                        <div class="tech-specs">
-                            <span class="spec-badge">Founded in 2013</span>
-                            <span class="spec-badge">Chamber Orchestra</span>
-                            <span class="spec-badge">Founding Member</span>
-                            <span class="spec-badge">Section Leader</span>
-                            <span class="spec-badge">Orchestral Arranger</span>
-                            <span class="spec-badge">Operations & Ensemble Management</span>
-                            <span class="spec-badge">Community Cultural Leadership</span>
-                        </div>
-
-                        <!-- Media Slot Placeholder (Empty slot clearly labelled) -->
-                        <div class="media-slots-container">
-                            <div class="media-slot-card">
-                                <div class="slot-badge">Media Placeholder</div>
-                                <h5>OCA performance clip</h5>
-                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan, duration to be stated then ]</p>
-                            </div>
-                            <div class="media-slot-card">
-                                <div class="slot-badge">Media Placeholder</div>
-                                <h5>OCA performance photos</h5>
-                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan ]</p>
-                            </div>
-                        </div>
-
-                        <div class="project-actions">
-                            <a href={`${base}saxophonist`} class="button small">Read more on Saxophonist & Musician</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Section 4: Other Projects (References) -->
             <section class="project-section alt-bg">
                 <div class="inner">
                     <div class="project-header">
                         <span class="section-tag">Section 04 &middot; Supplementary Portfolio</span>
                         <h2>Other Projects & Professional Works</h2>
-                        <p class="role-statement">Concise reference catalog of compositions, theatrical productions, and international performances across this site.</p>
+                        <p class="role-statement">Concise reference catalog of musical leadership, compositions, theatrical productions, and international performances across this site.</p>
                     </div>
 
                     <div class="references-grid">
+                        <div class="ref-card">
+                            <h4>OCA &mdash; Orquesta de C&aacute;mara de Atlixco</h4>
+                            <p>Founded in 2013 to unite Atlixco's premier young musicians. Founding member, section leader, arranger, and operations manager &mdash; first foundational leadership project promoting regional culture.</p>
+                            <a href={`${base}saxophonist`} class="ref-link">View in Saxophonist &rarr;</a>
+                        </div>
+
                         <div class="ref-card">
                             <h4>Jard&iacute;n en tu mirada</h4>
                             <p>Original song honored with &ldquo;Best Lyrics&rdquo; at the ITESM Puebla Song Festival.</p>
@@ -434,11 +455,20 @@ const base = import.meta.env.BASE_URL;
             font-size: 1.05rem;
             line-height: 1.8;
             color: #cbd5e1;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .reflective-block p:last-child {
             margin-bottom: 0;
+        }
+
+        .disclaimer-text {
+            font-size: 0.9rem !important;
+            color: #94a3b8 !important;
+            line-height: 1.6 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1rem;
+            margin-top: 1.5rem !important;
         }
 
         /* Subsections Grid */
@@ -546,6 +576,21 @@ const base = import.meta.env.BASE_URL;
             margin: 0;
         }
 
+        .ip-notice-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid #64748b;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .ip-notice-box p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.5;
+        }
+
         .project-actions {
             margin-top: 1.5rem;
         }
@@ -613,7 +658,7 @@ const base = import.meta.env.BASE_URL;
             .portfolio-hero {
                 padding: 5rem 0 2rem 0;
             }
-            .subsections-grid, .media-slots-container {
+            .subsections-grid, .media-slots-container, .references-grid {
                 grid-template-columns: 1fr;
             }
         }
