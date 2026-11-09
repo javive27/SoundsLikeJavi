@@ -1,0 +1,630 @@
+---
+// src/pages/portfolio.astro
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+    title="Portfolio — Masters Application | Javier Flores"
+    description="Selected projects for ReSound, Chalmers, WAVES Plus, and Pompeu Fabra Master's applications. Lead Audio Engineer at Disney Cruise Line, STELA Founder, OCA Founding Member."
+    lang="en"
+    pathEs=""
+    pathEn="portfolio"
+>
+    <div class="portfolio-container">
+        <!-- Hero Section -->
+        <section class="portfolio-hero">
+            <div class="hero-inner">
+                <span class="hero-badge">Selected Projects</span>
+                <h1 class="hero-title">Portfolio — Masters Application</h1>
+                <p class="hero-subtitle">Lead Audio Engineer, Disney Cruise Line &middot; 5 years &middot; Immersive Audio &middot; Live Theatre &middot; Community Leadership</p>
+                <p class="hero-meta">3 projects &mdash; for ReSound, Chalmers, WAVES Plus, and Pompeu Fabra applications, January 2027</p>
+                <div class="divider-line"></div>
+            </div>
+        </section>
+
+        <!-- Main Content Wrapper -->
+        <div id="main" class="main-content-wrapper">
+            <!-- Project 1: Disney Cruise Line -->
+            <section class="project-section">
+                <div class="inner">
+                    <div class="project-header">
+                        <span class="section-tag">Project 01 &middot; Immersive Audio & Systems Leadership</span>
+                        <h2>Disney Cruise Line — Audio Lead (5 years)</h2>
+                        <p class="role-statement"><strong>My role:</strong> Audio Lead / Lead Audio Technician, Disney Cruise Line, Walt Disney Theater</p>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="reflective-block">
+                            <h3>Reflective Overview</h3>
+                            <p>
+                                Over 5 years as Audio Lead with Disney Cruise Line, I have overseen thousands of performances in high-pressure theatrical environments, ensuring pristine acoustic fidelity and sonic immersion across Broadway-caliber productions. A central pillar of my leadership is managing cast installs: recreating and preserving the original sound design of each show for every newly incoming cast. This involves rigorous 4-hour dedicated EQ sessions for each of the 3 flagship stage shows per cast transition.
+                            </p>
+                            <p>
+                                For every individual performer, act, and show cue, I select microphones, fit them optimally for capsule positioning and physical decoupling, and finely tune equalization, dynamic processing, and stage acoustic balance. Working closely with Disney Senior Sound Designers and Vocal Directors, we consistently uphold Disney's global gold standard for theatrical sound quality.
+                            </p>
+                        </div>
+
+                        <!-- Sub-sections a, b, c -->
+                        <div class="subsections-grid">
+                            <div class="sub-card">
+                                <span class="sub-tag">01.A</span>
+                                <h4>Cast Installs & EQ Sessions</h4>
+                                <p>
+                                    Recreating show sound design with each new cast cycle. Leading systematic 4-hour acoustic EQ sessions per show for all 3 main-stage productions, selecting capsule polar patterns, optimizing transmitter positioning, and dialling in multi-band dynamic control for each singer.
+                                </p>
+                            </div>
+
+                            <div class="sub-card">
+                                <span class="sub-tag">01.B</span>
+                                <h4>Dry Docks & Systems Calibration</h4>
+                                <p>
+                                    Spearheading shipyard dry-dock audio re-engineering: redesigning and aligning line arrays, tuning delay matrices, calibrating Clear-Com intercom communication systems, configuring Shure wireless microphone networks, and engineering Dante AoIP infrastructures across open-air deck stages and indoor theaters.
+                                </p>
+                            </div>
+
+                            <div class="sub-card">
+                                <span class="sub-tag">01.C</span>
+                                <h4>Current Project — Disney Dream, Walt Disney Theater</h4>
+                                <p>
+                                    Collaborating with shoreside sound designers to update venue show sound designs. Developing spatial audio maps from Disney Dream Walt Disney Theater architectural and electrical schematics to implement object-based audio mixing in the venue. Responsibilities include interpreting venue schematics, authoring QLab 5 spatial audio maps, redesigning Yamaha PM10 show files, scenes, mix busses, and matrices, re-routing Dante AoIP mixing matrices, and calibrating multi-channel acoustic levels for immersive object-based spatialization.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Tech Specs Badges -->
+                        <div class="tech-specs">
+                            <span class="spec-badge">5 Years Audio Lead</span>
+                            <span class="spec-badge">Walt Disney Theater</span>
+                            <span class="spec-badge">Yamaha Rivage PM10</span>
+                            <span class="spec-badge">QLab 5 Object-Based Audio</span>
+                            <span class="spec-badge">Dante AoIP Networks</span>
+                            <span class="spec-badge">Q-SYS Ecosystem</span>
+                            <span class="spec-badge">Clear-Com Matrix Intercom</span>
+                            <span class="spec-badge">Shure Axient Digital</span>
+                        </div>
+
+                        <!-- Media Placeholders (Empty slots clearly labelled) -->
+                        <div class="media-slots-container">
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>Photos: Disney shows + Javier mixing live</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan ]</p>
+                            </div>
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>Show mix clip</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan, duration to be stated then ]</p>
+                            </div>
+                        </div>
+
+                        <div class="project-actions">
+                            <a href={`${base}engineering`} class="button small">Read more on Audio Engineering</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project 2: STELA -->
+            <section class="project-section alt-bg">
+                <div class="inner">
+                    <div class="project-header">
+                        <span class="section-tag">Project 02 &middot; Digital Leadership & Community Strategy</span>
+                        <h2>STELA — Sociedad de Técnicos del Entretenimiento Latino Americanos</h2>
+                        <p class="role-statement"><strong>My role:</strong> Founder / Lead &mdash; Master's Field Project in Communication and Digital Media, UDLAP</p>
+                        <p class="project-status"><strong>Status:</strong> Research and identity phase finalized. Now moving into implementation, after the first trial.</p>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="reflective-block">
+                            <h3>Reflective Overview</h3>
+                            <p>
+                                STELA is a Master's degree final field project conceived to conceptualize, launch, and position a dedicated digital community and professional network for audio, lighting, video, and stage entertainment technicians across Latin America. Recognizing the systemic deficit of localized, high-standard technical knowledge and accessible training in the region, the project seeks to bridge technical divides and elevate the broader Latin American entertainment workforce.
+                            </p>
+                            <p>
+                                The project spans the comprehensive strategic lifecycle of digital brand deployment: establishing core institutional philosophy, creating a coherent brand identity, and formulating an exhaustive digital style guide. This strategic foundation feeds directly into multi-channel digital activation across Facebook, Instagram, LinkedIn, and WhatsApp.
+                            </p>
+                            <p>
+                                To effectively resolve the cold-start problem inherent to new communities, the deployment model couples identity-building with utility marketing, qualitative audience engagement, cross-platform distribution within established industry channels, and granular performance analytics. The ultimate objective is clear and lasting: empower technicians with premier technical education, professional recognition, and collaborative regional networking.
+                            </p>
+                        </div>
+
+                        <!-- Tech / Strategy Badges -->
+                        <div class="tech-specs">
+                            <span class="spec-badge">Master's Final Project</span>
+                            <span class="spec-badge">UDLAP</span>
+                            <span class="spec-badge">Community Architecture</span>
+                            <span class="spec-badge">Brand Identity & Digital Style Guide</span>
+                            <span class="spec-badge">Multi-Channel Activation</span>
+                            <span class="spec-badge">Utility Marketing Strategy</span>
+                            <span class="spec-badge">Latin America Entertainment Tech</span>
+                        </div>
+
+                        <!-- Media / Attachment Placeholders (Empty slots clearly labelled) -->
+                        <div class="media-slots-container">
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Document Placeholder</div>
+                                <h5>STELA final Master's paper (PDF)</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be attached in media plan ]</p>
+                            </div>
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>STELA brand / logo images, social channel links</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in media plan ]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project 3: OCA -->
+            <section class="project-section">
+                <div class="inner">
+                    <div class="project-header">
+                        <span class="section-tag">Project 03 &middot; Artistic Leadership & Orchestral Direction</span>
+                        <h2>OCA — Orquesta de Cámara de Atlixco (Atlixco Chamber Orchestra)</h2>
+                        <p class="role-statement"><strong>My role:</strong> Founding member, section leader, arranger & manager &mdash; first leadership project</p>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="reflective-block">
+                            <h3>Reflective Overview</h3>
+                            <p>
+                                Founded in 2013, the Atlixco Chamber Orchestra (OCA) was established to unite the finest young musicians across Atlixco and form the city's premier chamber orchestra. As one of the founding members alongside close musical peers, the initiative was driven by a deep commitment to promote symphonic culture, artistic expression, and classical appreciation in our hometown.
+                            </p>
+                            <p>
+                                My responsibilities extended far beyond instrumental performance: I managed day-to-day operations and logistics, authored custom musical arrangements adapted to the ensemble's unique instrumentation, and served as section leader.
+                            </p>
+                            <p>
+                                As my first foundational leadership project, directing and coordinating a young orchestral ensemble in Atlixco provided critical insights into group dynamics, rehearsal discipline, acoustic orchestration, and community-driven cultural mobilization. This foundational experience directly shaped my subsequent leadership style in large-scale theatrical sound engineering at Disney Cruise Line and in structural community architecture with STELA.
+                            </p>
+                        </div>
+
+                        <!-- Tech / Role Badges -->
+                        <div class="tech-specs">
+                            <span class="spec-badge">Founded in 2013</span>
+                            <span class="spec-badge">Chamber Orchestra</span>
+                            <span class="spec-badge">Founding Member</span>
+                            <span class="spec-badge">Section Leader</span>
+                            <span class="spec-badge">Orchestral Arranger</span>
+                            <span class="spec-badge">Operations & Ensemble Management</span>
+                            <span class="spec-badge">Community Cultural Leadership</span>
+                        </div>
+
+                        <!-- Media Slot Placeholder (Empty slot clearly labelled) -->
+                        <div class="media-slots-container">
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>OCA performance clip</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan, duration to be stated then ]</p>
+                            </div>
+                            <div class="media-slot-card">
+                                <div class="slot-badge">Media Placeholder</div>
+                                <h5>OCA performance photos</h5>
+                                <p class="slot-note">[ Empty slot &mdash; to be added in separate media plan ]</p>
+                            </div>
+                        </div>
+
+                        <div class="project-actions">
+                            <a href={`${base}saxophonist`} class="button small">Read more on Saxophonist & Musician</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Other Projects (References) -->
+            <section class="project-section alt-bg">
+                <div class="inner">
+                    <div class="project-header">
+                        <span class="section-tag">Section 04 &middot; Supplementary Portfolio</span>
+                        <h2>Other Projects & Professional Works</h2>
+                        <p class="role-statement">Concise reference catalog of compositions, theatrical productions, and international performances across this site.</p>
+                    </div>
+
+                    <div class="references-grid">
+                        <div class="ref-card">
+                            <h4>Jard&iacute;n en tu mirada</h4>
+                            <p>Original song honored with &ldquo;Best Lyrics&rdquo; at the ITESM Puebla Song Festival.</p>
+                            <a href={`${base}music`} class="ref-link">View in Music &rarr;</a>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>One Please</h4>
+                            <p>Original psychological horror short film score, complete foley, and sound design.</p>
+                            <a href={`${base}music`} class="ref-link">View in Music &rarr;</a>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>Death And The Maiden</h4>
+                            <p>Orchestral dramatic composition utilizing recurring leitmotifs, adapted from Frank Tallis.</p>
+                            <a href={`${base}music`} class="ref-link">View in Music &rarr;</a>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>Musical Theater & Broadway Training</h4>
+                            <p>Audio engineering for <em>Beauty and the Beast</em>, <em>Frozen</em>, <em>Tangled</em>, and Broadway NYC masterclasses (<em>Moulin Rouge</em>, <em>Wicked</em>).</p>
+                            <a href={`${base}engineering`} class="ref-link">View in Engineering &rarr;</a>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>Lunario del Auditorio Nacional &mdash; All Shook Up</h4>
+                            <p>Monitors Audio Engineer for the full-scale musical theater production in Mexico City.</p>
+                            <div class="ref-links-multi">
+                                <a href={`${base}engineering`} class="ref-link">Engineering &rarr;</a>
+                                <a href={`${base}experience`} class="ref-link">Experience &rarr;</a>
+                            </div>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>La Casa de la M&uacute;sica de Viena en Puebla</h4>
+                            <p>Front-of-House (FOH) audio engineer for concerts and events in the 500-seat auditorium.</p>
+                            <a href={`${base}engineering`} class="ref-link">View in Engineering &rarr;</a>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>Compa&ntilde;&iacute;a Folkl&oacute;rica Magisterial de Hidalgo</h4>
+                            <p>Musician and audio liaison for international tours: Yilan Taiwan (2018) and Sharjah UAE (2019).</p>
+                            <div class="ref-links-multi">
+                                <a href={`${base}experience`} class="ref-link">Experience &rarr;</a>
+                                <a href={`${base}saxophonist`} class="ref-link">Saxophonist &rarr;</a>
+                            </div>
+                        </div>
+
+                        <div class="ref-card">
+                            <h4>C&oacute;ctel Calavera</h4>
+                            <p>Independent band saxophonist, multi-festival live performances, and studio recordings.</p>
+                            <a href={`${base}saxophonist`} class="ref-link">View in Saxophonist &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        body, #wrapper {
+            background-color: #0f131f !important;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .portfolio-container {
+            width: 100%;
+        }
+
+        /* Hero */
+        .portfolio-hero {
+            padding: 7rem 0 3rem 0;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.08) 0%, rgba(15, 19, 31, 0) 70%);
+        }
+
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            color: #00e5ff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 229, 255, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem) !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.03em !important;
+            margin-bottom: 1.25rem !important;
+            color: #ffffff !important;
+            line-height: 1.15 !important;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .hero-meta {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #00e5ff, #3b82f6);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Sections */
+        .project-section {
+            padding: 4.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-section.alt-bg {
+            background-color: rgba(21, 27, 43, 0.5);
+        }
+
+        .project-section .inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: #00e5ff;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            margin-bottom: 0.75rem !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        .role-statement {
+            font-size: 1.15rem;
+            color: #38bdf8;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .role-statement strong {
+            color: #ffffff;
+        }
+
+        .project-status {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .project-status strong {
+            color: #00e5ff;
+        }
+
+        .reflective-block {
+            background: rgba(15, 19, 31, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid #00e5ff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .reflective-block h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #00e5ff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .reflective-block p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .reflective-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Subsections Grid */
+        .subsections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .sub-card {
+            background: rgba(15, 19, 31, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .sub-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        .sub-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #00e5ff;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub-card h4 {
+            font-size: 1.15rem;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .sub-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* Tech Specs */
+        .tech-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .spec-badge {
+            background: rgba(111, 195, 223, 0.08);
+            border: 1px solid rgba(111, 195, 223, 0.25);
+            color: #6fc3df;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Media Slots Placeholders */
+        .media-slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .media-slot-card {
+            background: rgba(15, 19, 31, 0.4);
+            border: 1.5px dashed rgba(0, 229, 255, 0.3);
+            border-radius: 8px;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .slot-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #00e5ff;
+            background: rgba(0, 229, 255, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .media-slot-card h5 {
+            font-size: 1.05rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .slot-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .project-actions {
+            margin-top: 1.5rem;
+        }
+
+        /* References Grid */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .ref-card {
+            background: rgba(15, 19, 31, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .ref-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 229, 255, 0.35);
+        }
+
+        .ref-card h4 {
+            font-size: 1.05rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .ref-card p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .ref-link {
+            color: #00e5ff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .ref-link:hover {
+            color: #38bdf8;
+            transform: translateX(3px);
+        }
+
+        .ref-links-multi {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media screen and (max-width: 900px) {
+            .portfolio-hero {
+                padding: 5rem 0 2rem 0;
+            }
+            .subsections-grid, .media-slots-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 736px) {
+            .hero-inner, .project-section .inner {
+                padding: 0 1.5rem;
+            }
+            .reflective-block {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</Layout>

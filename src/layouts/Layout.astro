@@ -14,6 +14,7 @@ const saxofonistaPath = isEn ? `${base}saxophonist` : `${base}es/saxofonista`;
 const experienciaPath = isEn ? `${base}experience` : `${base}es/experiencia`;
 const audioToolsPath = isEn ? `${base}audiotools` : `${base}es/audiotools`;
 const journeyPath = isEn ? `${base}journey` : `${base}es/viajes`;
+const portfolioPath = `${base}portfolio`;
 
 const esTarget = pathEs ? `${base}es/${pathEs}` : `${base}es/`;
 const enTarget = pathEn ? `${base}${pathEn}` : `${base}`;
@@ -89,12 +90,12 @@ const ogLocale = isEn ? "en_US" : "es_MX";
                 <!-- Menu -->
                     <nav id="menu" aria-label={isEn ? "Mobile Menu" : "Menú Móvil"}>
                         <ul class="links">
-                            <li><a href={musicaPath}>{isEn ? "Music & Sound Design" : "Música y Diseño Sonoro"}</a></li>
                             <li><a href={ingenieriaPath}>{isEn ? "Engineering" : "Ingeniería"}</a></li>
                             <li><a href={experienciaPath}>{isEn ? "Experience" : "Experiencia"}</a></li>
-                            <li><a href={saxofonistaPath}>{isEn ? "Saxophonist" : "Saxofonista"}</a></li>
-                            <li><a href={audioToolsPath}>{isEn ? "Audio & Music Tools" : "Herramientas de Audio y Música"}</a></li>
+                            <li><a href={portfolioPath}>{isEn ? "Portfolio" : "Portfolio"}</a></li>
+                            <li><a href={musicaPath}>{isEn ? "Music & Sound Design" : "Música y Diseño Sonoro"}</a></li>
                             <li><a href={journeyPath}>{isEn ? "My Journey" : "Mis Viajes"}</a></li>
+                            <li><a href={saxofonistaPath}>{isEn ? "Saxophonist" : "Saxofonista"}</a></li>
                         </ul>
                         <ul class="actions stacked">
                             <li><a href={homePath} class="button primary fit">{isEn ? "HOME" : "INICIO"}</a></li>

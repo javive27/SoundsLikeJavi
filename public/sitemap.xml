@@ -60,6 +60,13 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Portfolio — Masters Application -->
+  <url>
+    <loc>https://javierfloresaudio.com/portfolio</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Herramientas Musicales -->
   <url>
     <loc>https://javierfloresaudio.com/music-tools</loc>
