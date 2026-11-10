@@ -17,7 +17,7 @@
   - `public/sitemap.xml`
   - `src/pages/audiotools.astro` (verified untouched)
 - **Changes Planned for v3:**
-  - Transition Project 2 from STELA to IBTRDAI (Immersive Binaural Tools Research and Development with AI).
+  - Transition Project 2 from STELA to ORBIT (Immersive Binaural Mixer for NDH 30, AI-assisted research).
   - Move STELA to Project 3.
   - Move OCA (Orquesta de Cámara de Atlixco) to Section 4 as the first reference.
   - Strict IP safety check: zero occurrences of "RIME".
@@ -39,7 +39,7 @@
 
 ---
 
-### T3: Add Project 2 (IBTRDAI)
+### T3: Add Project 2 (ORBIT)
 - **File Changed:** `src/pages/portfolio.astro`
 - **Role:** Independent researcher / developer, personal learning tool
 - **Status:** Research in progress, v1.1, UI currently being rebuilt. Not a finished commercial plugin, not distributed.
@@ -49,7 +49,7 @@
   - Public measurement calibration from Oratory1990 for Neumann NDH 30.
   - Formats: Stereo, 5.0, 7.0, 7.1, 7.0.4, 7.1.2, 7.1.4 via FIR convolution, HRTF (.sofa), OSC head tracking (Yaw/Pitch/Roll), C++/JUCE with Apple vDSP on M1 Pro.
   - Academic master's value clearly stated.
-  - Empty media slots: "IBTRDAI demo video" and "UI screenshot, after UI rebuild".
+  - Empty media slots: "ORBIT demo video" and "UI screenshot, after UI rebuild".
 - **Build Output:** `npm run build` success (15 pages built).
 
 ---
@@ -132,6 +132,6 @@
 ### T10: Deployment & Live Verification
 - **Git Push:** Pushed to `origin main` (commit `20f44af`).
 - **Live URLs Checked:**
-  - `https://javierfloresaudio.com/portfolio/` -> **HTTP 200 OK** (served live, contains IBTRDAI)
+  - `https://javierfloresaudio.com/portfolio/` -> **HTTP 200 OK** (served live, contains ORBIT)
   - `https://javierfloresaudio.com/audiotools/` -> **HTTP 200 OK** (still directly accessible)
   - `https://javierfloresaudio.com/` -> **HTTP 200 OK** (menu and cards reflect Portfolio, Audio Tools hidden)
